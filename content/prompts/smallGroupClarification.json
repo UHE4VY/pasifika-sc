@@ -1,0 +1,38 @@
+[
+    {
+      "id": "smallgroup-why",
+      "title": "Why this tier exists",
+      "body": "Small Group training exists to create structure, consistency, and accountability through shared sessions. Progress comes from showing up regularly, following the plan, and training with intention—not from doing more volume.",
+      "ui": "inline"
+    },
+    {
+      "id": "smallgroup-best-for",
+      "title": "Who Small Group is best for",
+      "body": "Small Group works best for athletes who benefit from routine, coaching presence, and training alongside others. It’s a strong fit for those who stay consistent when sessions are scheduled and expectations are clear.",
+      "ui": "inline"
+    },
+    {
+      "id": "smallgroup-progress",
+      "title": "What progress looks like in Small Group",
+      "body": "Progress in Small Group looks like improved consistency, stronger fundamentals, and confidence built through repeatable sessions. We focus on quality reps, clear standards, and momentum that carries from week to week.",
+      "ui": "inline"
+    },
+    {
+      "id": "smallgroup-vs-1on1",
+      "title": "Small Group vs 1:1 (simple rule)",
+      "body": "Choose Small Group if your athlete thrives with structure and team energy. Choose 1:1 if they need individualized pacing, focused confidence-building, or a fully tailored plan.",
+      "ui": "inline"
+    },
+    {
+        "id": "svc-compare-1",
+        "title": "How to choose between options",
+        "body": "If consistency is the priority, choose the option your athlete can attend reliably each week. Small Group works best when sessions become part of a predictable routine.",
+        "ui": "inline"
+      },
+    {
+      "id": "smallgroup-reassure-1",
+      "title": "You’re not behind",
+      "body": "Small Group is built for steady progress. If time has been missed or things feel off, consistency and a simple routine will reset momentum faster than doing more. Show up, follow the structure, and let progress rebuild week to week.",
+      "ui": "inline"
+    }
+  ]

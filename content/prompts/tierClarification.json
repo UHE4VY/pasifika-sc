@@ -1,0 +1,15 @@
+[
+    {
+      "id": "tier-clarity-1",
+      "title": "Why this tier exists",
+      "body": "This tier is designed for athletes who need consistent structure and accountability. Progress comes from quality reps, not volume.",
+      "ui": "inline"
+    },
+    {
+      "id": "tier-clarity-2",
+      "title": "Who this is best for",
+      "body": "This option works best for families who value steady development, coach oversight, and a clear path forward rather than quick fixes.",
+      "ui": "inline"
+    }
+  ]
+  

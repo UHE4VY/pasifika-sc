@@ -1,0 +1,33 @@
+[
+    {
+      "id": "oneonone-why",
+      "title": "Why this tier exists",
+      "body": "1:1 coaching exists to provide focused attention, individualized pacing, and direct feedback. It’s built for athletes who benefit from a quieter environment and a plan that adapts to them—not the group."
+    },
+    {
+      "id": "oneonone-best-for",
+      "title": "Who 1:1 is best for",
+      "body": "This option works best for athletes who need personalized pacing, added confidence support, or focused attention on specific goals. It’s a strong fit for those returning from setbacks, feeling stuck, or needing a slower, more controlled training environment."
+    },
+    {
+      "id": "oneonone-progress",
+      "title": "What progress looks like in 1:1",
+      "body": "Progress in 1:1 shows up as increased confidence, cleaner fundamentals, and steady momentum built at the athlete’s pace. We prioritize quality reps, clear feedback, and sustainable improvement over rushing results."
+    },
+    {
+      "id": "oneonone-vs-smallgroup",
+      "title": "1:1 vs Small Group (simple rule)",
+      "body": "Choose 1:1 if your athlete needs individualized attention, confidence-building, or a highly tailored approach. Choose Small Group if they thrive with structure, routine, and training alongside others."
+    },
+    {
+      "id": "oneonone-choice",
+      "title": "How to choose between options",
+      "body": "The right choice is the environment your athlete can show up for consistently. Comfort, clarity, and confidence matter more than intensity when long-term progress is the goal."
+    },
+    {
+      "id": "oneonone-reassure-1",
+      "title": "You’re not behind",
+      "body": "1:1 is where we slow things down and get specific. If your athlete feels unsure or off track, we’ll clarify the focus, adjust the pace, and rebuild confidence through small, repeatable wins. Progress doesn’t need to be loud—it needs to be consistent.",
+      "ui": "inline"
+    }
+  ]

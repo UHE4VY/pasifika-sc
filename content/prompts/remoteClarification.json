@@ -1,0 +1,33 @@
+[
+    {
+      "id": "remote-choose",
+      "title": "How to choose between options",
+      "body": "Start with the option you can realistically maintain week to week. Consistency matters more than intensity. The best plan is the one that fits your real schedule—not an ideal one."
+    },
+    {
+      "id": "remote-why",
+      "title": "Why Remote works",
+      "body": "Remote coaching works by providing a clear plan, accountability, and ongoing adjustments without requiring in-person sessions. Athletes follow a defined structure, check in regularly, and train independently with guidance."
+    },
+    {
+      "id": "remote-best-for",
+      "title": "Who Remote is best for",
+      "body": "Remote works best for athletes with busy or unpredictable schedules who can train independently and stay consistent without live sessions. It’s a strong fit for school, travel, or competing priorities."
+    },
+    {
+      "id": "remote-progress",
+      "title": "What progress looks like in Remote",
+      "body": "Progress in Remote shows up as improved consistency, cleaner fundamentals, and steady improvement over time. We track what’s working, adjust when needed, and keep momentum through repeatable habits."
+    },
+    {
+      "id": "remote-vs-inperson",
+      "title": "Remote vs in-person (simple rule)",
+      "body": "Choose Remote if you need flexibility and can follow a plan independently. Choose in-person if you need hands-on coaching or struggle to stay consistent without live sessions."
+    },
+    {
+      "id": "remote-reassure-1",
+      "title": "You’re not behind",
+      "body": "Remote is built for busy seasons. When schedules get full, we simplify the plan and focus on what moves the needle. Progress comes from repeatable effort—not perfect weeks.",
+      "ui": "inline"
+    }
+  ]
