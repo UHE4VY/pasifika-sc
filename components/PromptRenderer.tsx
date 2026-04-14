@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Prompt } from "../types/prompts";
-
+import { useAnalytics } from "@/hooks/useAnalytics";
 type Props = {
   tierLabel?: string;
   prompts: Prompt[];
@@ -63,6 +63,7 @@ export default function PromptRenderer({
   lessGuidanceLabel = "Show less",
 }: Props) {
   const [open, setOpen] = useState(false);
+const { trackEvent } = useAnalytics();
 
   const { top, guidance } = useMemo(() => {
     const topPrompts = prompts.slice(0, 3);
@@ -95,19 +96,30 @@ export default function PromptRenderer({
       {guidance.length > 0 && (
         <div style={{ marginTop: 16 }}>
           <button
-            onClick={() => setOpen((v) => !v)}
-            style={{
-              border: "1px solid #111",
-              background: open ? "#111" : "#fff",
-              color: open ? "#fff" : "#111",
-              borderRadius: 10,
-              padding: "10px 12px",
-              cursor: "pointer",
-              fontWeight: 700,
-            }}
-          >
-            {open ? lessGuidanceLabel : moreGuidanceLabel}
-          </button>
+  onClick={() => {
+    const next = !open;
+  
+    trackEvent("cta_click", {
+      component: "prompt_renderer",
+      action: next ? "open_more_guidance" : "close_more_guidance",
+      location: "more_guidance_toggle",
+      guidance_count: guidance.length,
+    });
+  
+    setOpen(next);
+  }}
+  style={{
+    border: "1px solid #111",
+    background: open ? "#111" : "#fff",
+    color: open ? "#fff" : "#111",
+    borderRadius: 10,
+    padding: "10px 12px",
+    cursor: "pointer",
+    fontWeight: 700,
+  }}
+>
+  {open ? lessGuidanceLabel : moreGuidanceLabel}
+</button>
 
           {open && (
             <div style={{ marginTop: 14 }}>
@@ -127,5 +139,4 @@ export default function PromptRenderer({
         </div>
       )}
     </section>
-  );
-}
+  );}

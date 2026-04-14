@@ -5,25 +5,25 @@ import CallToAction from "../../../components/CallToAction";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import PageViewTracker from "@/app/schedule/PageViewTracker";
 
-export default function OneOnOneServicePage() {
+export default function HybridCoachingServicePage() {
   const [showMore, setShowMore] = useState(false);
   const { trackEvent } = useAnalytics();
 
   return (
     <>
-      <PageViewTracker page="/services/one-on-one" component="one_on_one_page" />
+      <PageViewTracker page="/services/hybrid" component="hybrid_page" />
 
       <main style={pageStyle}>
         {/* HERO */}
         <section style={heroStyle}>
           <p style={eyebrowStyle}>Training Program</p>
 
-          <h1 style={titleStyle}>1:1 Coaching</h1>
+          <h1 style={titleStyle}>Hybrid Coaching</h1>
 
           <p style={subtitleStyle}>
-            Fully individualized coaching for athletes who want faster feedback,
-            targeted development, and a training plan built around their sport,
-            body, and goals.
+            A flexible mix of in-person coaching and remote programming for
+            athletes who want hands-on guidance, measurable progress, and a
+            system they can follow between sessions.
           </p>
 
           <div style={ctaRowStyle}>
@@ -41,32 +41,33 @@ export default function OneOnOneServicePage() {
 
         {/* TOP CARDS */}
         <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Why athletes choose 1:1 coaching</h2>
+          <h2 style={sectionTitleStyle}>Why athletes choose hybrid coaching</h2>
 
           <div style={gridStyle}>
             <div style={cardStyle}>
-              <h3 style={cardTitle}>Real-time coaching</h3>
+              <h3 style={cardTitle}>Best of both worlds</h3>
               <p style={cardBody}>
-                Every rep gets coached. Adjustments happen immediately so
-                technique, mechanics, and movement quality improve faster.
+                Hybrid combines the accountability of in-person coaching with
+                the flexibility of remote programming, so athletes can keep
+                progressing even when they are not in the facility.
               </p>
             </div>
 
             <div style={cardStyle}>
-              <h3 style={cardTitle}>Fully customized sessions</h3>
+              <h3 style={cardTitle}>Who this is best for</h3>
               <ul style={cardList}>
-                <li>Training built around your sport</li>
-                <li>Adjustments for injuries or movement limitations</li>
-                <li>Programming tailored to your goals</li>
+                <li>You want some in-person coaching, but not every session</li>
+                <li>You need flexibility around school, work, or travel</li>
+                <li>You want a structured plan between coached sessions</li>
               </ul>
             </div>
 
             <div style={cardStyle}>
-              <h3 style={cardTitle}>Faster development</h3>
+              <h3 style={cardTitle}>What progress looks like</h3>
               <ul style={cardList}>
-                <li>Strength and power improve faster</li>
-                <li>Movement becomes more efficient</li>
-                <li>Benchmarks evolve as you improve</li>
+                <li>Better consistency across the month</li>
+                <li>Clear skill and strength progression</li>
+                <li>Coaching support without losing flexibility</li>
               </ul>
             </div>
           </div>
@@ -82,9 +83,9 @@ export default function OneOnOneServicePage() {
               const next = !showMore;
 
               trackEvent("cta_click", {
-                component: "one_on_one_page",
+                component: "hybrid_page",
                 action: next ? "open_more_guidance" : "close_more_guidance",
-                location: "one_on_one_more_guidance",
+                location: "hybrid_more_guidance",
               });
 
               setShowMore(next);
@@ -96,8 +97,8 @@ export default function OneOnOneServicePage() {
 
           <p style={{ marginTop: 8, opacity: 0.75, fontSize: 14 }}>
             {showMore
-              ? "Extra clarity to help you decide if 1:1 is the best fit."
-              : "Get extra clarity on when 1:1 coaching makes the most sense."}
+              ? "Extra clarity to help you decide if hybrid coaching is the best fit."
+              : "Get extra clarity on when hybrid coaching makes the most sense."}
           </p>
         </div>
 
@@ -106,27 +107,29 @@ export default function OneOnOneServicePage() {
           <section style={panelStyle}>
             <div style={gridStyle}>
               <div style={cardStyle}>
-                <h3 style={cardTitle}>1:1 vs Small Group</h3>
+                <h3 style={cardTitle}>Hybrid vs 1:1</h3>
                 <p style={cardBody}>
-                  Small Group provides structured coaching in a team setting.
-                  1:1 gives you full customization and faster adjustments every
-                  session.
+                  1:1 gives you full coaching attention every session. Hybrid
+                  gives you strategic in-person coaching touchpoints plus independent work
+                  between sessions.
+                </p>
+              </div>
+
+              <div style={cardStyle}>
+                <h3 style={cardTitle}>Hybrid vs Remote</h3>
+                <p style={cardBody}>
+                  Remote programming gives you structure from a distance.
+                  Hybrid adds live coaching touchpoints so technique and progress
+                  stay sharper.
                 </p>
               </div>
 
               <div style={cardStyle}>
                 <h3 style={cardTitle}>How to choose</h3>
                 <p style={cardBody}>
-                  Choose 1:1 if you want maximum coaching attention, have a
-                  specific performance goal, or are managing pain or injury.
-                </p>
-              </div>
-
-              <div style={cardStyle}>
-                <h3 style={cardTitle}>You’re not late</h3>
-                <p style={cardBody}>
-                  The best time to build a strong base is now. We meet you where
-                  you are and stack progress week after week.
+                  Choose hybrid if you want coaching support and flexibility at
+                  the same time. It’s ideal for athletes who can train
+                  independently but still benefit from in-person feedback.
                 </p>
               </div>
             </div>
@@ -135,142 +138,35 @@ export default function OneOnOneServicePage() {
 
         <div style={dividerStyle} />
 
-        {/* PRICING */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>1:1 Coaching Packages</h2>
+{/* ADULT TRAINING OPTIONS */}
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>Adult Training Options</h2>
 
-          <p style={pricingNoteStyle}>
-            We’ve made our 1:1 packages more accessible for student-athletes
-            while keeping the coaching individualized and results-driven. Adult
-            clients should inquire directly for pricing.
-          </p>
+  <p style={cardBodyStyle}>
+    While many of our programs are designed for youth athlete development,
+    we also offer individualized coaching solutions for adult clients seeking
+    improved strength, performance, and long-term health.
+  </p>
 
-          <div style={pricingGridStyle}>
-            {/* 5 PACK */}
-            <div style={pricingCardStyle}>
-              <p style={pricingTierStyle}>Starter</p>
+  <p style={{ ...cardBodyStyle, marginTop: 12 }}>
+    Adult training options for <strong>Remote Programming</strong> and
+    <strong> Hybrid Coaching</strong> are customized based on goals,
+    schedule, and the level of coaching support required.
+    <br /><br />
+    <strong>Please inquire for more information on adult coaching and pricing.</strong>
+  </p>
 
-              <h3 style={pricingPriceStyle}>
-                $750<span style={pricingMonthStyle}> / 5 sessions</span>
-              </h3>
+  <p style={{ ...cardBodyStyle, marginTop: 12 }}>
+    Adult 1:1 coaching begins at a base rate of <strong>$165 per session</strong>,
+    with remote and hybrid options tailored to individual needs.
+  </p>
 
-              <p style={pricingFreqStyle}>$150 per session</p>
-
-              <p style={pricingDescStyle}>
-                A strong entry point for student-athletes who want to get
-                started with individualized coaching without a large upfront
-                commitment.
-              </p>
-
-              <ul style={pricingListStyle}>
-                <li>5 private coaching sessions</li>
-                <li>$150 per session</li>
-                <li>Best for athletes getting started</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
-
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/5-session-package"
-                  variant="primary"
-                >
-                  View 5-session package
-                </CallToAction>
-              </div>
-            </div>
-
-            {/* 10 PACK */}
-            <div style={pricingCardFeaturedStyle}>
-              <p style={pricingBadgeStyle}>Most popular</p>
-
-              <p style={pricingTierStyle}>Performance</p>
-
-              <h3 style={pricingPriceStyle}>
-                $1,300<span style={pricingMonthStyle}> / 10 sessions</span>
-              </h3>
-
-              <p style={pricingFreqStyle}>$130 per session</p>
-
-              <p style={pricingDescStyle}>
-                A strong option for student-athletes who want more consistency,
-                better value per session, and a clearer coaching rhythm.
-              </p>
-
-              <ul style={pricingListStyle}>
-                <li>10 private coaching sessions</li>
-                <li>$130 per session</li>
-                <li>Best balance of value and consistency</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
-
-              <p style={pricingMiniNoteStyle}>
-                Best balance of affordability, consistency, and value.
-              </p>
-
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/10-session-package"
-                  variant="primary"
-                >
-                  View 10-session package
-                </CallToAction>
-              </div>
-            </div>
-
-            {/* 20 PACK */}
-            <div style={pricingCardStyle}>
-              <p style={pricingTierStyle}>Best Value</p>
-
-              <h3 style={pricingPriceStyle}>
-                $2,400<span style={pricingMonthStyle}> / 20 sessions</span>
-              </h3>
-
-              <p style={pricingFreqStyle}>$120 per session</p>
-
-              <p style={pricingDescStyle}>
-                The best-value option for student-athletes committed to
-                long-term development, steady progress, and more continuity in
-                coaching.
-              </p>
-
-              <ul style={pricingListStyle}>
-                <li>20 private coaching sessions</li>
-                <li>$120 per session</li>
-                <li>Best value for long-term development</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
-
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/20-session-package"
-                  variant="primary"
-                >
-                  View 20-session package
-                </CallToAction>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
-
-        {/* ADULT TRAINING */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Adult training</h2>
-
-          <p style={cardBody}>
-            Adult clients should inquire directly for more information. Adult
-            1:1 training starts at a base rate of $165 per session.
-          </p>
-
-          <div style={{ marginTop: 16 }}>
-            <CallToAction href="/contact" variant="secondary">
-              Inquire for adult training
-            </CallToAction>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
+  <div style={{ marginTop: 18, textAlign: "center" }}>
+    <CallToAction href="/contact" variant="primary">
+      Inquire about adult training
+    </CallToAction>
+  </div>
+</section>
 
         {/* TESTIMONIALS */}
         <section style={panelStyle}>
@@ -279,8 +175,8 @@ export default function OneOnOneServicePage() {
           <div style={gridStyle}>
             <figure style={testimonialCardStyle}>
               <blockquote style={quoteStyle}>
-                “The structure is the difference. My kid knows exactly what
-                they&apos;re working on each session.”
+                “The flexibility helped us stay consistent, but it still felt
+                like there was real coaching behind the plan.”
               </blockquote>
               <figcaption style={quoteMetaStyle}>
                 — Parent of youth athlete
@@ -289,8 +185,8 @@ export default function OneOnOneServicePage() {
 
             <figure style={testimonialCardStyle}>
               <blockquote style={quoteStyle}>
-                “Coaching cues are clear and the environment is focused. It
-                feels professional.”
+                “I liked having structure between sessions and knowing exactly
+                what to work on.”
               </blockquote>
               <figcaption style={quoteMetaStyle}>
                 — High school athlete
@@ -299,8 +195,8 @@ export default function OneOnOneServicePage() {
 
             <figure style={testimonialCardStyle}>
               <blockquote style={quoteStyle}>
-                “It’s the first training place where progress is actually
-                measured.”
+                “It felt like the right middle ground—flexible, but still
+                measured and organized.”
               </blockquote>
               <figcaption style={quoteMetaStyle}>— Parent</figcaption>
             </figure>
@@ -309,16 +205,102 @@ export default function OneOnOneServicePage() {
 
         <div style={dividerStyle} />
 
+       {/* PRICING */}
+<section style={panelStyle}>
+<h2 style={sectionTitleStyle}>Pricing options</h2>
+<p style={pricingNoteStyle}>
+  Not sure which tier fits best? Book a consult and we’ll recommend the right
+  option based on goals, schedule, and support needed.
+</p>
+
+  <div style={pricingGridStyle}>
+    <div style={pricingCardStyle}>
+      <p style={pricingTierStyle}>Starter</p>
+      <h3 style={pricingPriceStyle}>
+        $249<span style={pricingMonthStyle}>/month</span>
+      </h3>
+      <p style={pricingFreqStyle}>1 in-person session / month + remote programming</p>
+      <p style={pricingDescStyle}>
+        A flexible entry point for athletes who want a monthly live coaching
+        touchpoint while following a structured plan between sessions.
+      </p>
+
+      <ul style={pricingListStyle}>
+        <li>1 in-person coaching session per month</li>
+        <li>Remote programming between sessions</li>
+        <li>Clear structure and progression</li>
+      </ul>
+
+      <div style={{ marginTop: 16 }}>
+        <CallToAction href="/services/hybrid/1x-month" variant="primary">
+          View starter option
+        </CallToAction>
+      </div>
+    </div>
+
+    <div style={pricingCardFeaturedStyle}>
+      <p style={pricingBadgeStyle}>Most popular</p>
+      <p style={pricingTierStyle}>Performance</p>
+      <h3 style={pricingPriceStyle}>
+        $399<span style={pricingMonthStyle}>/month</span>
+      </h3>
+      <p style={pricingFreqStyle}>Biweekly in-person sessions (2x / month) + remote programming</p>
+      <p style={pricingDescStyle}>
+        Our most balanced hybrid option for athletes who want regular live
+        coaching without needing weekly in-person sessions.
+      </p>
+
+      <ul style={pricingListStyle}>
+        <li>2 in-person coaching sessions per month</li>
+        <li>Remote programming between sessions</li>
+        <li>More accountability and a stronger feedback loop</li>
+      </ul>
+
+      <div style={{ marginTop: 16 }}>
+        <CallToAction href="/services/hybrid/2x-month" variant="primary">
+          View performance option
+        </CallToAction>
+      </div>
+    </div>
+
+    <div style={pricingCardStyle}>
+      <p style={pricingTierStyle}>Elite</p>
+      <h3 style={pricingPriceStyle}>
+        $549<span style={pricingMonthStyle}>/month</span>
+      </h3>
+      <p style={pricingFreqStyle}>3 touchpoints / month + remote programming</p>
+      <p style={pricingDescStyle}>
+        Our highest-support hybrid option for athletes who want more coaching,
+        more feedback, and more structure across the month.
+      </p>
+
+      <ul style={pricingListStyle}>
+        <li>3 in-person coaching touchpoints per month</li>
+        <li>Remote programming between sessions</li>
+        <li>Highest level of hybrid support</li>
+      </ul>
+
+      <div style={{ marginTop: 16 }}>
+        <CallToAction href="/services/hybrid/3x-month" variant="primary">
+          View elite option
+        </CallToAction>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <div style={dividerStyle} />
+
         {/* CTA */}
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Ready to get started?</h2>
 
           <p style={cardBody}>
-            Start the athlete intake so we can understand your goals and guide
-            you to the best package for your schedule and level of support.
+            Start the athlete intake so we can understand your schedule, goals,
+            and whether hybrid coaching is the best fit.
           </p>
 
-          <div style={{ marginTop: 16, display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ marginTop: 16, display: "flex", gap: 12 }}>
             <CallToAction href="/intake" variant="primary">
               Start athlete intake
             </CallToAction>
@@ -348,7 +330,10 @@ const heroStyle: React.CSSProperties = {
   background:
     "radial-gradient(700px 320px at 10% 0%, rgba(31,111,235,0.08), transparent 60%), var(--panel)",
   boxShadow: "0 10px 30px var(--shadow)",
-  textAlign: "center",
+  textAlign: "center",          // Centers all text
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",         // Centers child elements horizontally
 };
 
 const eyebrowStyle: React.CSSProperties = {
@@ -358,10 +343,11 @@ const eyebrowStyle: React.CSSProperties = {
   letterSpacing: 0.3,
   textTransform: "uppercase",
   color: "var(--accent)",
+  textAlign: "center",
 };
 
 const titleStyle: React.CSSProperties = {
-  margin: "10px auto 10px",
+  margin: "10px 0 10px",
   fontSize: 38,
   lineHeight: 1.12,
   color: "var(--navy)",
@@ -370,7 +356,7 @@ const titleStyle: React.CSSProperties = {
 
 const subtitleStyle: React.CSSProperties = {
   margin: "0 auto",
-  maxWidth: 760,
+  maxWidth: 720,                // Keeps line length readable
   lineHeight: 1.75,
   color: "var(--navy)",
   opacity: 0.88,
@@ -382,7 +368,8 @@ const ctaRowStyle: React.CSSProperties = {
   gap: 12,
   flexWrap: "wrap",
   marginTop: 18,
-  justifyContent: "center",
+  justifyContent: "center",     // Centers CTA buttons
+  alignItems: "center",
 };
 
 const dividerStyle: React.CSSProperties = {
@@ -397,6 +384,7 @@ const panelStyle: React.CSSProperties = {
   padding: "18px 16px",
   background: "var(--panel)",
   boxShadow: "0 10px 26px var(--shadow)",
+  textAlign: "center",
 };
 
 const sectionTitleStyle: React.CSSProperties = {
@@ -418,6 +406,7 @@ const cardStyle: React.CSSProperties = {
   borderRadius: 16,
   padding: 16,
   background: "var(--panel2)",
+  textAlign: "center",
 };
 
 const cardTitle: React.CSSProperties = {
@@ -425,7 +414,6 @@ const cardTitle: React.CSSProperties = {
   marginBottom: 8,
   fontSize: 17,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
 const cardBody: React.CSSProperties = {
@@ -433,7 +421,6 @@ const cardBody: React.CSSProperties = {
   opacity: 0.88,
   lineHeight: 1.7,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
 const cardList: React.CSSProperties = {
@@ -442,7 +429,6 @@ const cardList: React.CSSProperties = {
   lineHeight: 1.9,
   opacity: 0.88,
   color: "var(--navy)",
-  textAlign: "left",
 };
 
 const moreGuidanceBtn: React.CSSProperties = {
@@ -465,14 +451,12 @@ const quoteStyle: React.CSSProperties = {
   margin: 0,
   lineHeight: 1.7,
   opacity: 0.9,
-  textAlign: "center",
 };
 
 const quoteMetaStyle: React.CSSProperties = {
   marginTop: 10,
   fontSize: 13,
   opacity: 0.75,
-  textAlign: "center",
 };
 
 const pricingGridStyle: React.CSSProperties = {
@@ -518,7 +502,6 @@ const pricingTierStyle: React.CSSProperties = {
   letterSpacing: 0.3,
   color: "var(--navy)",
   opacity: 0.8,
-  textAlign: "center",
 };
 
 const pricingPriceStyle: React.CSSProperties = {
@@ -526,7 +509,6 @@ const pricingPriceStyle: React.CSSProperties = {
   fontSize: 34,
   lineHeight: 1,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
 const pricingMonthStyle: React.CSSProperties = {
@@ -539,7 +521,6 @@ const pricingFreqStyle: React.CSSProperties = {
   margin: "0 0 10px",
   fontWeight: 700,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
 const pricingDescStyle: React.CSSProperties = {
@@ -547,7 +528,6 @@ const pricingDescStyle: React.CSSProperties = {
   lineHeight: 1.65,
   opacity: 0.85,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
 const pricingListStyle: React.CSSProperties = {
@@ -563,14 +543,12 @@ const pricingNoteStyle: React.CSSProperties = {
   lineHeight: 1.65,
   opacity: 0.82,
   color: "var(--navy)",
-  textAlign: "center",
 };
 
-const pricingMiniNoteStyle: React.CSSProperties = {
-  margin: "12px 0 0",
-  fontSize: 13,
-  lineHeight: 1.5,
-  opacity: 0.78,
+const cardBodyStyle: React.CSSProperties = {
+  margin: 0,
+  lineHeight: 1.7,
   color: "var(--navy)",
-  textAlign: "center",
+  opacity: 0.88,
+  textAlign: "center", // Keeps text centered for consistency
 };
