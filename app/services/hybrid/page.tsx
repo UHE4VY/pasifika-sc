@@ -168,43 +168,6 @@ export default function HybridCoachingServicePage() {
   </div>
 </section>
 
-        {/* TESTIMONIALS */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>What families notice first</h2>
-
-          <div style={gridStyle}>
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “The flexibility helped us stay consistent, but it still felt
-                like there was real coaching behind the plan.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — Parent of youth athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “I liked having structure between sessions and knowing exactly
-                what to work on.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — High school athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “It felt like the right middle ground—flexible, but still
-                measured and organized.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>— Parent</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
-
        {/* PRICING */}
 <section style={panelStyle}>
 <h2 style={sectionTitleStyle}>Pricing options</h2>

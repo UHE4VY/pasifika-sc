@@ -272,43 +272,6 @@ export default function OneOnOneServicePage() {
 
         <div style={dividerStyle} />
 
-        {/* TESTIMONIALS */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>What families notice first</h2>
-
-          <div style={gridStyle}>
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “The structure is the difference. My kid knows exactly what
-                they&apos;re working on each session.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — Parent of youth athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “Coaching cues are clear and the environment is focused. It
-                feels professional.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — High school athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “It’s the first training place where progress is actually
-                measured.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>— Parent</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
-
         {/* CTA */}
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Ready to get started?</h2>

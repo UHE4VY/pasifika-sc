@@ -152,7 +152,6 @@ const cardTitle: React.CSSProperties = {
   color: "var(--navy)",
   textAlign: "center",
 };
-
 const cardBody: React.CSSProperties = {
   opacity: 0.85,
   lineHeight: 1.6,

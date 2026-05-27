@@ -136,41 +136,6 @@ export default function RemoteTrainingServicePage() {
 
         <div style={dividerStyle} />
 
-        {/* TESTIMONIALS */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>What families notice first</h2>
-
-          <div style={gridStyle}>
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “The structure is the difference. My kid knows exactly what to
-                do each session.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — Parent of youth athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “It feels organized and intentional, not random workouts.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — High school athlete
-              </figcaption>
-            </figure>
-
-            <figure style={testimonialCardStyle}>
-              <blockquote style={quoteStyle}>
-                “This is the first program where we can actually track progress.”
-              </blockquote>
-              <figcaption style={quoteMetaStyle}>
-                — Parent
-              </figcaption>
-            </figure>
-          </div>
-        </section>
-
         {/* PRICING */}
 <section style={panelStyle}>
 <h2 style={sectionTitleStyle}>Pricing options</h2>
