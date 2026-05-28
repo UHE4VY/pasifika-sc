@@ -7,7 +7,7 @@ export const testimonials: Testimonial[] = [
     role: "Athlete(softball)",
   },
   {
-    quote: "I appreicate how intentional and goal oriented my program is. I don't need to think as my the exercises are already modifed and customized for me.",
+    quote: "I appreicate how intentional and goal oriented my program is. I don't need to think about the exercises, they are already modifed and customized for me.",
     name: "Ciara V.",
     role: "Remote/Hybrid Athlete",
   },
