@@ -4,7 +4,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: "I trust coach Rachael because she's played the sport. I feel ahead of my teammates and I love learning new varations like cleans and squats.",
     name: "Anya C.",
-    role: "Athlete(softball)",
+    role: "Athlete (softball)",
   },
   {
     quote: "I appreicate how intentional and goal oriented my program is. I don't need to think about the exercises, they are already modifed and customized for me.",
