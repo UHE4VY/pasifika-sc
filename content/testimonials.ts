@@ -2,18 +2,18 @@ import type { Testimonial } from "@/components/Testimonials";
 
 export const testimonials: Testimonial[] = [
   {
-    quote: "My kid is faster, more confident, and actually understands how to train.",
-    name: "A. M.",
-    role: "Parent (softball)",
+    quote: "I trust coach Rachael because she's played the sport. I feel ahead of my teammates and I love learning new varations like cleans and squats.",
+    name: "Anya C.",
+    role: "Athlete(softball)",
   },
   {
-    quote: "Structure + coaching made the difference. We finally have a plan.",
-    name: "J. T.",
-    role: "Parent (football)",
+    quote: "I appreicate how intentional and goal oriented my program is. I don't need to think as my the exercises are already modifed and customized for me.",
+    name: "Ciara V.",
+    role: "Remote/Hybrid Athlete",
   },
   {
-    quote: "I feel stronger and move better in games—not just in the gym.",
-    name: "K. R.",
-    role: "Athlete (track)",
+    quote: "My experience has been great! They bring a lot of knowledge and expertise to our sessions and I appreciate that they're walking testimonies of being an athlete. ",
+    name: "Dylan C.",
+    role: "Athlete (football)",
   },
 ];
