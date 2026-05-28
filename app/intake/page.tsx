@@ -10,7 +10,7 @@ export default function IntakePage() {
       </p>
 
       <iframe
-        src="https://tally.so/embed/pbLjzy?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        src="https://docs.google.com/forms/d/e/1FAIpQLScHagjfrQeiFE4wDAXcuojunsiglJeVebAfWDvilANzVI-cKQ/viewform?usp=header"
         width="100%"
         height="900"
         frameBorder="0"
