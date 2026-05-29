@@ -249,7 +249,7 @@ export default function HomePage() {
        {/* TESTIMONIALS */}
 <section style={panelStyle}>
 <h2 style={testimonialsTitleStyle}>
-  What parents &amp; athletes are saying
+  What athletes are saying about PSC
 </h2>
   <Testimonials items={testimonials} />
 </section>
