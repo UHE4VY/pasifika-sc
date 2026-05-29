@@ -26,57 +26,67 @@ export default function YouthPerformancePage() {
         </div>
       </section>
 
-      <div style={dividerStyle} />
-
       {/* PRICING & AVAILABILITY */}
-      <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>Pricing & Availability</h2>
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>Pricing & Availability</h2>
 
-        <p style={cardBodyStyle}>
-          Youth Group Training includes 8 structured coaching sessions per
-          month in a supportive and accountable group environment.
-        </p>
+  <p style={cardBodyStyle}>
+    Youth Performance Training is offered through flexible session packages
+    designed to work around summer travel, tournaments, camps, and changing
+    sports schedules.
+  </p>
 
-        <div style={gridStyle}>
-          <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>Early Access Rate</h3>
-            <p style={cardBodyStyle}>
-              <strong>$150/month</strong> for the first 3 months for athletes who
-              sign up during the early access period.
-            </p>
-          </div>
+  <div style={gridStyle}>
+    <div style={cardStyle}>
+      <h3 style={cardTitleStyle}>Base Rate</h3>
+      <p style={cardBodyStyle}>
+        <strong>$40 per session</strong> for athletes who want flexible
+        session-by-session training.
+      </p>
+    </div>
 
-          <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>Standard Rate</h3>
-            <p style={cardBodyStyle}>
-              <strong>$200/month</strong> starting in month 4.
-            </p>
-          </div>
+    <div style={cardStyle}>
+      <h3 style={cardTitleStyle}>4-Session Package</h3>
+      <p style={cardBodyStyle}>
+        <strong>$150</strong>
+        <br />
+        $37.50 per session
+      </p>
+    </div>
 
-          <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>Sessions Included</h3>
-            <p style={cardBodyStyle}>
-              8 coach-led sessions per month focused on strength, speed and
-              movement quality.
-            </p>
-          </div>
+    <div style={cardStyle}>
+      <h3 style={cardTitleStyle}>8-Session Package</h3>
+      <p style={cardBodyStyle}>
+        <strong>$280</strong>
+        <br />
+        $35 per session
+      </p>
+    </div>
 
-        </div>
+    <div style={cardStyle}>
+      <h3 style={cardTitleStyle}>12-Session Package</h3>
+      <p style={cardBodyStyle}>
+        <strong>$390</strong>
+        <br />
+        $32.50 per session
+      </p>
+    </div>
+  </div>
 
-        <p style={launchNoteStyle}>
-          Early access athletes receive priority placement before public
-          enrollment opens.
-        </p>
+  <p style={launchNoteStyle}>
+    Packages provide a lower session rate when booked up front. Group sizes are
+    limited to 15 athletes per class to keep coaching quality high.
+  </p>
 
-        <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <CallToAction href="/intake" variant="primary">
-            Reserve early access
-          </CallToAction>
-          <CallToAction href="/schedule" variant="secondary">
-            Book a consult
-          </CallToAction>
-        </div>
-      </section>
+  <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+    <CallToAction href="/intake" variant="primary">
+      Start athlete intake
+    </CallToAction>
+    <CallToAction href="/schedule" variant="secondary">
+      Book a consult
+    </CallToAction>
+  </div>
+</section>
 
       <div style={dividerStyle} />
 
