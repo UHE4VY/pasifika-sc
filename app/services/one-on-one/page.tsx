@@ -135,142 +135,75 @@ export default function OneOnOneServicePage() {
 
         <div style={dividerStyle} />
 
-        {/* PRICING */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>1:1 Coaching Packages</h2>
+       {/* NEW CLIENT SPECIAL */}
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>New Client Special</h2>
 
-          <p style={pricingNoteStyle}>
-            We’ve made our 1:1 packages more accessible for student-athletes
-            while keeping the coaching individualized and results-driven. Adult
-            clients should inquire directly for pricing.
-          </p>
+  <p style={pricingNoteStyle}>
+    A simple entry point for athletes and families who want to experience 1:1
+    coaching before committing to a longer-term training plan.
+  </p>
 
-          <div style={pricingGridStyle}>
-            {/* 5 PACK */}
-            <div style={pricingCardStyle}>
-              <p style={pricingTierStyle}>Starter</p>
+  <div style={pricingGridStyle}>
+    <div style={pricingCardFeaturedStyle}>
+      <p style={pricingBadgeStyle}>New client special</p>
 
-              <h3 style={pricingPriceStyle}>
-                $750<span style={pricingMonthStyle}> / 5 sessions</span>
-              </h3>
+      <p style={pricingTierStyle}>5 Private Coaching Sessions</p>
 
-              <p style={pricingFreqStyle}>$150 per session</p>
+      <h3 style={pricingPriceStyle}>
+        $500<span style={pricingMonthStyle}> / 5 sessions</span>
+      </h3>
 
-              <p style={pricingDescStyle}>
-                A strong entry point for student-athletes who want to get
-                started with individualized coaching without a large upfront
-                commitment.
-              </p>
+      <p style={pricingFreqStyle}>$100 per session</p>
 
-              <ul style={pricingListStyle}>
-                <li>5 private coaching sessions</li>
-                <li>$150 per session</li>
-                <li>Best for athletes getting started</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
+      <p style={pricingDescStyle}>
+        Includes a free initial consultation so we can understand the athlete’s
+        goals, training history, schedule, and best path forward.
+      </p>
 
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/5-session-package"
-                  variant="primary"
-                >
-                  View 5-session package
-                </CallToAction>
-              </div>
-            </div>
+      <ul style={pricingListStyle}>
+        <li>Free initial consultation</li>
+        <li>5 private coaching sessions</li>
+        <li>Movement and training needs review</li>
+        <li>Individualized coaching recommendations</li>
+        <li>Best for athletes getting started with 1:1 support</li>
+        <li>Expires 90 days from purchase</li>
+      </ul>
 
-            {/* 10 PACK */}
-            <div style={pricingCardFeaturedStyle}>
-              <p style={pricingBadgeStyle}>Most popular</p>
+      <p style={pricingMiniNoteStyle}>
+        Longer-term training options can be discussed after the consultation.
+      </p>
 
-              <p style={pricingTierStyle}>Performance</p>
+      <div style={{ marginTop: 16 }}>
+        <CallToAction
+          href="/services/one-on-one/5-session-package"
+          variant="primary"
+        >
+          Claim new client special
+        </CallToAction>
+      </div>
+    </div>
+  </div>
+</section>
 
-              <h3 style={pricingPriceStyle}>
-                $1,300<span style={pricingMonthStyle}> / 10 sessions</span>
-              </h3>
+<div style={dividerStyle} />
 
-              <p style={pricingFreqStyle}>$130 per session</p>
+{/* ADULT TRAINING */}
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>Adult training</h2>
 
-              <p style={pricingDescStyle}>
-                A strong option for student-athletes who want more consistency,
-                better value per session, and a clearer coaching rhythm.
-              </p>
+  <p style={cardBody}>
+    Adult clients are welcome. Pricing and package recommendations are discussed
+    during the free consultation so we can match the plan to your goals,
+    schedule, and level of support needed.
+  </p>
 
-              <ul style={pricingListStyle}>
-                <li>10 private coaching sessions</li>
-                <li>$130 per session</li>
-                <li>Best balance of value and consistency</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
-
-              <p style={pricingMiniNoteStyle}>
-                Best balance of affordability, consistency, and value.
-              </p>
-
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/10-session-package"
-                  variant="primary"
-                >
-                  View 10-session package
-                </CallToAction>
-              </div>
-            </div>
-
-            {/* 20 PACK */}
-            <div style={pricingCardStyle}>
-              <p style={pricingTierStyle}>Best Value</p>
-
-              <h3 style={pricingPriceStyle}>
-                $2,400<span style={pricingMonthStyle}> / 20 sessions</span>
-              </h3>
-
-              <p style={pricingFreqStyle}>$120 per session</p>
-
-              <p style={pricingDescStyle}>
-                The best-value option for student-athletes committed to
-                long-term development, steady progress, and more continuity in
-                coaching.
-              </p>
-
-              <ul style={pricingListStyle}>
-                <li>20 private coaching sessions</li>
-                <li>$120 per session</li>
-                <li>Best value for long-term development</li>
-                <li>Expires 90 days from purchase</li>
-              </ul>
-
-              <div style={{ marginTop: 16 }}>
-                <CallToAction
-                  href="/services/one-on-one/20-session-package"
-                  variant="primary"
-                >
-                  View 20-session package
-                </CallToAction>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
-
-        {/* ADULT TRAINING */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Adult training</h2>
-
-          <p style={cardBody}>
-            Adult clients should inquire directly for more information. Adult
-            1:1 training starts at a base rate of $165 per session.
-          </p>
-
-          <div style={{ marginTop: 16 }}>
-            <CallToAction href="/contact" variant="secondary">
-              Inquire for adult training
-            </CallToAction>
-          </div>
-        </section>
-
-        <div style={dividerStyle} />
+  <div style={{ marginTop: 16 }}>
+    <CallToAction href="/schedule" variant="secondary">
+      Schedule free consultation
+    </CallToAction>
+  </div>
+</section>
 
         {/* CTA */}
         <section style={panelStyle}>

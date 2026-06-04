@@ -27,8 +27,9 @@ export default function YouthPerformancePage() {
       </section>
 
       {/* PRICING & AVAILABILITY */}
+{/* PROGRAM AVAILABILITY */}
 <section style={panelStyle}>
-  <h2 style={sectionTitleStyle}>Pricing & Availability</h2>
+  <h2 style={sectionTitleStyle}>Program Availability</h2>
 
   <p style={cardBodyStyle}>
     Youth Performance Training is offered through flexible session packages
@@ -38,45 +39,37 @@ export default function YouthPerformancePage() {
 
   <div style={gridStyle}>
     <div style={cardStyle}>
-      <h3 style={cardTitleStyle}>Base Rate</h3>
+      <h3 style={cardTitleStyle}>Flexible Packages</h3>
       <p style={cardBodyStyle}>
-        <strong>$40 per session</strong> for athletes who want flexible
-        session-by-session training.
+        Session packages are available based on your athlete’s schedule,
+        training goals, and level of support needed.
       </p>
     </div>
 
     <div style={cardStyle}>
-      <h3 style={cardTitleStyle}>4-Session Package</h3>
+      <h3 style={cardTitleStyle}>Limited Class Size</h3>
       <p style={cardBodyStyle}>
-        <strong>$150</strong>
-        <br />
-        $37.50 per session
+        Group sizes are limited to 15 athletes per class to keep coaching
+        quality high.
       </p>
     </div>
 
     <div style={cardStyle}>
-      <h3 style={cardTitleStyle}>8-Session Package</h3>
+      <h3 style={cardTitleStyle}>Best Fit First</h3>
       <p style={cardBodyStyle}>
-        <strong>$280</strong>
-        <br />
-        $35 per session
+        We recommend starting with the athlete intake so we can guide families
+        toward the right training option.
       </p>
     </div>
 
     <div style={cardStyle}>
-      <h3 style={cardTitleStyle}>12-Session Package</h3>
+      <h3 style={cardTitleStyle}>Pricing Discussed During Consult</h3>
       <p style={cardBodyStyle}>
-        <strong>$390</strong>
-        <br />
-        $32.50 per session
+        Current package options are reviewed during onboarding so families have
+        a clear plan before committing.
       </p>
     </div>
   </div>
-
-  <p style={launchNoteStyle}>
-    Packages provide a lower session rate when booked up front. Group sizes are
-    limited to 15 athletes per class to keep coaching quality high.
-  </p>
 
   <div style={{ marginTop: 18, display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
     <CallToAction href="/intake" variant="primary">
@@ -87,8 +80,6 @@ export default function YouthPerformancePage() {
     </CallToAction>
   </div>
 </section>
-
-      <div style={dividerStyle} />
 
       {/* WHAT PARENTS CAN EXPECT */}
       <section style={panelStyle}>
@@ -232,7 +223,7 @@ const sectionTitleStyle: React.CSSProperties = {
 
 const gridStyle: React.CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 14,
 };
 

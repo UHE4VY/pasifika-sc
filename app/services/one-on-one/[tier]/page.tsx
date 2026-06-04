@@ -4,13 +4,12 @@ import React, { use } from "react";
 import { notFound } from "next/navigation";
 import CallToAction from "../../../../components/CallToAction";
 
-type TierKey = "5-session-package" | "10-session-package" | "20-session-package";
+type TierKey = "5-session-package";
 
 const ONE_ON_ONE_TIERS: Record<
   TierKey,
   {
     label: string;
-    price: string;
     frequency: string;
     description: string;
     features: string[];
@@ -18,88 +17,57 @@ const ONE_ON_ONE_TIERS: Record<
   }
 > = {
   "5-session-package": {
-    label: "5 Session Package",
-    price: "$750",
-    frequency: "5 sessions at $150/session",
+    label: "New Client Special",
+    frequency: "5 private coaching sessions + free consultation",
     description:
-      "A strong starting point for student-athletes who want individualized coaching without a large upfront commitment.",
+      "A simple entry point for student-athletes and families who want to experience 1:1 coaching before committing to a longer-term training plan.",
     features: [
+      "Free initial consultation",
       "5 private coaching sessions",
-      "$150 per session",
-      "Best for athletes getting started with 1:1 coaching",
+      "$500 total",
+      "$100 per session",
+      "Movement and training needs review",
+      "Individualized coaching recommendations",
       "Package expires 90 days from purchase",
     ],
     bestFor:
-      "Student-athletes who want to build momentum, assess fit, and begin with a lower-commitment package.",
-  },
-
-  "10-session-package": {
-    label: "10 Session Package",
-    price: "$1,300",
-    frequency: "10 sessions at $130/session",
-    description:
-      "A more committed option for student-athletes who want greater consistency, stronger training rhythm, and better value per session.",
-    features: [
-      "10 private coaching sessions",
-      "$130 per session",
-      "Best balance of value and consistency",
-      "Package expires 90 days from purchase",
-    ],
-    bestFor:
-      "Student-athletes who want more continuity and a stronger coaching rhythm over time.",
-  },
-
-  "20-session-package": {
-    label: "20 Session Package",
-    price: "$2,400",
-    frequency: "20 sessions at $120/session",
-    description:
-      "The best-value package for student-athletes committed to longer-term development, measurable progress, and consistent coaching support.",
-    features: [
-      "20 private coaching sessions",
-      "$120 per session",
-      "Best value for long-term development",
-      "Package expires 90 days from purchase",
-    ],
-    bestFor:
-      "Student-athletes who are ready to commit to a longer training block and maximize value per session.",
+      "Student-athletes who want to build momentum, assess fit, and begin with individualized coaching support.",
   },
 };
 
 type Props = {
   params: Promise<{
-    tier: TierKey;
+    tier: string;
   }>;
 };
 
 export default function OneOnOneTierPage({ params }: Props) {
-  const { tier } = use(params) as { tier: TierKey };
-  const data = ONE_ON_ONE_TIERS[tier];
+  const { tier } = use(params) as { tier: string };
 
-  if (!data) {
+  if (tier !== "5-session-package") {
     notFound();
   }
+
+  const data = ONE_ON_ONE_TIERS[tier];
 
   return (
     <main style={pageStyle}>
       <section style={heroStyle}>
         <p style={eyebrowStyle}>1:1 Coaching</p>
 
-        <h1 style={titleStyle}>
-          {data.label} — {data.frequency}
-        </h1>
+        <h1 style={titleStyle}>{data.label}</h1>
 
-        <p style={priceStyle}>{data.price}</p>
+        <p style={subtitleStyle}>{data.frequency}</p>
 
         <p style={subtitleStyle}>{data.description}</p>
 
         <div style={ctaRowStyle}>
-          <CallToAction href="/intake" variant="primary">
-            Start athlete intake
+          <CallToAction href="/schedule" variant="primary">
+            Schedule free consultation
           </CallToAction>
 
-          <CallToAction href="/schedule" variant="secondary">
-            Book a consult
+          <CallToAction href="/intake" variant="secondary">
+            Start athlete intake
           </CallToAction>
         </div>
       </section>
@@ -113,9 +81,9 @@ export default function OneOnOneTierPage({ params }: Props) {
           <div style={cardStyle}>
             <h3 style={cardTitle}>Package overview</h3>
             <p style={cardBody}>
-              {data.label} gives student-athletes access to individualized 1:1
-              coaching designed to improve performance through focused attention
-              and clear progression.
+              This new client special gives student-athletes access to focused
+              1:1 coaching with a clear starting point and no long-term
+              commitment required.
             </p>
           </div>
 
@@ -125,11 +93,11 @@ export default function OneOnOneTierPage({ params }: Props) {
           </div>
 
           <div style={cardStyle}>
-            <h3 style={cardTitle}>Package policy</h3>
+            <h3 style={cardTitle}>Next steps</h3>
             <p style={cardBody}>
-              All student-athlete packages expire 90 days from purchase. Adult
-              clients should inquire directly for pricing. Adult base rate
-              starts at $165 per session.
+              Longer-term training options can be discussed after the
+              consultation once we understand the athlete’s goals, schedule, and
+              level of support needed.
             </p>
           </div>
         </div>
@@ -144,37 +112,16 @@ export default function OneOnOneTierPage({ params }: Props) {
       <div style={dividerStyle} />
 
       <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>Adult training</h2>
-
-        <p style={cardBody}>
-          Adult clients should inquire directly for more information. Adult 1:1
-          training starts at a base rate of $165 per session.
-        </p>
-
-        <div style={{ marginTop: 16, display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <CallToAction href="/contact" variant="primary">
-            Inquire for adult training
-          </CallToAction>
-
-          <CallToAction href="/services/one-on-one" variant="secondary">
-            Back to 1:1 Coaching
-          </CallToAction>
-        </div>
-      </section>
-
-      <div style={dividerStyle} />
-
-      <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to move forward?</h2>
 
         <p style={cardBody}>
-          Start with the athlete intake so we can understand your goals,
-          schedule, and which package is the right fit.
+          Start with a free consultation so we can learn more about the athlete,
+          answer questions, and decide whether 1:1 coaching is the right fit.
         </p>
 
         <div style={{ marginTop: 16, display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <CallToAction href="/intake" variant="primary">
-            Start athlete intake
+          <CallToAction href="/schedule" variant="primary">
+            Schedule free consultation
           </CallToAction>
 
           <CallToAction href="/services/one-on-one" variant="secondary">
@@ -219,15 +166,8 @@ const titleStyle: React.CSSProperties = {
   color: "var(--navy)",
 };
 
-const priceStyle: React.CSSProperties = {
-  margin: "0 0 8px",
-  fontSize: 30,
-  fontWeight: 800,
-  color: "var(--navy)",
-};
-
 const subtitleStyle: React.CSSProperties = {
-  margin: 0,
+  margin: "8px 0 0",
   maxWidth: 760,
   lineHeight: 1.75,
   color: "var(--navy)",

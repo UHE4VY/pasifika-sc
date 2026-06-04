@@ -10,7 +10,6 @@ const REMOTE_TIERS: Record<
   TierKey,
   {
     label: string;
-    price: string;
     frequency: string;
     description: string;
     features: string[];
@@ -19,7 +18,6 @@ const REMOTE_TIERS: Record<
 > = {
   "programming-only": {
     label: "Starter",
-    price: "$149/month",
     frequency: "Programming only",
     description:
       "A clear training plan for athletes who want structure and direction without ongoing live coaching touchpoints.",
@@ -35,7 +33,6 @@ const REMOTE_TIERS: Record<
 
   "check-ins": {
     label: "Performance",
-    price: "$249/month",
     frequency: "Programming + biweekly check-ins",
     description:
       "Our most balanced remote option for athletes who want accountability, adjustments, and regular coaching feedback.",
@@ -51,7 +48,6 @@ const REMOTE_TIERS: Record<
 
   "high-support": {
     label: "Elite",
-    price: "$399/month",
     frequency: "High-support remote coaching",
     description:
       "Our highest-support remote option for athletes who want the strongest feedback loop without training in person full time.",
@@ -88,8 +84,6 @@ export default function RemoteTierPage({ params }: Props) {
         <h1 style={titleStyle}>
           {data.label} — {data.frequency}
         </h1>
-
-        <p style={priceStyle}>{data.price}</p>
 
         <p style={subtitleStyle}>{data.description}</p>
 
@@ -149,10 +143,15 @@ export default function RemoteTierPage({ params }: Props) {
           schedule, and whether this tier is the right fit.
         </p>
 
-        <div style={{ marginTop: 16, display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <CallToAction href="/intake" variant="primary">
-            Start athlete intake
-          </CallToAction>
+        <div
+  style={{
+    marginTop: 16,
+    display: "flex",
+    gap: 12,
+    flexWrap: "wrap",
+    justifyContent: "center",
+  }}
+>
 
           <CallToAction href="/services/remote" variant="secondary">
             Back to Remote Programming
@@ -196,12 +195,6 @@ const titleStyle: React.CSSProperties = {
   color: "var(--navy)",
 };
 
-const priceStyle: React.CSSProperties = {
-  margin: "0 0 8px",
-  fontSize: 30,
-  fontWeight: 800,
-  color: "var(--navy)",
-};
 
 const subtitleStyle: React.CSSProperties = {
   margin: 0,
