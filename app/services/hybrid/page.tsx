@@ -169,11 +169,6 @@ export default function HybridCoachingServicePage() {
         <li>Clear structure and progression</li>
       </ul>
 
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/hybrid/1x-month" variant="primary">
-          View starter option
-        </CallToAction>
-      </div>
     </div>
 
     <div style={pricingCardFeaturedStyle}>
@@ -197,11 +192,6 @@ export default function HybridCoachingServicePage() {
         <li>More accountability and a stronger feedback loop</li>
       </ul>
 
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/hybrid/2x-month" variant="primary">
-          View performance option
-        </CallToAction>
-      </div>
     </div>
 
     <div style={pricingCardStyle}>
@@ -224,11 +214,6 @@ export default function HybridCoachingServicePage() {
         <li>Highest level of hybrid support</li>
       </ul>
 
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/hybrid/3x-month" variant="primary">
-          View elite option
-        </CallToAction>
-      </div>
     </div>
   </div>
 
