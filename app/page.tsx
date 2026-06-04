@@ -73,50 +73,78 @@ export default function HomePage() {
 
 {/* NEW CLIENT SPECIAL */}
 <section style={panelStyle}>
-  <h2 style={sectionTitleStyle}>New Client Intro Special</h2>
+<h2
+  style={{
+    fontSize: 32,
+    fontWeight: 800,
+    color: "var(--accent)",
+    marginBottom: 12,
+    textAlign: "center",
+  }}
+>
+  New Client Intro Special
+</h2>
 
   <p style={cardBodyStyle}>
     Experience individualized coaching before committing to a larger package.
   </p>
 
   <div
-    style={{
-      maxWidth: 700,
-      margin: "16px auto",
-      padding: "20px",
-      border: "1px solid var(--border)",
-      borderRadius: 16,
-      background: "var(--panel2)",
-    }}
-  >
-    <h3
-      style={{
-        margin: "0 0 8px",
-        fontSize: 28,
-        color: "var(--navy)",
-      }}
-    >
-      5 Private Coaching Sessions
-    </h3>
+  style={{
+    maxWidth: 700,
+    margin: "16px auto",
+    padding: "24px",
+    border: "1px solid var(--border)",
+    borderRadius: 16,
+    background: "var(--panel2)",
+    textAlign: "center",
+  }}
+>
 
-    <p
-      style={{
-        margin: 0,
-        fontSize: 20,
-        fontWeight: 700,
-        color: "var(--accent)",
-      }}
-    >
-      $100 per session (5-session package) Introductory Package. Available to new clients only.
-    </p>
+<h3
+  style={{
+    margin: "0 0 8px",
+    fontSize: 34,
+    fontWeight: 800,
+    color: "var(--navy)",
+    textAlign: "center",
+  }}
+>
+  5 Private Coaching Sessions
+</h3>
 
-    <p
-      style={{
-        marginTop: 12,
-        lineHeight: 1.7,
-        opacity: 0.88,
-      }}
-    >
+<p
+  style={{
+    margin: "8px 0",
+    fontSize: 28,
+    fontWeight: 800,
+    color: "var(--accent)",
+    textAlign: "center",
+  }}
+>
+  5 Sessions for $500
+</p>
+
+<p
+  style={{
+    margin: 0,
+    fontSize: 18,
+    fontWeight: 600,
+    opacity: 0.8,
+    textAlign: "center",
+  }}
+>
+  $100 per session • New clients only
+</p>
+
+<p
+  style={{
+    marginTop: 16,
+    lineHeight: 1.7,
+    opacity: 0.88,
+    textAlign: "center",
+  }}
+>
       A simple starting point for athletes and families who want to experience
       Pasifika Strength & Conditioning's coaching process, training environment,
       and development system before committing to a larger package.
