@@ -138,54 +138,29 @@ export default function HybridCoachingServicePage() {
 
         <div style={dividerStyle} />
 
-{/* ADULT TRAINING OPTIONS */}
+{/* COACHING OPTIONS */}
 <section style={panelStyle}>
-  <h2 style={sectionTitleStyle}>Adult Training Options</h2>
+  <h2 style={sectionTitleStyle}>Coaching Options</h2>
 
   <p style={cardBodyStyle}>
-    While many of our programs are designed for youth athlete development,
-    we also offer individualized coaching solutions for adult clients seeking
-    improved strength, performance, and long-term health.
+    Hybrid Coaching is customized based on the athlete’s schedule, goals, and
+    level of support needed. We recommend starting with the intake so we can
+    guide you toward the right option.
   </p>
-
-  <p style={{ ...cardBodyStyle, marginTop: 12 }}>
-    Adult training options for <strong>Remote Programming</strong> and
-    <strong> Hybrid Coaching</strong> are customized based on goals,
-    schedule, and the level of coaching support required.
-    <br /><br />
-    <strong>Please inquire for more information on adult coaching and pricing.</strong>
-  </p>
-
-  <p style={{ ...cardBodyStyle, marginTop: 12 }}>
-    Adult 1:1 coaching begins at a base rate of <strong>$165 per session</strong>,
-    with remote and hybrid options tailored to individual needs.
-  </p>
-
-  <div style={{ marginTop: 18, textAlign: "center" }}>
-    <CallToAction href="/contact" variant="primary">
-      Inquire about adult training
-    </CallToAction>
-  </div>
-</section>
-
-       {/* PRICING */}
-<section style={panelStyle}>
-<h2 style={sectionTitleStyle}>Pricing options</h2>
-<p style={pricingNoteStyle}>
-  Not sure which tier fits best? Book a consult and we’ll recommend the right
-  option based on goals, schedule, and support needed.
-</p>
 
   <div style={pricingGridStyle}>
     <div style={pricingCardStyle}>
       <p style={pricingTierStyle}>Starter</p>
-      <h3 style={pricingPriceStyle}>
-        $249<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>1 in-person session / month + remote programming</p>
+
+   
+
+      <p style={pricingFreqStyle}>
+        1 in-person session per month + remote programming
+      </p>
+
       <p style={pricingDescStyle}>
-        A flexible entry point for athletes who want a monthly live coaching
-        touchpoint while following a structured plan between sessions.
+        A flexible entry point for athletes who want occasional live coaching
+        while following a structured plan between sessions.
       </p>
 
       <ul style={pricingListStyle}>
@@ -204,10 +179,13 @@ export default function HybridCoachingServicePage() {
     <div style={pricingCardFeaturedStyle}>
       <p style={pricingBadgeStyle}>Most popular</p>
       <p style={pricingTierStyle}>Performance</p>
-      <h3 style={pricingPriceStyle}>
-        $399<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>Biweekly in-person sessions (2x / month) + remote programming</p>
+
+      <h3 style={pricingOptionTitleStyle}>Biweekly Support</h3>
+
+      <p style={pricingFreqStyle}>
+        2 in-person sessions per month + remote programming
+      </p>
+
       <p style={pricingDescStyle}>
         Our most balanced hybrid option for athletes who want regular live
         coaching without needing weekly in-person sessions.
@@ -228,10 +206,13 @@ export default function HybridCoachingServicePage() {
 
     <div style={pricingCardStyle}>
       <p style={pricingTierStyle}>Elite</p>
-      <h3 style={pricingPriceStyle}>
-        $549<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>3 touchpoints / month + remote programming</p>
+
+      <h3 style={pricingOptionTitleStyle}>High-Support Hybrid</h3>
+
+      <p style={pricingFreqStyle}>
+        3 coaching touchpoints per month + remote programming
+      </p>
+
       <p style={pricingDescStyle}>
         Our highest-support hybrid option for athletes who want more coaching,
         more feedback, and more structure across the month.
@@ -250,9 +231,12 @@ export default function HybridCoachingServicePage() {
       </div>
     </div>
   </div>
-</section>
 
-        <div style={dividerStyle} />
+  <p style={pricingNoteStyle}>
+    Pricing and package options are reviewed during onboarding so we can
+    recommend the right level of support before you commit.
+  </p>
+</section>
 
         {/* CTA */}
         <section style={panelStyle}>
@@ -403,24 +387,6 @@ const moreGuidanceBtn: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const testimonialCardStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 16,
-  padding: 16,
-  background: "var(--panel2)",
-};
-
-const quoteStyle: React.CSSProperties = {
-  margin: 0,
-  lineHeight: 1.7,
-  opacity: 0.9,
-};
-
-const quoteMetaStyle: React.CSSProperties = {
-  marginTop: 10,
-  fontSize: 13,
-  opacity: 0.75,
-};
 
 const pricingGridStyle: React.CSSProperties = {
   display: "grid",
@@ -467,19 +433,6 @@ const pricingTierStyle: React.CSSProperties = {
   opacity: 0.8,
 };
 
-const pricingPriceStyle: React.CSSProperties = {
-  margin: "8px 0 6px",
-  fontSize: 34,
-  lineHeight: 1,
-  color: "var(--navy)",
-};
-
-const pricingMonthStyle: React.CSSProperties = {
-  fontSize: 16,
-  fontWeight: 600,
-  opacity: 0.7,
-};
-
 const pricingFreqStyle: React.CSSProperties = {
   margin: "0 0 10px",
   fontWeight: 700,
@@ -514,4 +467,11 @@ const cardBodyStyle: React.CSSProperties = {
   color: "var(--navy)",
   opacity: 0.88,
   textAlign: "center", // Keeps text centered for consistency
+};
+
+const pricingOptionTitleStyle: React.CSSProperties = {
+  margin: "8px 0 10px",
+  fontSize: 24,
+  lineHeight: 1.15,
+  color: "var(--navy)",
 };
