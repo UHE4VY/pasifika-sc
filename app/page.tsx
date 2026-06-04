@@ -157,6 +157,9 @@ export default function HomePage() {
     </CallToAction>
   </div>
 </section>
+
+<div style={dividerStyle} />
+       
         {/* WHY PSC */}
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Why PSC</h2>
