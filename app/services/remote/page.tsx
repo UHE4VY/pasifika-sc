@@ -136,89 +136,46 @@ export default function RemoteTrainingServicePage() {
 
         <div style={dividerStyle} />
 
-        {/* PRICING */}
+ {/* COACHING OPTIONS */}
 <section style={panelStyle}>
-<h2 style={sectionTitleStyle}>Pricing options</h2>
-<p style={pricingNoteStyle}>
-  Not sure which tier fits best? Book a consult and we’ll recommend the right
-  option based on goals, schedule, and support needed.
-</p>
+  <h2 style={sectionTitleStyle}>Coaching Options</h2>
 
-  <div style={pricingGridStyle}>
-    <div style={pricingCardStyle}>
-      <p style={pricingTierStyle}>Starter</p>
-      <h3 style={pricingPriceStyle}>
-        $149<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>Programming only</p>
-      <p style={pricingDescStyle}>
-        A clear training plan for athletes who want structure and direction
-        without ongoing live coaching touchpoints.
+  <p style={cardBodyStyle}>
+    Every remote coaching plan is customized based on your goals, schedule,
+    training experience, and the level of support you need.
+  </p>
+
+  <div style={gridStyle}>
+    <div style={cardStyle}>
+      <h3 style={cardTitle}>Starter</h3>
+      <p style={cardBody}>
+        Structured programming for athletes who are comfortable training
+        independently and primarily need expert direction.
       </p>
-
-      <ul style={pricingListStyle}>
-        <li>Monthly training plan</li>
-        <li>Structured weekly progression</li>
-        <li>Best for independent athletes</li>
-      </ul>
-
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/remote/programming-only" variant="primary">
-          View starter option
-        </CallToAction>
-      </div>
     </div>
 
-    <div style={pricingCardFeaturedStyle}>
-      <p style={pricingBadgeStyle}>Most popular</p>
-      <p style={pricingTierStyle}>Performance</p>
-      <h3 style={pricingPriceStyle}>
-        $249<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>Programming + biweekly check-ins</p>
-      <p style={pricingDescStyle}>
-        Our most balanced remote option for athletes who want accountability,
-        adjustments, and regular coaching feedback.
+    <div style={cardStyle}>
+      <h3 style={cardTitle}>Performance</h3>
+      <p style={cardBody}>
+        Programming plus regular coaching feedback and accountability to help
+        athletes stay consistent and make adjustments along the way.
       </p>
-
-      <ul style={pricingListStyle}>
-        <li>Monthly training plan</li>
-        <li>Biweekly check-ins</li>
-        <li>Adjustments based on progress</li>
-      </ul>
-
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/remote/check-ins" variant="primary">
-          View performance option
-        </CallToAction>
-      </div>
     </div>
 
-    <div style={pricingCardStyle}>
-      <p style={pricingTierStyle}>Elite</p>
-      <h3 style={pricingPriceStyle}>
-        $399<span style={pricingMonthStyle}>/month</span>
-      </h3>
-      <p style={pricingFreqStyle}>High-support remote coaching</p>
-      <p style={pricingDescStyle}>
-        Our highest-support remote option for athletes who want the strongest
-        feedback loop without training in person full time.
+    <div style={cardStyle}>
+      <h3 style={cardTitle}>Elite</h3>
+      <p style={cardBody}>
+        Our highest level of remote support with frequent communication,
+        ongoing adjustments, and a stronger coaching feedback loop.
       </p>
-
-      <ul style={pricingListStyle}>
-        <li>Monthly training plan</li>
-        <li>Frequent check-ins and adjustments</li>
-        <li>Highest level of remote support</li>
-      </ul>
-
-      <div style={{ marginTop: 16 }}>
-        <CallToAction href="/services/remote/high-support" variant="primary">
-          View elite option
-        </CallToAction>
-      </div>
     </div>
   </div>
-</section>
+
+  <p style={{ marginTop: 16, opacity: 0.8 }}>
+    Not sure which option is right for you? Schedule a consultation and we'll
+    help determine the best fit.
+  </p>
+</section>       
 
         <div style={dividerStyle} />
         <section style={panelStyle}>
@@ -474,92 +431,6 @@ const quoteMetaStyle: React.CSSProperties = {
   marginTop: 10,
   fontSize: 13,
   opacity: 0.75,
-};
-
-const pricingGridStyle: React.CSSProperties = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: 16,
-};
-
-const pricingCardStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 18,
-  padding: 18,
-  background: "var(--panel2)",
-  boxShadow: "0 10px 24px var(--shadow)",
-};
-
-const pricingCardFeaturedStyle: React.CSSProperties = {
-  border: "2px solid var(--accent)",
-  borderRadius: 18,
-  padding: 18,
-  background: "var(--panel)",
-  boxShadow: "0 12px 28px var(--shadow)",
-};
-
-const pricingBadgeStyle: React.CSSProperties = {
-  display: "inline-block",
-  marginBottom: 10,
-  padding: "6px 10px",
-  borderRadius: 999,
-  background: "rgba(31,111,235,0.12)",
-  color: "var(--accent)",
-  fontSize: 12,
-  fontWeight: 800,
-  textTransform: "uppercase",
-  letterSpacing: 0.3,
-};
-
-const pricingTierStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 13,
-  fontWeight: 800,
-  textTransform: "uppercase",
-  letterSpacing: 0.3,
-  color: "var(--navy)",
-  opacity: 0.8,
-};
-
-const pricingPriceStyle: React.CSSProperties = {
-  margin: "8px 0 6px",
-  fontSize: 34,
-  lineHeight: 1,
-  color: "var(--navy)",
-};
-
-const pricingMonthStyle: React.CSSProperties = {
-  fontSize: 16,
-  fontWeight: 600,
-  opacity: 0.7,
-};
-
-const pricingFreqStyle: React.CSSProperties = {
-  margin: "0 0 10px",
-  fontWeight: 700,
-  color: "var(--navy)",
-};
-
-const pricingDescStyle: React.CSSProperties = {
-  margin: "0 0 12px",
-  lineHeight: 1.65,
-  opacity: 0.85,
-  color: "var(--navy)",
-};
-
-const pricingListStyle: React.CSSProperties = {
-  margin: 0,
-  paddingLeft: 18,
-  lineHeight: 1.85,
-  color: "var(--navy)",
-  opacity: 0.88,
-};
-
-const pricingNoteStyle: React.CSSProperties = {
-  margin: "0 0 14px",
-  lineHeight: 1.65,
-  opacity: 0.82,
-  color: "var(--navy)",
 };
 
 const cardBodyStyle: React.CSSProperties = {
