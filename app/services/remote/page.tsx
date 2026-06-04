@@ -15,6 +15,7 @@ export default function RemoteTrainingServicePage() {
 
       <main style={pageStyle}>
 
+
         {/* HERO */}
         <section style={heroStyle}>
           <p style={eyebrowStyle}>Training Program</p>
@@ -74,6 +75,67 @@ export default function RemoteTrainingServicePage() {
         </section>
 
         <div style={dividerStyle} />
+
+{/* NEW CLIENT SPECIAL */}
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>New Client Intro Special</h2>
+
+  <p style={cardBodyStyle}>
+    Experience individualized coaching before committing to a larger package.
+  </p>
+
+  <div
+    style={{
+      maxWidth: 700,
+      margin: "16px auto",
+      padding: "20px",
+      border: "1px solid var(--border)",
+      borderRadius: 16,
+      background: "var(--panel2)",
+    }}
+  >
+    <h3
+      style={{
+        margin: "0 0 8px",
+        fontSize: 28,
+        color: "var(--navy)",
+      }}
+    >
+      5 Private Coaching Sessions
+    </h3>
+
+    <p
+      style={{
+        margin: 0,
+        fontSize: 20,
+        fontWeight: 700,
+        color: "var(--accent)",
+      }}
+    >
+      $100 per session (5-session package) Introductory Package. Available to new clients only.
+    </p>
+
+    <p
+      style={{
+        marginTop: 12,
+        lineHeight: 1.7,
+        opacity: 0.88,
+      }}
+    >
+      A simple starting point for athletes and families who want to experience
+      Pasifika Strength & Conditioning's coaching process, training environment,
+      and development system before committing to a larger package.
+    </p>
+  </div>
+
+  <div style={{ marginTop: 16 }}>
+    <CallToAction href="/intake" variant="primary">
+      Claim Intro Special
+    </CallToAction>
+  </div>
+</section>
+
+<div style={dividerStyle} />
 
         {/* MORE GUIDANCE */}
         <div style={{ marginBottom: 18 }}>
