@@ -24,14 +24,13 @@ const ONE_ON_ONE_TIERS: Record<
     features: [
       "Free initial consultation",
       "5 private coaching sessions",
-      "$500 total",
-      "$100 per session",
+      "$100 per session (5-session package)",
       "Movement and training needs review",
       "Individualized coaching recommendations",
       "Package expires 90 days from purchase",
     ],
     bestFor:
-      "Student-athletes who want to build momentum, assess fit, and begin with individualized coaching support.",
+      "Student-athletes and families who want to build momentum, assess fitness and training needs and begin with individualized coaching support.",
   },
 };
 
