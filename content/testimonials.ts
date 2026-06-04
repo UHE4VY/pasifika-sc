@@ -12,7 +12,7 @@ export const testimonials: Testimonial[] = [
     role: "Remote/Hybrid Athlete",
   },
   {
-    quote: "My experience has been great! Coach Josh brings a lot of knowledge and expertise to our sessions and I appreciate that he's walking testimonies of being an athlete. ",
+    quote: "My experience has been great! Coach Josh brings a lot of knowledge and expertise to our sessions and I appreciate that he's a walking testimony of being an elite athlete. ",
     name: "Dylan C.",
     role: "Athlete (football)",
   },
