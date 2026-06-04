@@ -32,7 +32,7 @@ export default function HomePage() {
 
             <p style={subtitleStyle}>
               We coach what actually moves the needle. We build movement
-              quality and confidence, all measured, tracked, and progressed intentionally.
+              quality and confidence, all measured, tracked and progressed intentionally.
             </p>
 
             <div style={ctaRowStyle}>
@@ -105,7 +105,7 @@ export default function HomePage() {
     <div style={cardStyle}>
       <h3 style={cardTitleCenteredStyle}>Speed &amp; movement quality</h3>
       <p style={cardBodyCenteredStyle}>
-        Sprint mechanics, acceleration, and movement efficiency improve
+        Sprint mechanics, acceleration and movement efficiency improve
         through structured progressions.
       </p>
     </div>
@@ -182,21 +182,24 @@ export default function HomePage() {
                   high-level competition. After a season-ending football injury
                   in high school, he rebuilt through track &amp; field and went
                   on to earn All-American honors in the shot put, set the CSU
-                  Stanislaus school record, and represent the Kingdom of Tonga
-                  on the world stage in weightlifting.
+                  Stanislaus school record and represent the Kingdom of Tonga
+                  on the world stage in the sport of olympic weightlifting.
                 </p>
                 <p style={coachBodyStyle}>
                   His coaching reflects PSC’s values: discipline, humility,
-                  structure, and measurable development. He believes athletes
-                  grow best when training is intentional, standards are clear,
+                  structure and measurable development. He believes athletes
+                  grow best when training is intentional, standards are clear
                   and progress is tracked.
                 </p>
 
                 <ul style={coachListStyle}>
-                  <li>All-American in Shot Put</li>
+                  <li>2x All-American in the Shot Put</li>
                   <li>CSU Stanislaus school record holder</li>
-                  <li>Tongan national record holder</li>
+                  <li>Tongan national record holder in the shotput</li>
                   <li>2x Weightlifting World Championships competitor</li>
+                  <li>B.A. in Kinesiology from CSU Stanislaus</li>
+                  <li>USAW Level 1 and 2 Certified</li>
+                  <li>Certified Strength and Conditioning Specialist</li>
                 </ul>
               </div>
             </div>
@@ -232,6 +235,9 @@ export default function HomePage() {
                   <li>Youth athlete development focused</li>
                   <li>Experience coaching club and youth athletes</li>
                   <li>Performance + confidence-driven approach</li>
+                  <li>NASM CPT Certified</li>
+                  <li>B.A. in English with an emphasis in 19th century British and American Literature from CSU East Bay</li>
+                 
                 </ul>
               </div>
             </div>
@@ -307,8 +313,7 @@ export default function HomePage() {
           <h2 style={sectionTitleStyle}>Ready for the next step?</h2>
           <p style={{ margin: 0, opacity: 0.85, lineHeight: 1.7 }}>
             Fill out the intake form and book a performance evaluation and we’ll
-            guide you to the best coaching option based on your sport, schedule,
-            and goals.
+            guide you to the best coaching option based on your sport, schedule and goals.
           </p>
 
           <div
