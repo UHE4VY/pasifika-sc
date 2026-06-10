@@ -184,3 +184,40 @@
     margin-right: auto;
   }
 }
+
+.coach-card {
+  display: block;
+  padding: 22px;
+  overflow: hidden;
+}
+
+.coach-image-wrap {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 22px auto;
+}
+
+.coach-image {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  position: static;
+}
+
+.coach-text {
+  display: block;
+  clear: both;
+  width: 100%;
+  position: static;
+  text-align: center;
+}
+
+.coach-text ul {
+  text-align: left;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
