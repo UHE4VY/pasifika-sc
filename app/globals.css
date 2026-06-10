@@ -76,3 +76,17 @@
     text-align: left;
   }
 }
+
+/* Force CTA buttons to retain styling */
+
+a[style] {
+  color: inherit;
+}
+
+a[style*="background"] {
+  color: #ffffff !important;
+}
+
+a[style*="background"][href] {
+  text-decoration: none !important;
+}
