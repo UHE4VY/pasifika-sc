@@ -1,9 +1,79 @@
-.coach-section {
+:root {
+  --navy: #0b1f3a;
+  --blue: #1f6feb;
+  --ice: #eaf2ff;
+  --sand: #f4efe6;
+  --ink: #071423;
+  
+  --bg: #fbfaf7;
+  --panel: #ffffff;
+  --panel2: #ffffff;
+  --panel-soft: #f8f6f1;
+  --text: #0b1f3a;
+  --muted: #5c6b7a;
+  --border: #e6e1d8;
+  
+  --accent: #1f6feb;
+  --accent2: #f97316;
+  --accent-soft: #7db7ff;
+  --shadow: rgba(0, 0, 0, 0.08);
+  }
+  
+  * {
+  box-sizing: border-box;
+  }
+  
+  html,
+  body {
+  min-height: 100%;
+  }
+  
+  body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui,
+  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+  sans-serif;
+  }
+  
+  a {
+  color: var(--accent);
+  text-decoration: none;
+  }
+  
+  a:hover {
+  text-decoration: underline;
+  }
+  
+  p {
+  color: var(--muted);
+  }
+  
+  hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  }
+  
+  /* Service card hover effect */
+  
+  .serviceCard {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  
+  .serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+  }
+  
+  /* Coach cards */
+  
+  .coach-section {
   display: grid;
   gap: 24px;
-}
-
-.coach-card {
+  }
+  
+  .coach-card {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 24px;
@@ -11,67 +81,65 @@
   padding: 22px;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  overflow: visible;
-}
-
-.coach-image-wrap {
+  background: var(--panel2);
+  box-shadow: 0 8px 20px var(--shadow);
+  }
+  
+  .coach-image-wrap {
   width: 220px;
   height: 260px;
-  flex-shrink: 0;
-}
-
-.coach-image {
+  }
+  
+  .coach-image {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   border-radius: 16px;
   border: 1px solid var(--border);
-}
-
-.coach-text {
+  }
+  
+  .coach-text {
   min-width: 0;
   width: 100%;
   text-align: left;
-}
-
-.coach-text ul {
+  }
+  
+  .coach-text ul {
   margin-top: 12px;
   padding-left: 20px;
   line-height: 1.8;
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
   .coach-card {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
   }
-
+  
   .coach-image-wrap {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto 20px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto 20px;
   }
-
+  
   .coach-image {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
   }
-
+  
   .coach-text {
-    width: 100%;
-    clear: both;
-    text-align: center;
+  width: 100%;
+  clear: both;
+  text-align: center;
   }
-
+  
   .coach-text ul {
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
   }
-}
+  }
