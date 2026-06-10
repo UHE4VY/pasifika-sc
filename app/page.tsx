@@ -250,99 +250,108 @@ export default function HomePage() {
         <div style={dividerStyle} />
 
 
-        {/* MEET THE COACHES */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Meet the Coaches</h2>
+ {/* MEET THE COACHES */}
+<section style={panelStyle}>
+  <h2 style={sectionTitleStyle}>Meet the Coaches</h2>
 
-          <div className="coach-section">
-  <div className="coach-card">
-  <div className="coach-image-wrap">
-                <img
-                  src="/coaches/josh.jpeg"
-                  alt="Coach Josh Uikilifi"
-                  className="coach-image"
-                />
-              </div>
+  <div className="coach-section">
+    <article className="coach-card">
+      <div className="coach-image-wrap">
+        <img
+          src="/coaches/josh.jpeg"
+          alt="Coach Josh Uikilifi"
+          className="coach-image"
+        />
+      </div>
 
-              <div className="coach-text">
-                <h3 style={coachNameStyle}>Coach Josh</h3>
-                <p style={coachBodyStyle}>
-                  Josh’s path in sport was shaped by both setbacks and
-                  high-level competition. After a season-ending football injury
-                  in high school, he rebuilt through track &amp; field and went
-                  on to earn All-American honors in the shot put, set the CSU
-                  Stanislaus school record and represent the Kingdom of Tonga
-                  on the world stage in the sport of olympic weightlifting.
-                </p>
-                <p style={coachBodyStyle}>
-                  His coaching reflects PSC’s values: discipline, humility,
-                  structure and measurable development. He believes athletes
-                  grow best when training is intentional, standards are clear
-                  and progress is tracked.
-                </p>
+      <div className="coach-text">
+        <h3 style={coachNameStyle}>Coach Josh</h3>
 
-                <ul style={coachListStyle}>
-                  <li>2x All-American in the Shot Put</li>
-                  <li>CSU Stanislaus school record holder</li>
-                  <li>Tongan national record holder in the shotput</li>
-                  <li>2x Weightlifting World Championships competitor</li>
-                  <li>B.A. in Kinesiology from CSU Stanislaus</li>
-                  <li>USAW Level 1 and 2 Certified</li>
-                  <li>Certified Strength and Conditioning Specialist</li>
-                  <li>Certified Personal Trainer</li>
-                  <li>Over 10 years of coaching experience working with athletes of all ages and abilities</li>
-                </ul>
-              </div>
-            </div>
+        <p style={coachBodyStyle}>
+          Josh’s path in sport was shaped by both setbacks and high-level
+          competition. After a season-ending football injury in high school, he
+          rebuilt through track &amp; field and went on to earn All-American
+          honors in the shot put, set the CSU Stanislaus school record and
+          represent the Kingdom of Tonga on the world stage in the sport of
+          Olympic weightlifting.
+        </p>
 
-            <div className="coach-card">
-            <div className="coach-image-wrap">
-                <img
-                  src="/coaches/rachael.jpeg"
-                  alt="Coach Rachael Simbra"
-                  style={coachImageStyle}
-                />
-              </div>
+        <p style={coachBodyStyle}>
+          His coaching reflects PSC’s values: discipline, humility, structure
+          and measurable development. He believes athletes grow best when
+          training is intentional, standards are clear and progress is tracked.
+        </p>
 
-              <div className="coach-text">
-                <h3 style={coachNameStyle}>Coach Rachael</h3>
-                <p style={coachBodyStyle}>
-                  Rachael’s background in softball and her own recovery journey
-                  shaped the way she coaches today. After competing at a high
-                  level through her youth and having her competitive career cut
-                  short by injury, she found her way into coaching and athlete
-                  development.
-                </p>
-                <p style={coachBodyStyle}>
-                  She brings a warm but standards-driven approach that helps
-                  young athletes build confidence, movement quality, and
-                  long-term athletic ability. Her work reflects PSC’s belief
-                  that strong athletes are built through consistency, care, and
-                  community.
-                </p>
+        <ul style={coachListStyle}>
+          <li>2x All-American in the Shot Put</li>
+          <li>CSU Stanislaus school record holder</li>
+          <li>Tongan national record holder in the shot put</li>
+          <li>2x Weightlifting World Championships competitor</li>
+          <li>B.A. in Kinesiology from CSU Stanislaus</li>
+          <li>USAW Level 1 and 2 Certified</li>
+          <li>Certified Strength and Conditioning Specialist</li>
+          <li>Certified Personal Trainer</li>
+          <li>
+            Over 10 years of coaching experience working with athletes of all
+            ages and abilities
+          </li>
+        </ul>
+      </div>
+    </article>
 
-                <ul style={coachListStyle}>
-                  <li>Former high-level softball athlete</li>
-                  <li>Youth athlete development focused</li>
-                  <li>Experience coaching club and youth athletes</li>
-                  <li>Performance + confidence-driven approach</li>
-                  <li>NASM CPT Certified</li>
-                  <li>B.A. in English with an emphasis in 19th century British and American Literature from CSU East Bay</li>
-                  <li>Over 10 years of coaching experience working with athletes of all ages and abilities</li>
-                 
-                </ul>
-              </div>
-            </div>
-          </div>
+    <article className="coach-card">
+      <div className="coach-image-wrap">
+        <img
+          src="/coaches/rachael.jpeg"
+          alt="Coach Rachael Simbra"
+          className="coach-image"
+        />
+      </div>
 
-          <div style={{ marginTop: 18 }}>
-            <CallToAction href="/services" variant="secondary">
-              Explore services
-            </CallToAction>
-          </div>
-        </section>
+      <div className="coach-text">
+        <h3 style={coachNameStyle}>Coach Rachael</h3>
 
-        <div style={dividerStyle} />
+        <p style={coachBodyStyle}>
+          Rachael’s background in softball and her own recovery journey shaped
+          the way she coaches today. After competing at a high level through her
+          youth and having her competitive career cut short by injury, she found
+          her way into coaching and athlete development.
+        </p>
+
+        <p style={coachBodyStyle}>
+          She brings a warm but standards-driven approach that helps young
+          athletes build confidence, movement quality, and long-term athletic
+          ability. Her work reflects PSC’s belief that strong athletes are built
+          through consistency, care, and community.
+        </p>
+
+        <ul style={coachListStyle}>
+          <li>Former high-level softball athlete</li>
+          <li>Youth athlete development focused</li>
+          <li>Experience coaching club and youth athletes</li>
+          <li>Performance + confidence-driven approach</li>
+          <li>NASM CPT Certified</li>
+          <li>
+            B.A. in English with an emphasis in 19th century British and
+            American Literature from CSU East Bay
+          </li>
+          <li>
+            Over 10 years of coaching experience working with athletes of all
+            ages and abilities
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div style={{ marginTop: 18, textAlign: "center" }}>
+    <CallToAction href="/services" variant="secondary">
+      Explore services
+    </CallToAction>
+  </div>
+</section>
+
+<div style={dividerStyle} />
 
        {/* TESTIMONIALS */}
 <section style={panelStyle}>
