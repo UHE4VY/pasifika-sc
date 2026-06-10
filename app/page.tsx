@@ -254,17 +254,17 @@ export default function HomePage() {
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Meet the Coaches</h2>
 
-          <div style={coachSectionStyle}>
-            <div style={coachCardStyle}>
-              <div style={coachImageWrapStyle}>
+          <div className="coach-section">
+  <div className="coach-card">
+  <div className="coach-image-wrap">
                 <img
                   src="/coaches/josh.jpeg"
                   alt="Coach Josh Uikilifi"
-                  style={coachImageStyle}
+                  className="coach-image"
                 />
               </div>
 
-              <div style={coachTextStyle}>
+              <div className="coach-text">
                 <h3 style={coachNameStyle}>Coach Josh</h3>
                 <p style={coachBodyStyle}>
                   Josh’s path in sport was shaped by both setbacks and
@@ -289,12 +289,14 @@ export default function HomePage() {
                   <li>B.A. in Kinesiology from CSU Stanislaus</li>
                   <li>USAW Level 1 and 2 Certified</li>
                   <li>Certified Strength and Conditioning Specialist</li>
+                  <li>Certified Personal Trainer</li>
+                  <li>Over 10 years of coaching experience working with athletes of all ages and abilities</li>
                 </ul>
               </div>
             </div>
 
-            <div style={coachCardStyle}>
-              <div style={coachImageWrapStyle}>
+            <div className="coach-card">
+            <div className="coach-image-wrap">
                 <img
                   src="/coaches/rachael.jpeg"
                   alt="Coach Rachael Simbra"
@@ -302,7 +304,7 @@ export default function HomePage() {
                 />
               </div>
 
-              <div style={coachTextStyle}>
+              <div className="coach-text">
                 <h3 style={coachNameStyle}>Coach Rachael</h3>
                 <p style={coachBodyStyle}>
                   Rachael’s background in softball and her own recovery journey
@@ -326,6 +328,7 @@ export default function HomePage() {
                   <li>Performance + confidence-driven approach</li>
                   <li>NASM CPT Certified</li>
                   <li>B.A. in English with an emphasis in 19th century British and American Literature from CSU East Bay</li>
+                  <li>Over 10 years of coaching experience working with athletes of all ages and abilities</li>
                  
                 </ul>
               </div>

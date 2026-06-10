@@ -71,3 +71,57 @@
   transform: translateY(-4px);
   box-shadow: 0 16px 34px rgba(0,0,0,0.18);
 }
+
+.coach-section {
+  display: grid;
+  gap: 20px;
+}
+
+.coach-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.coach-image-wrap {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.coach-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.coach-text {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .coach-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .coach-image-wrap {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+  }
+
+  .coach-text {
+    width: 100%;
+  }
+
+  .coach-text ul {
+    text-align: left;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
