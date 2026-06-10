@@ -11,7 +11,7 @@
   padding: 22px;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--panel);
+  background: #ffffff;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   overflow: visible;
 }
@@ -19,6 +19,7 @@
 .coach-image-wrap {
   width: 220px;
   height: 260px;
+  flex-shrink: 0;
 }
 
 .coach-image {
@@ -44,10 +45,7 @@
 
 @media (max-width: 768px) {
   .coach-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
+    display: block;
     text-align: center;
   }
 
@@ -55,17 +53,18 @@
     width: 100%;
     max-width: 300px;
     height: auto;
+    margin: 0 auto 20px;
   }
 
   .coach-image {
     width: 100%;
     height: auto;
-    max-height: 360px;
-    object-fit: cover;
+    display: block;
   }
 
   .coach-text {
     width: 100%;
+    clear: both;
     text-align: center;
   }
 
@@ -75,18 +74,4 @@
     margin-right: auto;
     text-align: left;
   }
-}
-
-/* Force CTA buttons to retain styling */
-
-a[style] {
-  color: inherit;
-}
-
-a[style*="background"] {
-  color: #ffffff !important;
-}
-
-a[style*="background"][href] {
-  text-decoration: none !important;
 }
