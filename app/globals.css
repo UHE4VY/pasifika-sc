@@ -90,3 +90,37 @@ a[style*="background"] {
 a[style*="background"][href] {
   text-decoration: none !important;
 }
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.cta-primary {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: 0 8px 20px rgba(31, 111, 235, 0.22);
+}
+
+.cta-secondary {
+  background-color: #ffffff !important;
+  color: var(--navy) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.cta-link {
+  padding: 0;
+  background: transparent !important;
+  color: var(--accent) !important;
+  border: none !important;
+  box-shadow: none;
+  font-weight: 700;
+}
