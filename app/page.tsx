@@ -252,9 +252,9 @@ export default function HomePage() {
     <div style={cardStyle}>
       <h3 style={cardTitleCenteredStyle}>Consistency</h3>
       <p style={cardBodyCenteredStyle}>
-        The biggest driver of improvement is consistent training. Yes, even during your athlete's time in-seasonOur
-        program is designed for sustainable and responsible progress so
-        athletes can stay consistent week after week, without wasting valuble time and energy.
+        The biggest driver of improvement is consistent training; yes, even during your athlete's time in-season. Our
+        program is designed so that
+        athletes can make sustainable progress week after week, without wasting valuable time and energy.
       </p>
     </div>
   </div>
