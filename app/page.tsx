@@ -56,7 +56,8 @@ export default function HomePage() {
                 lineHeight: 1.13,
               }}
             >
-              Stronger Roots. Stronger Athletes.
+              <span style={{ color: "#00FFFF" }}>Stronger Roots. Stronger Athletes.</span>
+         
             </p>
 
             <p
@@ -155,7 +156,7 @@ export default function HomePage() {
     textAlign: "center",
   }}
 >
-  5 1-on-1 Coaching Sessions
+  5 1:1 Coaching Sessions
 </h3>
 
 <p
