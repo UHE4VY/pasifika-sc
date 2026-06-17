@@ -56,7 +56,8 @@ export default function HomePage() {
                 lineHeight: 1.13,
               }}
             >
-              <span style={{ color: "#00FFFF" }}>Stronger Roots. Stronger Athletes.</span>
+              <span style={{ color: "var(--accent)" }}>Stronger Roots. Stronger Athletes.</span>
+         
          
             </p>
 
