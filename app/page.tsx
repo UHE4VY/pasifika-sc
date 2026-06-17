@@ -14,27 +14,67 @@ export default function HomePage() {
        
 
         {/* HERO */}
-        <section style={heroWrapStyle}>
-          <div style={heroTopStyle}>
-            <div style={heroLogoWrapStyle}>
+        <section
+          style={{
+            ...heroWrapStyle,
+            minHeight: "54vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "36px 0 24px 0",
+            background: "linear-gradient(0deg,rgba(241,246,255,.38) 58%,transparent 100%)",
+          }}
+        >
+          <div style={{ ...heroTopStyle, width: "100%", maxWidth: 720, margin: "0 auto" }}>
+            <div style={{ ...heroLogoWrapStyle, marginBottom: 28 }}>
               <img
                 src="/psc_logo.png"
                 alt="Pasifika Strength & Conditioning"
-                style={heroLogoStyle}
+                style={{
+                  ...heroLogoStyle,
+                  width: 132,
+                  height: 132,
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                  margin: "0 auto",
+                  boxShadow: "0 4px 32px rgba(30,61,125,0.05)",
+                }}
               />
             </div>
 
-            <p style={kickerStyle}>Stronger Roots. Stronger athletes.</p>
-       
+            <p
+              style={{
+                ...kickerStyle,
+                fontSize: 36,
+                fontWeight: 900,
+                textAlign: "center",
+                letterSpacing: "0.01em",
+                color: "var(--navy)",
+                marginBottom: 18,
+                marginTop: 0,
+                lineHeight: 1.13,
+              }}
+            >
+              Stronger Roots. Stronger Athletes.
+            </p>
 
-            <p style={subtitleStyle}>
+            <p
+              style={{
+                ...subtitleStyle,
+                fontSize: 20,
+                maxWidth: 560,
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
               We coach what actually moves the needle to build movement
-              quality and confidence. 
-              Training ismeasured, tracked and progressed intentionally - 
+              quality and confidence.
+              Training is measured, tracked and progressed intentionally –
               no guesswork.
             </p>
 
-            <div style={ctaRowStyle}>
+            <div style={{ ...ctaRowStyle, marginTop: 32 }}>
               <CallToAction href="/schedule" variant="primary">
                 Book a consultation
               </CallToAction>
@@ -49,6 +89,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+  
 
         {/* CREDIBILITY STRIP */}
         <section style={credStyle}>
