@@ -93,7 +93,7 @@ export default function RemoteTierPage({ params }: Props) {
           </CallToAction>
 
           <CallToAction href="/schedule" variant="secondary">
-            Book a consult
+            Book a consultation
           </CallToAction>
         </div>
       </section>

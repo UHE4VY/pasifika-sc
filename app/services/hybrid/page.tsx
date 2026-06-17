@@ -32,7 +32,7 @@ export default function HybridCoachingServicePage() {
             </CallToAction>
 
             <CallToAction href="/schedule" variant="secondary">
-              Book a consult
+              Book a consultation
             </CallToAction>
           </div>
         </section>

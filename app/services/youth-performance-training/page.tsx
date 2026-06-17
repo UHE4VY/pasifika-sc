@@ -21,7 +21,7 @@ export default function YouthPerformancePage() {
             Reserve early access
           </CallToAction>
           <CallToAction href="/schedule" variant="secondary">
-            Book a consult
+            Book a consultation
           </CallToAction>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function YouthPerformancePage() {
       Start athlete intake
     </CallToAction>
     <CallToAction href="/schedule" variant="secondary">
-      Book a consult
+      Book a consultation
     </CallToAction>
   </div>
 </section>

@@ -25,19 +25,18 @@ export default function HomePage() {
             </div>
 
             <p style={kickerStyle}>Stronger Roots. Stronger athletes.</p>
-
-            <h1 style={titleStyle}>
-              Science-backed training for athletes built on discipline, respect and community.
-            </h1>
+       
 
             <p style={subtitleStyle}>
-              We coach what actually moves the needle. We build movement
-              quality and confidence, all measured, tracked and progressed intentionally.
+              We coach what actually moves the needle to build movement
+              quality and confidence. 
+              Training ismeasured, tracked and progressed intentionally - 
+              no guesswork.
             </p>
 
             <div style={ctaRowStyle}>
               <CallToAction href="/schedule" variant="primary">
-                Book a consult
+                Book a consultation
               </CallToAction>
 
               <CallToAction href="/services" variant="secondary">
@@ -55,7 +54,10 @@ export default function HomePage() {
         <section style={credStyle}>
           <div style={trustBarStyle}>
             <div style={trustTitleStyle}>
-              Trusted by Peninsula athletes &amp; families
+              <span style={{ display: "block", textAlign: "center", width: "100%" }}>
+                Trusted by Peninsula athletes &amp; families
+              </span>
+         
             </div>
 
             <div style={trustItemsStyle}>
@@ -82,11 +84,13 @@ export default function HomePage() {
     textAlign: "center",
   }}
 >
-  New Client Intro Special
+  New Client Special
 </h2>
 
   <p style={cardBodyStyle}>
-    Experience individualized coaching before committing to a larger package.
+    <span style={{ display: "block", textAlign: "center" }}>
+      Experience individualized coaching before committing to a larger package.
+    </span>
   </p>
 
   <div
@@ -110,7 +114,7 @@ export default function HomePage() {
     textAlign: "center",
   }}
 >
-  5 Private Coaching Sessions
+  5 1-on-1 Coaching Sessions
 </h3>
 
 <p
@@ -145,15 +149,17 @@ export default function HomePage() {
     textAlign: "center",
   }}
 >
-      A simple starting point for athletes and families who want to experience
-      Pasifika Strength & Conditioning's coaching process, training environment,
-      and development system before committing to a larger package.
+      An ideal starting point for athletes and families who want to experience
+      Pasifika Strength & Conditioning's coaching process and training environment before committing to a larger package.
     </p>
   </div>
 
   <div style={{ marginTop: 16 }}>
     <CallToAction href="/intake" variant="primary">
-      Claim Intro Special
+      <span style={{ display: "block", textAlign: "center", width: "100%" }}>
+        Claim New Client Special
+      </span>
+ 
     </CallToAction>
   </div>
 </section>
@@ -164,14 +170,15 @@ export default function HomePage() {
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Why PSC</h2>
           <p style={{ margin: 0, lineHeight: 1.75 }}>
-  PSC is rooted in discipline and community.
+  PSC is rooted in the belief that the strongest roots in training, values and community suport do in fact make the strongest athletes. They say it takes a village--
+  this is our part. 
   We hold high standards, coach with intention and develop athletes
   who carry themselves with confidence and integrity on and off the field.
 
   <br /><br />
 
   Our training is grounded in science-based programming and measurable results.
-  We don’t chase hype, we focus on what works, track progress and refine it over time.
+  We don't chase hype or trends, but focus on what actually yields result while, tracking progress and refining what the athlete needsover time.
 
 </p>
         </section>
@@ -202,9 +209,9 @@ export default function HomePage() {
     <div style={cardStyle}>
       <h3 style={cardTitleCenteredStyle}>Consistency</h3>
       <p style={cardBodyCenteredStyle}>
-        The biggest driver of improvement is consistent training. Our
+        The biggest driver of improvement is consistent training. Yes, even during your athlete's time in-seasonOur
         program is designed for sustainable and responsible progress so
-        athletes can stay consistent week after week.
+        athletes can stay consistent week after week, without wasting valuble time and energy.
       </p>
     </div>
   </div>
@@ -225,7 +232,7 @@ export default function HomePage() {
           <div style={proofGridStyle}>
             <div style={proofCardStyle}>
               <h3 style={proofMetricStyle}>+1–2 mph</h3>
-              <p style={proofLabelStyle}>Sprint speed improvements</p>
+              <p style={proofLabelStyle}>Linear sprint speed improvements</p>
             </div>
 
             <div style={proofCardStyle}>
@@ -332,8 +339,7 @@ export default function HomePage() {
           <li>Performance + confidence-driven approach</li>
           <li>NASM CPT Certified</li>
           <li>
-            B.A. in English with an emphasis in 19th century British and
-            American Literature from CSU East Bay
+            B.A. in English from CSU East Bay
           </li>
           <li>
             Over 10 years of coaching experience working with athletes of all
@@ -378,14 +384,14 @@ export default function HomePage() {
   <div style={cardStyle}>
     <h3 style={cardTitleStyle}>2) Book a performance evaluation</h3>
     <p style={cardBodyStyle}>
-      We assess movement quality, strength baseline, and performance goals.
+      We assess movement quality, strength baseline, and program for your performance goals.
     </p>
   </div>
 
   <div style={cardStyle}>
     <h3 style={cardTitleStyle}>3) Start your training plan</h3>
     <p style={cardBodyStyle}>
-      We recommend the right coaching structure and guide you into a plan built for your goals.
+      We recommend the right coaching structure and guide you in your custom trainingplan built for your goals.
     </p>
   </div>
 </div>
@@ -421,7 +427,7 @@ export default function HomePage() {
             style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap" }}
           >
             <CallToAction href="/schedule" variant="primary">
-              Book a consult
+              Book a consultation
             </CallToAction>
 
             <CallToAction href="/services" variant="secondary">

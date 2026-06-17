@@ -46,7 +46,7 @@ export default function Nav() {
 
         <div style={cta}>
           <CallToAction href="/schedule" variant="primary">
-            Book a consult
+            Book a consultation
           </CallToAction>
         </div>
       </nav>

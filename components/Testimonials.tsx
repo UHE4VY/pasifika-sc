@@ -18,7 +18,7 @@ type Props = {
 export default function Testimonials({
   items,
   ctaHref = "/schedule",
-  ctaText = "Book a consult",
+  ctaText = "Book a consultation",
 }: Props) {
   return (
     <section style={{ marginTop: 0 }}>

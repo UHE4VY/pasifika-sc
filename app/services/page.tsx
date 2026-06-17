@@ -123,7 +123,7 @@ export default function ServicesPage() {
       {/* Primary CTA */}
       <div style={{ marginTop: 28, textAlign: "center" }}>
         <CallToAction href="/schedule" variant="primary">
-          Book a consult
+          Book a consultation
         </CallToAction>
       </div>
 
