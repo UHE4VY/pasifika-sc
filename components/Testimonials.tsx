@@ -51,7 +51,7 @@ export default function Testimonials({
         ))}
       </div>
 
-      <div style={{ marginTop: 14 }}>
+      <div style={{ marginTop: 14, textAlign: "center" }}>
         <CallToAction href={ctaHref}>{ctaText}</CallToAction>
       </div>
     </section>

@@ -466,9 +466,7 @@ export default function HomePage() {
             guide you to the best coaching option based on your sport, schedule and goals.
           </p>
 
-          <div
-            style={{ marginTop: 14, display: "flex", gap: 12, flexWrap: "wrap" }}
-          >
+          <div style={{ ...ctaRowStyle, marginTop: 14 }}>
             <CallToAction href="/schedule" variant="primary">
               Book a consultation
             </CallToAction>
