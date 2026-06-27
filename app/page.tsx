@@ -737,6 +737,7 @@ const trustItemsStyle: React.CSSProperties = {
   display: "flex",
   gap: 10,
   flexWrap: "wrap",
+  justifyContent: "center",
 };
 
 const trustPillStyle: React.CSSProperties = {
