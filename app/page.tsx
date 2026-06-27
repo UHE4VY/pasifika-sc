@@ -83,7 +83,7 @@ export default function HomePage() {
 
             <div style={heroImageWrapStyle}>
               <img
-                src="/hero/hero.jpg"
+                src="/hero/hero.png"
                 alt="Athletes training at Pasifika Strength and Conditioning"
                 style={heroImageStyle}
               />
@@ -216,7 +216,7 @@ export default function HomePage() {
             <div style={whyPscImageWrapStyle}>
               <img
                 src="/home/why-psc.png"
-                alt="PSC athletes and coaches celebrating together after training"
+                alt="Athletes training barbell squats at Pasifika Strength and Conditioning"
                 style={whyPscImageStyle}
               />
             </div>
@@ -363,8 +363,8 @@ export default function HomePage() {
     <article className="coach-card">
       <div className="coach-image-wrap">
         <img
-          src="/coaches/rachael.jpeg"
-          alt="Coach Rachael Simbra"
+          src="/coaches/rachael.png"
+          alt="Coach Rachael Simbra coaching in the gym"
           className="coach-image"
         />
       </div>
