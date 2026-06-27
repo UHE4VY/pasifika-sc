@@ -120,93 +120,41 @@ export default function HomePage() {
         <div style={dividerStyle} />
 
 {/* NEW CLIENT SPECIAL */}
-<section style={panelStyle}>
-<h2
-  style={{
-    fontSize: 32,
-    fontWeight: 800,
-    color: "var(--accent)",
-    marginBottom: 12,
-    textAlign: "center",
-  }}
->
-  New Client Special
-</h2>
+<section style={newClientSpecialWrapStyle}>
+  <img
+    src="/home/new-client-special.png"
+    alt=""
+    aria-hidden="true"
+    style={newClientSpecialImageStyle}
+  />
+  <div style={newClientSpecialOverlayStyle} aria-hidden="true" />
 
-  <p style={cardBodyStyle}>
-    <span style={{ display: "block", textAlign: "center" }}>
+  <div style={newClientSpecialContentStyle}>
+    <h2 style={newClientSpecialTitleStyle}>New Client Special</h2>
+
+    <p style={newClientSpecialIntroStyle}>
       Experience individualized coaching before committing to a larger package.
-    </span>
-  </p>
-
-  <div
-  style={{
-    maxWidth: 700,
-    margin: "16px auto",
-    padding: "24px",
-    border: "1px solid var(--border)",
-    borderRadius: 16,
-    background: "var(--panel2)",
-    textAlign: "center",
-  }}
->
-
-<h3
-  style={{
-    margin: "0 0 8px",
-    fontSize: 34,
-    fontWeight: 800,
-    color: "var(--navy)",
-    textAlign: "center",
-  }}
->
-  5 1:1 Coaching Sessions
-</h3>
-
-<p
-  style={{
-    margin: "8px 0",
-    fontSize: 28,
-    fontWeight: 800,
-    color: "var(--accent)",
-    textAlign: "center",
-  }}
->
-  5 Sessions for $500
-</p>
-
-<p
-  style={{
-    margin: 0,
-    fontSize: 18,
-    fontWeight: 600,
-    opacity: 0.8,
-    textAlign: "center",
-  }}
->
-  $100 per session • New clients only
-</p>
-
-<p
-  style={{
-    marginTop: 16,
-    lineHeight: 1.7,
-    opacity: 0.88,
-    textAlign: "center",
-  }}
->
-      An ideal starting point for athletes and families who want to experience
-      Pasifika Strength & Conditioning's coaching process and training environment before committing to a larger package.
     </p>
-  </div>
 
-  <div style={{ marginTop: 16 }}>
-    <CallToAction href="/intake" variant="primary">
-      <span style={{ display: "block", textAlign: "center", width: "100%" }}>
+    <h3 style={newClientSpecialHeadingStyle}>5 1:1 Coaching Sessions</h3>
+
+    <p style={newClientSpecialPriceStyle}>5 Sessions for $500</p>
+
+    <p style={newClientSpecialMetaStyle}>
+      $100 per session • New clients only
+    </p>
+
+    <p style={newClientSpecialBodyStyle}>
+      An ideal starting point for athletes and families who want to experience
+      Pasifika Strength &amp; Conditioning&apos;s coaching process and training
+      environment before committing to a larger package.
+    </p>
+
+    <div style={{ marginTop: 20 }}>
+      <CallToAction href="/intake" variant="primary">
         Claim New Client Special
-      </span>
- 
-    </CallToAction>
+      </CallToAction>
+    </div>
   </div>
 </section>
 
@@ -548,6 +496,87 @@ const heroContentStyle: React.CSSProperties = {
 const heroContentInnerStyle: React.CSSProperties = {
   width: "100%",
   maxWidth: 720,
+};
+
+const newClientSpecialWrapStyle: React.CSSProperties = {
+  position: "relative",
+  border: "1px solid var(--border)",
+  borderRadius: 18,
+  overflow: "hidden",
+  boxShadow: "0 10px 26px var(--shadow)",
+};
+
+const newClientSpecialImageStyle: React.CSSProperties = {
+  width: "100%",
+  height: "auto",
+  display: "block",
+};
+
+const newClientSpecialOverlayStyle: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  background:
+    "linear-gradient(180deg, rgba(11, 31, 58, 0.55) 0%, rgba(11, 31, 58, 0.78) 100%)",
+};
+
+const newClientSpecialContentStyle: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  zIndex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "36px 24px",
+};
+
+const newClientSpecialTitleStyle: React.CSSProperties = {
+  margin: "0 0 10px",
+  fontSize: 32,
+  fontWeight: 800,
+  color: "var(--accent-soft)",
+  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+};
+
+const newClientSpecialIntroStyle: React.CSSProperties = {
+  margin: "0 0 16px",
+  maxWidth: 560,
+  lineHeight: 1.7,
+  color: "rgba(255,255,255,0.92)",
+  textShadow: "0 1px 10px rgba(0,0,0,0.3)",
+};
+
+const newClientSpecialHeadingStyle: React.CSSProperties = {
+  margin: "0 0 8px",
+  fontSize: 34,
+  fontWeight: 800,
+  color: "#ffffff",
+  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+};
+
+const newClientSpecialPriceStyle: React.CSSProperties = {
+  margin: "8px 0",
+  fontSize: 28,
+  fontWeight: 800,
+  color: "var(--accent-soft)",
+  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+};
+
+const newClientSpecialMetaStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 18,
+  fontWeight: 600,
+  color: "rgba(255,255,255,0.88)",
+  textShadow: "0 1px 10px rgba(0,0,0,0.3)",
+};
+
+const newClientSpecialBodyStyle: React.CSSProperties = {
+  margin: "16px 0 0",
+  maxWidth: 640,
+  lineHeight: 1.7,
+  color: "rgba(255,255,255,0.9)",
+  textShadow: "0 1px 10px rgba(0,0,0,0.3)",
 };
 
 const whyPscWrapStyle: React.CSSProperties = {
