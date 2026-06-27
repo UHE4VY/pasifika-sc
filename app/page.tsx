@@ -14,80 +14,79 @@ export default function HomePage() {
        
 
         {/* HERO */}
-        <section
-          style={{
-            ...heroWrapStyle,
-            minHeight: "54vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "36px 0 24px 0",
-            background: "linear-gradient(0deg,rgba(241,246,255,.38) 58%,transparent 100%)",
-          }}
-        >
-          <div style={{ ...heroTopStyle, width: "100%", maxWidth: 720, margin: "0 auto" }}>
-            <div style={{ ...heroLogoWrapStyle, marginBottom: 28 }}>
-              <img
-                src="/psc_logo.png"
-                alt="Pasifika Strength & Conditioning"
+        <section style={heroWrapStyle}>
+          <div style={heroGridStyle}>
+            <div style={heroTopStyle}>
+              <div style={{ ...heroLogoWrapStyle, marginBottom: 28 }}>
+                <img
+                  src="/psc_logo.png"
+                  alt="Pasifika Strength & Conditioning"
+                  style={{
+                    ...heroLogoStyle,
+                    width: 132,
+                    height: 132,
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                    display: "block",
+                    margin: "0 auto",
+                    boxShadow: "0 4px 32px rgba(30,61,125,0.05)",
+                  }}
+                />
+              </div>
+
+              <p
                 style={{
-                  ...heroLogoStyle,
-                  width: 132,
-                  height: 132,
-                  maxWidth: "100%",
-                  objectFit: "contain",
-                  display: "block",
-                  margin: "0 auto",
-                  boxShadow: "0 4px 32px rgba(30,61,125,0.05)",
+                  ...kickerStyle,
+                  fontSize: 36,
+                  fontWeight: 900,
+                  textAlign: "center",
+                  letterSpacing: "0.01em",
+                  color: "var(--navy)",
+                  marginBottom: 18,
+                  marginTop: 0,
+                  lineHeight: 1.13,
                 }}
-              />
+              >
+                <span style={{ color: "var(--accent)" }}>
+                  Stronger Roots. Stronger Athletes.
+                </span>
+              </p>
+
+              <p
+                style={{
+                  ...subtitleStyle,
+                  fontSize: 20,
+                  maxWidth: 560,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                We coach what actually moves the needle to build movement
+                quality and confidence. Training is measured, tracked and
+                progressed intentionally – no guesswork.
+              </p>
+
+              <div style={{ ...ctaRowStyle, marginTop: 32 }}>
+                <CallToAction href="/schedule" variant="primary">
+                  Book a consultation
+                </CallToAction>
+
+                <CallToAction href="/services" variant="secondary">
+                  Explore services
+                </CallToAction>
+
+                <CallToAction href="/contact" variant="link">
+                  Questions? Contact us
+                </CallToAction>
+              </div>
             </div>
 
-            <p
-              style={{
-                ...kickerStyle,
-                fontSize: 36,
-                fontWeight: 900,
-                textAlign: "center",
-                letterSpacing: "0.01em",
-                color: "var(--navy)",
-                marginBottom: 18,
-                marginTop: 0,
-                lineHeight: 1.13,
-              }}
-            >
-              <span style={{ color: "var(--accent)" }}>Stronger Roots. Stronger Athletes.</span>
-         
-         
-            </p>
-
-            <p
-              style={{
-                ...subtitleStyle,
-                fontSize: 20,
-                maxWidth: 560,
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              We coach what actually moves the needle to build movement
-              quality and confidence.
-              Training is measured, tracked and progressed intentionally –
-              no guesswork.
-            </p>
-
-            <div style={{ ...ctaRowStyle, marginTop: 32 }}>
-              <CallToAction href="/schedule" variant="primary">
-                Book a consultation
-              </CallToAction>
-
-              <CallToAction href="/services" variant="secondary">
-                Explore services
-              </CallToAction>
-
-              <CallToAction href="/contact" variant="link">
-                Questions? Contact us
-              </CallToAction>
+            <div style={heroImageWrapStyle}>
+              <img
+                src="/hero/hero.jpg"
+                alt="Athletes training at Pasifika Strength and Conditioning"
+                style={heroImageStyle}
+              />
             </div>
           </div>
         </section>
@@ -212,18 +211,30 @@ export default function HomePage() {
         {/* WHY PSC */}
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Why PSC</h2>
-          <p style={{ margin: 0, lineHeight: 1.75 }}>
-  PSC is rooted in the belief that the strongest roots in training, values and community suport do in fact make the strongest athletes. They say it takes a village--
-  this is our part. 
-  We hold high standards, coach with intention and develop athletes
-  who carry themselves with confidence and integrity on and off the field.
 
-  <br /><br />
+          <div style={whyPscGridStyle}>
+            <div style={whyPscImageWrapStyle}>
+              <img
+                src="/home/why-psc.png"
+                alt="PSC athletes and coaches celebrating together after training"
+                style={whyPscImageStyle}
+              />
+            </div>
 
-  Our training is grounded in science-based programming and measurable results.
-  We don't chase hype or trends, but focus on what actually yields result while, tracking progress and refining what the athlete needsover time.
-
-</p>
+            <p style={{ margin: 0, lineHeight: 1.75 }}>
+              PSC is rooted in the belief that the strongest roots in training,
+              values and community suport do in fact make the strongest athletes.
+              They say it takes a village-- this is our part. We hold high
+              standards, coach with intention and develop athletes who carry
+              themselves with confidence and integrity on and off the field.
+              <br />
+              <br />
+              Our training is grounded in science-based programming and
+              measurable results. We don&apos;t chase hype or trends, but focus
+              on what actually yields result while, tracking progress and
+              refining what the athlete needsover time.
+            </p>
+          </div>
         </section>
 
         <div style={dividerStyle} />
@@ -503,6 +514,51 @@ const heroWrapStyle: React.CSSProperties = {
     "radial-gradient(700px 320px at 10% 0%, rgba(31,111,235,0.12), transparent 60%), radial-gradient(600px 280px at 90% 20%, rgba(125,183,255,0.10), transparent 55%), linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65))",
   backdropFilter: "blur(6px)",
   boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
+};
+
+const heroGridStyle: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+  gap: 28,
+  alignItems: "center",
+  width: "100%",
+};
+
+const heroImageWrapStyle: React.CSSProperties = {
+  width: "100%",
+  minHeight: 280,
+};
+
+const heroImageStyle: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  minHeight: 280,
+  maxHeight: 420,
+  objectFit: "cover",
+  borderRadius: 16,
+  display: "block",
+  border: "1px solid var(--border)",
+  boxShadow: "0 10px 28px rgba(0,0,0,0.10)",
+};
+
+const whyPscGridStyle: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: 20,
+  alignItems: "center",
+};
+
+const whyPscImageWrapStyle: React.CSSProperties = {
+  width: "100%",
+};
+
+const whyPscImageStyle: React.CSSProperties = {
+  width: "100%",
+  height: 260,
+  objectFit: "cover",
+  borderRadius: 16,
+  display: "block",
+  border: "1px solid var(--border)",
 };
 
 const heroTopStyle: React.CSSProperties = {
