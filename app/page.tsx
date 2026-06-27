@@ -24,6 +24,7 @@ export default function HomePage() {
           <div style={heroOverlayStyle} aria-hidden="true" />
 
           <div style={heroContentStyle}>
+            <div style={heroContentInnerStyle}>
             <div style={{ ...heroLogoWrapStyle, marginBottom: 28 }}>
               <img
                 src="/psc_logo.png"
@@ -89,6 +90,7 @@ export default function HomePage() {
               <CallToAction href="/contact" variant="link">
                 Questions? Contact us
               </CallToAction>
+            </div>
             </div>
           </div>
         </section>
@@ -211,19 +213,19 @@ export default function HomePage() {
 <div style={dividerStyle} />
        
         {/* WHY PSC */}
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Why PSC</h2>
+        <section style={whyPscWrapStyle}>
+          <img
+            src="/home/why-psc.png"
+            alt=""
+            aria-hidden="true"
+            style={whyPscImageStyle}
+          />
+          <div style={whyPscOverlayStyle} aria-hidden="true" />
 
-          <div style={whyPscGridStyle}>
-            <div style={whyPscImageWrapStyle}>
-              <img
-                src="/home/why-psc.png"
-                alt="Athlete performing a box jump during training at PSC"
-                style={whyPscImageStyle}
-              />
-            </div>
+          <div style={whyPscContentStyle}>
+            <h2 style={whyPscTitleStyle}>Why PSC</h2>
 
-            <p style={{ margin: 0, lineHeight: 1.75 }}>
+            <p style={whyPscBodyStyle}>
               PSC is rooted in the belief that the strongest roots in training,
               values and community suport do in fact make the strongest athletes.
               They say it takes a village-- this is our part. We hold high
@@ -513,21 +515,12 @@ const heroWrapStyle: React.CSSProperties = {
   border: "1px solid var(--border)",
   borderRadius: 18,
   overflow: "hidden",
-  minHeight: "min(560px, 72vh)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "48px 22px",
   boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
 };
 
 const heroBackgroundImageStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
   width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "center",
+  height: "auto",
   display: "block",
 };
 
@@ -539,35 +532,71 @@ const heroOverlayStyle: React.CSSProperties = {
 };
 
 const heroContentStyle: React.CSSProperties = {
-  position: "relative",
+  position: "absolute",
+  inset: 0,
   zIndex: 1,
-  width: "100%",
-  maxWidth: 720,
-  margin: "0 auto",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  justifyContent: "center",
   textAlign: "center",
-};
-
-const whyPscGridStyle: React.CSSProperties = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: 20,
-  alignItems: "center",
-};
-
-const whyPscImageWrapStyle: React.CSSProperties = {
+  padding: "48px 22px",
   width: "100%",
+  margin: 0,
+};
+
+const heroContentInnerStyle: React.CSSProperties = {
+  width: "100%",
+  maxWidth: 720,
+};
+
+const whyPscWrapStyle: React.CSSProperties = {
+  position: "relative",
+  border: "1px solid var(--border)",
+  borderRadius: 18,
+  overflow: "hidden",
+  boxShadow: "0 10px 26px var(--shadow)",
 };
 
 const whyPscImageStyle: React.CSSProperties = {
   width: "100%",
-  height: 260,
-  objectFit: "cover",
-  borderRadius: 16,
+  height: "auto",
   display: "block",
-  border: "1px solid var(--border)",
+};
+
+const whyPscOverlayStyle: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  background:
+    "linear-gradient(180deg, rgba(11, 31, 58, 0.5) 0%, rgba(11, 31, 58, 0.72) 100%)",
+};
+
+const whyPscContentStyle: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  zIndex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  padding: "32px 24px",
+};
+
+const whyPscTitleStyle: React.CSSProperties = {
+  marginTop: 0,
+  marginBottom: 14,
+  fontSize: 18,
+  color: "#ffffff",
+  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+};
+
+const whyPscBodyStyle: React.CSSProperties = {
+  margin: 0,
+  maxWidth: 720,
+  lineHeight: 1.75,
+  color: "rgba(255,255,255,0.92)",
+  textShadow: "0 1px 10px rgba(0,0,0,0.3)",
 };
 
 const titleStyle: React.CSSProperties = {
