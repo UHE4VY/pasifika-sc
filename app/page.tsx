@@ -325,23 +325,23 @@ export default function HomePage() {
         <h3 style={coachNameStyle}>Coach Rachael</h3>
 
         <p style={coachBodyStyle}>
-          Rachael’s background in softball and her own recovery journey shaped
-          the way she coaches today. After competing at a high level through her
-          youth and having her competitive career cut short by injury, she found
+          Rachael’s background as a softball athlete and her own recovery journey shaped
+          the way she coaches today. After competing in club ball through her
+          youth and high school and having her competitive career cut short by injury, she found
           her way into coaching and athlete development.
         </p>
 
         <p style={coachBodyStyle}>
-          She brings a warm but standards-driven approach that helps young
-          athletes build confidence, movement quality, and long-term athletic
-          ability. Her work reflects PSC’s belief that strong athletes are built
-          through consistency, care, and community.
+          She brings a warm, but standards-driven approach that helps young
+          athletes build confidence, movement quality and long-term athletic
+          ability. Her work deeply reflects PSC’s belief that the strongest athletes are built
+          with consistency, care, and community support.
         </p>
 
         <ul style={coachListStyle}>
-          <li>Former high-level softball athlete</li>
-          <li>Youth athlete development focused</li>
-          <li>Experience coaching club and youth athletes</li>
+          <li>Former club softball athlete</li>
+          <li>Student and youth athlete development focused</li>
+          <li>Experience as head and pitching coach for club and student athletes</li>
           <li>Performance + confidence-driven approach</li>
           <li>NASM CPT Certified</li>
           <li>
@@ -826,7 +826,7 @@ const coachBodyStyle: React.CSSProperties = {
   margin: "0 0 10px",
   lineHeight: 1.75,
   color: "var(--navy)",
-  opacity: 0.88,
+  opacity: 1,
 };
 
 const coachListStyle: React.CSSProperties = {
@@ -834,7 +834,7 @@ const coachListStyle: React.CSSProperties = {
   paddingLeft: 18,
   lineHeight: 1.8,
   color: "var(--navy)",
-  opacity: 0.88,
+  opacity: 1,
 };
 
 const heroLogoWrapStyle: React.CSSProperties = {
