@@ -14,16 +14,16 @@ export default function HomePage() {
        
 
         {/* HERO */}
-        <section style={heroWrapStyle}>
+        <section className="home-image-section home-image-section--hero">
           <img
             src="/hero/hero.png"
             alt=""
             aria-hidden="true"
-            style={heroBackgroundImageStyle}
+            className="home-image-section__img"
           />
-          <div style={heroOverlayStyle} aria-hidden="true" />
+          <div className="home-image-section__scrim" aria-hidden="true" />
 
-          <div style={heroContentStyle}>
+          <div className="home-image-section__content">
             <div style={heroContentInnerStyle}>
             <div style={{ ...heroLogoWrapStyle, marginBottom: 28 }}>
               <img
@@ -120,16 +120,16 @@ export default function HomePage() {
         <div style={dividerStyle} />
 
 {/* NEW CLIENT SPECIAL */}
-<section style={newClientSpecialWrapStyle}>
+<section className="home-image-section home-image-section--new-client">
   <img
     src="/home/new-client-special.png"
     alt=""
     aria-hidden="true"
-    style={newClientSpecialImageStyle}
+    className="home-image-section__img"
   />
-  <div style={newClientSpecialOverlayStyle} aria-hidden="true" />
+  <div className="home-image-section__scrim" aria-hidden="true" />
 
-  <div style={newClientSpecialContentStyle}>
+  <div className="home-image-section__content">
     <h2 style={newClientSpecialTitleStyle}>New Client Special</h2>
 
     <p style={newClientSpecialIntroStyle}>
@@ -161,16 +161,16 @@ export default function HomePage() {
 <div style={dividerStyle} />
        
         {/* WHY PSC */}
-        <section style={whyPscWrapStyle}>
+        <section className="home-image-section home-image-section--why-psc">
           <img
             src="/home/why-psc.png"
             alt=""
             aria-hidden="true"
-            style={whyPscImageStyle}
+            className="home-image-section__img"
           />
-          <div style={whyPscOverlayStyle} aria-hidden="true" />
+          <div className="home-image-section__scrim" aria-hidden="true" />
 
-          <div style={whyPscContentStyle}>
+          <div className="home-image-section__content">
             <h2 style={whyPscTitleStyle}>Why PSC</h2>
 
             <p style={whyPscBodyStyle}>
@@ -458,77 +458,9 @@ const pageStyle: React.CSSProperties = {
   padding: "28px 18px 56px",
 };
 
-const heroWrapStyle: React.CSSProperties = {
-  position: "relative",
-  border: "1px solid var(--border)",
-  borderRadius: 18,
-  overflow: "hidden",
-  boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
-};
-
-const heroBackgroundImageStyle: React.CSSProperties = {
-  width: "100%",
-  height: "auto",
-  display: "block",
-};
-
-const heroOverlayStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  background:
-    "linear-gradient(180deg, rgba(11, 31, 58, 0.45) 0%, rgba(11, 31, 58, 0.68) 100%)",
-};
-
-const heroContentStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  zIndex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "center",
-  padding: "48px 22px",
-  width: "100%",
-  margin: 0,
-};
-
 const heroContentInnerStyle: React.CSSProperties = {
   width: "100%",
   maxWidth: 720,
-};
-
-const newClientSpecialWrapStyle: React.CSSProperties = {
-  position: "relative",
-  border: "1px solid var(--border)",
-  borderRadius: 18,
-  overflow: "hidden",
-  boxShadow: "0 10px 26px var(--shadow)",
-};
-
-const newClientSpecialImageStyle: React.CSSProperties = {
-  width: "100%",
-  height: "auto",
-  display: "block",
-};
-
-const newClientSpecialOverlayStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  background:
-    "linear-gradient(180deg, rgba(11, 31, 58, 0.55) 0%, rgba(11, 31, 58, 0.78) 100%)",
-};
-
-const newClientSpecialContentStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  zIndex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "center",
-  padding: "36px 24px",
 };
 
 const newClientSpecialTitleStyle: React.CSSProperties = {
@@ -577,39 +509,6 @@ const newClientSpecialBodyStyle: React.CSSProperties = {
   lineHeight: 1.7,
   color: "rgba(255,255,255,0.9)",
   textShadow: "0 1px 10px rgba(0,0,0,0.3)",
-};
-
-const whyPscWrapStyle: React.CSSProperties = {
-  position: "relative",
-  border: "1px solid var(--border)",
-  borderRadius: 18,
-  overflow: "hidden",
-  boxShadow: "0 10px 26px var(--shadow)",
-};
-
-const whyPscImageStyle: React.CSSProperties = {
-  width: "100%",
-  height: "auto",
-  display: "block",
-};
-
-const whyPscOverlayStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  background:
-    "linear-gradient(180deg, rgba(11, 31, 58, 0.5) 0%, rgba(11, 31, 58, 0.72) 100%)",
-};
-
-const whyPscContentStyle: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  zIndex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "center",
-  padding: "32px 24px",
 };
 
 const whyPscTitleStyle: React.CSSProperties = {
