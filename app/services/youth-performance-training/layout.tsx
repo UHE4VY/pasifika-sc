@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Group Training",
+  title: "Group Performance Training",
   description:
-    "Structured, coach-led group training for athletes who want consistent progress in speed, strength, movement quality, and confidence.",
+    "Structured, coach-led group performance training for athletes who want consistent progress in speed, strength, movement quality, and confidence.",
 };
 
 export default function GroupTrainingLayout({

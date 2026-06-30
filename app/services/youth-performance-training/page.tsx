@@ -9,7 +9,7 @@ export default function YouthPerformancePage() {
       {/* HERO */}
       <section style={heroStyle}>
         <p style={eyebrowStyle}>Training Program</p>
-        <h1 style={titleStyle}>Group Training</h1>
+        <h1 style={titleStyle}>Group Performance Training</h1>
         <p style={subtitleStyle}>
           Structured, coach-led training for youth athletes who thrive in a
           competitive environment and want consistent progress in speed,
@@ -35,7 +35,7 @@ export default function YouthPerformancePage() {
   <h2 style={sectionTitleStyle}>Program Availability</h2>
 
   <p style={cardBodyStyle}>
-    Group Training is offered through flexible session packages
+    Group Performance Training is offered through flexible session packages
     designed to work around summer travel, tournaments, camps, and changing
     sports schedules.
   </p>

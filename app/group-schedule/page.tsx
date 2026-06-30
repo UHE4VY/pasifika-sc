@@ -176,7 +176,7 @@ export default function GroupSchedulePage() {
   return (
     <main className="group-schedule-page" style={pageStyle}>
       <section style={heroStyle}>
-        <p style={eyebrowStyle}>Group Training</p>
+        <p style={eyebrowStyle}>Group Performance Training</p>
         <h1 style={titleStyle}>Summer Class Schedule</h1>
         <p style={subtitleStyle}>
           Weekly group classes for Summer Intensive and Summer Jam. Times are
@@ -229,7 +229,7 @@ export default function GroupSchedulePage() {
 
       <div className="group-schedule-cta-row" style={ctaRowStyle}>
         <CallToAction href="/services/youth-performance-training" variant="secondary">
-          Back to Group Training
+          Back to Group Performance Training
         </CallToAction>
         <CallToAction href="/intake" variant="primary">
           Reserve early access

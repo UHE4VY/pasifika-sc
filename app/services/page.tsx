@@ -19,7 +19,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     slug: "youth-performance-training",
-    label: "Group Training",
+    label: "Group Performance Training",
     description:
       "Structured, coach-led training in a competitive group environment that builds accountability, confidence, and measurable progress.",
     highlight: "Train with purpose in a team setting",
@@ -53,7 +53,7 @@ export default function ServicesPage() {
         }}
       >
         PSC specializes in in-person coaching through private 1:1 sessions and
-        structured group training. Every program is built around measurable
+        structured group performance training. Every program is built around measurable
         progress, intentional coaching, and long-term athletic development.
       </p>
 
@@ -88,7 +88,7 @@ export default function ServicesPage() {
           </div>
 
           <div style={compareCardStyle}>
-            <h3 style={cardTitle}>Group Training</h3>
+            <h3 style={cardTitle}>Group Performance Training</h3>
             <p style={cardBody}>
               Best for athletes who want consistent coaching, structure, and
               accountability in a competitive training environment with peers.

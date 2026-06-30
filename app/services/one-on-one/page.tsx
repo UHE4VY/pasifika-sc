@@ -106,9 +106,9 @@ export default function OneOnOneServicePage() {
           <section style={panelStyle}>
             <div style={gridStyle}>
               <div style={cardStyle}>
-                <h3 style={cardTitle}>1:1 vs Group Training</h3>
+                <h3 style={cardTitle}>1:1 vs Group Performance Training</h3>
                 <p style={cardBody}>
-                  Group Training provides structured coaching in a team setting.
+                  Group Performance Training provides structured coaching in a team setting.
                   1:1 gives you full customization and faster adjustments every
                   session.
                 </p>
