@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import CallToAction from "../../components/CallToAction";
 import PageViewTracker from "./PageViewTracker";
 
@@ -15,9 +16,17 @@ export default function SchedulePage() {
           <h1 style={titleStyle}>Online scheduling is coming soon</h1>
 
           <p style={subtitleStyle}>
-            We’re currently finalizing our booking system. In the meantime,
+            We’re currently finalizing our online booking system. In the meantime,
             please reach out through our contact page and we’ll help you get
             started.
+          </p>
+
+          <p style={scheduleNoteStyle}>
+            Looking for summer group class times?{" "}
+            <Link href="/group-schedule" style={scheduleLinkStyle}>
+              View the class schedule
+            </Link>
+            .
           </p>
 
           <div style={ctaRowStyle}>
@@ -81,6 +90,21 @@ const subtitleStyle: React.CSSProperties = {
   color: "var(--navy)",
   opacity: 0.88,
   textAlign: "center",
+};
+
+const scheduleNoteStyle: React.CSSProperties = {
+  margin: "14px auto 0",
+  maxWidth: 720,
+  lineHeight: 1.7,
+  color: "var(--navy)",
+  opacity: 0.9,
+  textAlign: "center",
+};
+
+const scheduleLinkStyle: React.CSSProperties = {
+  color: "var(--accent)",
+  fontWeight: 800,
+  textDecoration: "none",
 };
 
 const ctaRowStyle: React.CSSProperties = {

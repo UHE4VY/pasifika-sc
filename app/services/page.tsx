@@ -104,6 +104,12 @@ export default function ServicesPage() {
         </CallToAction>
       </div>
 
+      <div style={{ marginTop: 14, textAlign: "center" }}>
+        <CallToAction href="/group-schedule" variant="secondary">
+          View summer class schedule
+        </CallToAction>
+      </div>
+
       {/* Secondary CTA */}
       <div style={{ marginTop: 14, textAlign: "center" }}>
         <CallToAction href="/contact" variant="link">

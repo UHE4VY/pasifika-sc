@@ -36,8 +36,11 @@ export default function Nav() {
           <Link href="/services" style={link(isActive("/services"))}>
             Services
           </Link>
+          <Link href="/group-schedule" style={link(isActive("/group-schedule"))}>
+            Class Schedule
+          </Link>
           <Link href="/schedule" style={link(isActive("/schedule"))}>
-            Schedule
+            Book
           </Link>
           <Link href="/contact" style={link(isActive("/contact"))}>
             Contact
