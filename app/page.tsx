@@ -2,6 +2,7 @@
 
 import CallToAction from "../components/CallToAction";
 import Testimonials from "../components/Testimonials";
+import UpcomingEvents from "../components/UpcomingEvents";
 import { testimonials } from "../content/testimonials";
 import PageViewTracker from "./schedule/PageViewTracker";
 
@@ -116,6 +117,10 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <div style={dividerStyle} />
+
+        <UpcomingEvents />
 
         <div style={dividerStyle} />
 
