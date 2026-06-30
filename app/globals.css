@@ -223,3 +223,226 @@
   margin-right: 0;
   }
   }
+
+  /* Group class schedule calendar */
+
+  .group-schedule-month {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 14px;
+  background: var(--panel);
+  box-shadow: 0 10px 26px var(--shadow);
+  margin-bottom: 22px;
+  }
+
+  .group-schedule-month__title {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  text-align: center;
+  }
+
+  .group-schedule-weekdays,
+  .group-schedule-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  }
+
+  .group-schedule-weekdays {
+  margin-bottom: 8px;
+  }
+
+  .group-schedule-weekdays__cell {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 0;
+  }
+
+  .group-schedule-weeks {
+  display: grid;
+  gap: 8px;
+  }
+
+  .group-schedule-day {
+  min-height: 112px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+  background: var(--panel2);
+  }
+
+  .group-schedule-day--empty {
+  border-color: transparent;
+  background: transparent;
+  min-height: 0;
+  padding: 0;
+  }
+
+  .group-schedule-day--active {
+  border-color: rgba(31, 111, 235, 0.25);
+  background: #ffffff;
+  }
+
+  .group-schedule-day--cancelled {
+  border-color: rgba(249, 115, 22, 0.35);
+  background: #fff8f2;
+  }
+
+  .group-schedule-day__date {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 6px;
+  }
+
+  .group-schedule-day__events {
+  display: grid;
+  gap: 6px;
+  }
+
+  .group-schedule-day__note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent2);
+  }
+
+  .group-schedule-event {
+  border-radius: 10px;
+  padding: 6px;
+  background: rgba(31, 111, 235, 0.08);
+  }
+
+  .group-schedule-event--jam {
+  background: rgba(249, 115, 22, 0.1);
+  }
+
+  .group-schedule-event--cancelled {
+  opacity: 0.72;
+  text-decoration: line-through;
+  }
+
+  .group-schedule-day__date-full {
+  display: none;
+  }
+
+  .group-schedule-event__time,
+  .group-schedule-event__title,
+  .group-schedule-event__subtitle {
+  margin: 0;
+  line-height: 1.35;
+  }
+
+  .group-schedule-event__time {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--navy);
+  }
+
+  .group-schedule-event__title {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--navy);
+  }
+
+  .group-schedule-event__subtitle {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+  .group-schedule-page {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  }
+
+  .group-schedule-page h1 {
+  font-size: 28px !important;
+  }
+
+  .group-schedule-weekdays {
+  display: none;
+  }
+
+  .group-schedule-weeks,
+  .group-schedule-week {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  }
+
+  .group-schedule-day--empty {
+  display: none;
+  }
+
+  .group-schedule-day:not(.group-schedule-day--active):not(.group-schedule-day--cancelled) {
+  display: none;
+  }
+
+  .group-schedule-day {
+  min-height: 0;
+  padding: 12px;
+  }
+
+  .group-schedule-day__date {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  }
+
+  .group-schedule-day__date-number {
+  display: none;
+  }
+
+  .group-schedule-day__date-full {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+  }
+
+  .group-schedule-event {
+  padding: 10px;
+  }
+
+  .group-schedule-event__time {
+  font-size: 13px;
+  }
+
+  .group-schedule-event__title {
+  font-size: 14px;
+  }
+
+  .group-schedule-event__subtitle {
+  font-size: 13px;
+  line-height: 1.45;
+  }
+
+  .group-schedule-weekly-grid {
+  grid-template-columns: 1fr !important;
+  }
+
+  .group-schedule-panel {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  }
+
+  .group-schedule-cta-row {
+  flex-direction: column;
+  align-items: stretch;
+  }
+
+  .group-schedule-cta-row a {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  }
+  }

@@ -9,7 +9,7 @@ export default function YouthPerformancePage() {
       {/* HERO */}
       <section style={heroStyle}>
         <p style={eyebrowStyle}>Training Program</p>
-        <h1 style={titleStyle}>Youth Performance Training</h1>
+        <h1 style={titleStyle}>Group Training</h1>
         <p style={subtitleStyle}>
           Structured, coach-led training for youth athletes who thrive in a
           competitive environment and want consistent progress in speed,
@@ -19,6 +19,9 @@ export default function YouthPerformancePage() {
         <div style={ctaRowStyle}>
           <CallToAction href="/intake" variant="primary">
             Reserve early access
+          </CallToAction>
+          <CallToAction href="/group-schedule" variant="secondary">
+            View summer schedule
           </CallToAction>
           <CallToAction href="/schedule" variant="secondary">
             Book a consultation
@@ -32,7 +35,7 @@ export default function YouthPerformancePage() {
   <h2 style={sectionTitleStyle}>Program Availability</h2>
 
   <p style={cardBodyStyle}>
-    Youth Performance Training is offered through flexible session packages
+    Group Training is offered through flexible session packages
     designed to work around summer travel, tournaments, camps, and changing
     sports schedules.
   </p>

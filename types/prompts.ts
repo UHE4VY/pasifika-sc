@@ -4,7 +4,6 @@ export type PromptCategory =
   | "service_comparison"
   | "commitment_onboarding"
   | "expansion_addon"
-  | "remote_clarification"
   | "one_on_one_clarification"
   | "small_group_clarification";
 export interface Prompt {

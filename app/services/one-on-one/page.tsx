@@ -106,9 +106,9 @@ export default function OneOnOneServicePage() {
           <section style={panelStyle}>
             <div style={gridStyle}>
               <div style={cardStyle}>
-                <h3 style={cardTitle}>1:1 vs Small Group</h3>
+                <h3 style={cardTitle}>1:1 vs Group Training</h3>
                 <p style={cardBody}>
-                  Small Group provides structured coaching in a team setting.
+                  Group Training provides structured coaching in a team setting.
                   1:1 gives you full customization and faster adjustments every
                   session.
                 </p>

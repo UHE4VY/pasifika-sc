@@ -3,35 +3,26 @@ import Link from "next/link";
 import CallToAction from "../../components/CallToAction";
 
 type ServiceItem = {
-  slug: "youth-performance-training" | "one-on-one" | "hybrid" | "remote";
+  slug: "one-on-one" | "youth-performance-training";
   label: string;
   description: string;
+  highlight: string;
 };
 
 const SERVICES: ServiceItem[] = [
   {
-    slug: "youth-performance-training",
-    label: "Youth Performance Training",
-    description:
-      "Structured, coach-led training in a competitive group environment that builds accountability and measurable progress.",
-  },
-  {
     slug: "one-on-one",
     label: "1:1 Coaching",
     description:
-      "Fully individualized coaching for athletes who need targeted attention and a plan built around specific goals.",
+      "Fully individualized coaching for athletes who want targeted attention, faster feedback, and a plan built around their sport, body, and goals.",
+    highlight: "Most personalized support",
   },
   {
-    slug: "hybrid",
-    label: "Hybrid Coaching",
+    slug: "youth-performance-training",
+    label: "Group Training",
     description:
-      "A mix of in-person coaching and remote programming for athletes who want flexibility without losing structure.",
-  },
-  {
-    slug: "remote",
-    label: "Remote Programming",
-    description:
-      "Structured training plans with coaching guidance for athletes training outside the facility.",
+      "Structured, coach-led training in a competitive group environment that builds accountability, confidence, and measurable progress.",
+    highlight: "Train with purpose in a team setting",
   },
 ];
 
@@ -61,9 +52,9 @@ export default function ServicesPage() {
           textAlign: "center",
         }}
       >
-        Explore the training option that fits your goals, schedule, and level
-        of coaching support. Every program at PSC is built around measurable
-        progress, structured development, and long-term athletic growth.
+        PSC specializes in in-person coaching through private 1:1 sessions and
+        structured group training. Every program is built around measurable
+        progress, intentional coaching, and long-term athletic development.
       </p>
 
       {/* Service cards */}
@@ -74,6 +65,7 @@ export default function ServicesPage() {
             href={`/services/${s.slug}`}
             style={serviceCardLinkStyle}
           >
+            <p style={highlightStyle}>{s.highlight}</p>
             <div style={cardTitle}>{s.label}</div>
             <div style={cardBody}>{s.description}</div>
             <div style={linkStyle}>View details →</div>
@@ -87,34 +79,19 @@ export default function ServicesPage() {
 
         <div style={compareGridStyle}>
           <div style={compareCardStyle}>
-            <h3 style={cardTitle}>Youth Group Training</h3>
-            <p style={cardBody}>
-              Best for athletes who want consistent coaching, structure, and
-              accountability in a competitive training environment.
-            </p>
-          </div>
-
-          <div style={compareCardStyle}>
             <h3 style={cardTitle}>1:1 Coaching</h3>
             <p style={cardBody}>
               Best for athletes who want maximum coaching attention, targeted
-              feedback, and a fully individualized plan.
+              feedback, and a fully individualized plan built around specific
+              goals, movement needs, or sport demands.
             </p>
           </div>
 
           <div style={compareCardStyle}>
-            <h3 style={cardTitle}>Hybrid Coaching</h3>
+            <h3 style={cardTitle}>Group Training</h3>
             <p style={cardBody}>
-              Best for athletes who want flexibility while still getting regular
-              in-person coaching touchpoints.
-            </p>
-          </div>
-
-          <div style={compareCardStyle}>
-            <h3 style={cardTitle}>Remote Programming</h3>
-            <p style={cardBody}>
-              Best for athletes who can train independently but still want
-              expert structure, progression, and accountability.
+              Best for athletes who want consistent coaching, structure, and
+              accountability in a competitive training environment with peers.
             </p>
           </div>
         </div>
@@ -143,6 +120,15 @@ const gridStyle: React.CSSProperties = {
   display: "grid",
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 16,
+};
+
+const highlightStyle: React.CSSProperties = {
+  margin: "0 0 10px",
+  fontSize: 12,
+  fontWeight: 800,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--accent)",
 };
 
 const cardTitle: React.CSSProperties = {
@@ -216,7 +202,7 @@ const serviceCardLinkStyle: React.CSSProperties = {
   borderRadius: 16,
   padding: 18,
   background: "#ffffff",
-  minHeight: 180,
+  minHeight: 220,
   boxShadow: "0 8px 20px rgba(0,0,0,0.04)",
   color: "var(--navy)",
   height: "100%",

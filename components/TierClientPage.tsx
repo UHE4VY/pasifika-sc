@@ -10,7 +10,6 @@ import tierClarification from "../content/prompts/tierClarification.json";
 import serviceComparison from "../content/prompts/serviceComparison.json";
 import oneOnOneClarification from "../content/prompts/oneOnOneClarification.json";
 import smallGroupClarification from "../content/prompts/smallGroupClarification.json";
-import remoteClarification from "../content/prompts/remoteClarification.json";
 
 // NOTE: We are NOT importing/using parentReassurance here on purpose.
 // Parent reassurance is handled per-service in each service JSON.
@@ -82,10 +81,9 @@ export default function TierClientPage({ tierLabel, categories, primaryCategory 
     tier_clarification: tierClarification as Prompt[],
     service_comparison: serviceComparison as Prompt[],
     one_on_one_clarification: oneOnOneClarification as Prompt[],
-    small_group_clarification: smallGroupClarification as Prompt[],
-    remote_clarification: remoteClarification as Prompt[],
+    small_group_clarification: smallGroupClarification as Prompt[],
 
-    // IMPORTANT: keep this EMPTY so it never auto-renders via the stack
+    // IMPORTANT: keep this EMPTY so it never auto-renders via the stack
     parent_reassurance: [],
 
     // Keep unused categories as empty arrays (only if they exist in your PromptCategory union)
