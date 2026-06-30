@@ -6,7 +6,6 @@ import CallToAction from "../../../components/CallToAction";
 export default function YouthPerformancePage() {
   return (
     <main style={pageStyle}>
-      {/* HERO */}
       <section style={heroStyle}>
         <p style={eyebrowStyle}>Training Program</p>
         <h1 style={titleStyle}>Group Performance Training</h1>

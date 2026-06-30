@@ -14,7 +14,6 @@ export default function OneOnOneServicePage() {
       <PageViewTracker page="/services/one-on-one" component="one_on_one_page" />
 
       <main style={pageStyle}>
-        {/* HERO */}
         <section style={heroStyle}>
           <p style={eyebrowStyle}>Training Program</p>
 
