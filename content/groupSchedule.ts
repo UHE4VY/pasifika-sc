@@ -9,6 +9,10 @@ export type GroupClassTemplate = {
   programKey: "intensive" | "jam";
   startDate: string;
   endDate: string;
+  registerHref: string;
+  registerLabel: string;
+  dropInHref?: string;
+  dropInLabel?: string;
 };
 
 export const GROUP_SCHEDULE_YEAR = 2026;
@@ -30,6 +34,10 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
     programKey: session.programKey,
     startDate: SCHOOL_YEAR_FLYER.startDate,
     endDate: "2026-12-31",
+    registerHref: session.registerHref,
+    registerLabel: session.registerLabel,
+    dropInHref: session.dropInHref,
+    dropInLabel: session.dropInLabel,
   })
 );
 

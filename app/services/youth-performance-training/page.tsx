@@ -5,6 +5,7 @@ import CallToAction from "../../../components/CallToAction";
 import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
+  getSessionCtas,
 } from "../../../content/schoolYearGroupClasses";
 
 export default function YouthPerformancePage() {
@@ -20,9 +21,17 @@ export default function YouthPerformancePage() {
         </p>
 
         <div style={ctaRowStyle}>
-          <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
-            Register now
-          </CallToAction>
+          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+            getSessionCtas(session).map((action) => (
+              <CallToAction
+                key={action.href}
+                href={action.href}
+                variant={action.variant}
+              >
+                {action.label}
+              </CallToAction>
+            ))
+          )}
           <CallToAction href="/group-schedule" variant="secondary">
             View class schedule
           </CallToAction>
@@ -62,6 +71,17 @@ export default function YouthPerformancePage() {
                   <p style={sessionTimeStyle}>
                     {session.startTime} – {session.endTime}
                   </p>
+                  <div style={sessionCtaStyle}>
+                    {getSessionCtas(session).map((action) => (
+                      <CallToAction
+                        key={action.href}
+                        href={action.href}
+                        variant={action.variant}
+                      >
+                        {action.label}
+                      </CallToAction>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -78,9 +98,6 @@ export default function YouthPerformancePage() {
             </div>
 
             <div style={{ ...ctaRowStyle, justifyContent: "flex-start" }}>
-              <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
-                Register now
-              </CallToAction>
               <CallToAction href="/group-schedule" variant="secondary">
                 View class schedule
               </CallToAction>
@@ -137,9 +154,17 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
-            Register now
-          </CallToAction>
+          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+            getSessionCtas(session).map((action) => (
+              <CallToAction
+                key={action.href}
+                href={action.href}
+                variant={action.variant}
+              >
+                {action.label}
+              </CallToAction>
+            ))
+          )}
           <CallToAction href="/schedule" variant="secondary">
             Book a consultation
           </CallToAction>
@@ -199,9 +224,17 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
-            Register now
-          </CallToAction>
+          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+            getSessionCtas(session).map((action) => (
+              <CallToAction
+                key={action.href}
+                href={action.href}
+                variant={action.variant}
+              >
+                {action.label}
+              </CallToAction>
+            ))
+          )}
           <CallToAction href="/services" variant="secondary">
             Back to services
           </CallToAction>
@@ -348,6 +381,14 @@ const sessionTimeStyle: React.CSSProperties = {
   fontSize: 18,
   fontWeight: 800,
   color: "var(--navy)",
+};
+
+const sessionCtaStyle: React.CSSProperties = {
+  marginTop: 14,
+  display: "flex",
+  gap: 12,
+  flexWrap: "wrap",
+  justifyContent: "center",
 };
 
 const pricingBoxStyle: React.CSSProperties = {

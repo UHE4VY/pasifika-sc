@@ -1,8 +1,18 @@
-import { SCHOOL_YEAR_FLYER, SCHOOL_YEAR_SESSIONS } from "./schoolYearGroupClasses";
+import {
+  SCHOOL_YEAR_FLYER,
+  SCHOOL_YEAR_SESSIONS,
+  getSessionCtas,
+} from "./schoolYearGroupClasses";
 
 export type UpcomingEventDetail = {
   label: string;
   value: string;
+};
+
+export type UpcomingEventRegisterAction = {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary";
 };
 
 export type UpcomingEvent = {
@@ -17,7 +27,8 @@ export type UpcomingEvent = {
   locationAddress?: string;
   imageSrc: string;
   imageAlt: string;
-  registerHref: string;
+  registerHref?: string;
+  registerActions?: UpcomingEventRegisterAction[];
   secondaryHref?: string;
   secondaryLabel?: string;
 };
@@ -43,7 +54,9 @@ export const upcomingEvents: UpcomingEvent[] = [
     ],
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
-    registerHref: SCHOOL_YEAR_FLYER.registerHref,
+    registerActions: SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+      getSessionCtas(session)
+    ),
     secondaryHref: "/group-schedule",
     secondaryLabel: "View class schedule",
   },

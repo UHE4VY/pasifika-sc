@@ -7,7 +7,10 @@ import {
   WEEKLY_GROUP_CLASSES,
   type GroupClassTemplate,
 } from "@/content/groupSchedule";
-import { SCHOOL_YEAR_FLYER } from "@/content/schoolYearGroupClasses";
+import {
+  SCHOOL_YEAR_SESSIONS,
+  getSessionCtas,
+} from "@/content/schoolYearGroupClasses";
 
 type DayClass = GroupClassTemplate & { cancelled?: boolean };
 
@@ -201,6 +204,17 @@ export default function GroupSchedulePage() {
               </p>
               <p style={weeklyTitleStyle}>{session.title}</p>
               <p style={weeklySubtitleStyle}>{session.subtitle}</p>
+              <div style={weeklyCtaStyle}>
+                {getSessionCtas(session).map((action) => (
+                  <CallToAction
+                    key={action.href}
+                    href={action.href}
+                    variant={action.variant}
+                  >
+                    {action.label}
+                  </CallToAction>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -229,9 +243,17 @@ export default function GroupSchedulePage() {
         <CallToAction href="/services/youth-performance-training" variant="secondary">
           Back to Group Performance Training
         </CallToAction>
-        <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
-          Register now
-        </CallToAction>
+        {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+          getSessionCtas(session).map((action) => (
+            <CallToAction
+              key={action.href}
+              href={action.href}
+              variant={action.variant}
+            >
+              {action.label}
+            </CallToAction>
+          ))
+        )}
       </div>
     </main>
   );
@@ -337,6 +359,14 @@ const weeklySubtitleStyle: React.CSSProperties = {
   fontSize: 14,
   lineHeight: 1.5,
   color: "var(--muted)",
+};
+
+const weeklyCtaStyle: React.CSSProperties = {
+  marginTop: 14,
+  display: "flex",
+  gap: 12,
+  flexWrap: "wrap",
+  justifyContent: "center",
 };
 
 const notesListStyle: React.CSSProperties = {

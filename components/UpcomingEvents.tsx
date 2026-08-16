@@ -68,9 +68,19 @@ export default function UpcomingEvents() {
               ) : null}
 
               <div style={ctaRowStyle}>
-                <CallToAction href={event.registerHref} variant="primary">
-                  Register now
-                </CallToAction>
+                {(event.registerActions ??
+                  (event.registerHref
+                    ? [{ href: event.registerHref, label: "Register now" }]
+                    : [])
+                ).map((action) => (
+                  <CallToAction
+                    key={action.href}
+                    href={action.href}
+                    variant={action.variant ?? "primary"}
+                  >
+                    {action.label}
+                  </CallToAction>
+                ))}
                 <CallToAction
                   href={event.secondaryHref ?? "/contact"}
                   variant="secondary"

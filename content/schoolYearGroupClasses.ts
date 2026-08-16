@@ -10,25 +10,76 @@ export const SCHOOL_YEAR_FLYER = {
   monthlyPrice: "$150/mo",
   monthlyDetail: "four sessions",
   siblingDiscount: "15% off for siblings",
-  registerHref: "https://square.link/u/AvHYq975",
   priceSummary: "$45 drop-in · $150/mo for four sessions · 15% sibling discount",
 } as const;
 
-export const SCHOOL_YEAR_SESSIONS = [
+export type SchoolYearSession = {
+  id: string;
+  title: string;
+  audience: string;
+  startTime: string;
+  endTime: string;
+  programKey: "jam" | "intensive";
+  registerHref: string;
+  registerLabel: string;
+  dropInHref?: string;
+  dropInLabel?: string;
+};
+
+export type SessionCta = {
+  href: string;
+  label: string;
+  variant: "primary" | "secondary";
+};
+
+export function getSessionCtas(session: {
+  registerHref: string;
+  registerLabel: string;
+  dropInHref?: string;
+  dropInLabel?: string;
+}): SessionCta[] {
+  const actions: SessionCta[] = [
+    {
+      href: session.registerHref,
+      label: session.registerLabel,
+      variant: "primary",
+    },
+  ];
+
+  if (session.dropInHref && session.dropInLabel) {
+    actions.push({
+      href: session.dropInHref,
+      label: session.dropInLabel,
+      variant: "secondary",
+    });
+  }
+
+  return actions;
+}
+
+export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
   {
     id: "middle-school",
     title: "Middle School",
     audience: "Coed",
     startTime: "4:00 PM",
     endTime: "5:30 PM",
-    programKey: "jam" as const,
+    programKey: "jam",
+    registerHref: "https://square.link/u/1joWZmRg",
+    registerLabel: "Register — Middle School",
+    dropInHref: "https://square.link/u/RrK3yuwu",
+    dropInLabel: "Drop-in — Middle School",
   },
   {
     id: "high-school",
-    title: "High School",
+    title: "Fall Intensive",
     audience: "Girls only",
     startTime: "5:30 PM",
     endTime: "7:00 PM",
-    programKey: "intensive" as const,
+    programKey: "intensive",
+    registerHref: "https://square.link/u/XcwsaOXt",
+    registerLabel: "Register — Fall Intensive",
+    dropInHref: "https://square.link/u/LRGW4MhW",
+    dropInLabel: "Drop-in — Fall Intensive",
   },
-] as const;
+];
