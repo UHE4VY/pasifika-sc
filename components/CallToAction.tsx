@@ -9,6 +9,10 @@ type Props = {
   variant?: "primary" | "secondary" | "link";
 };
 
+function isExternalHref(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
+
 export default function CallToAction({
   href,
   children,
@@ -20,6 +24,19 @@ export default function CallToAction({
       : variant === "secondary"
       ? secondaryStyle
       : linkStyle;
+
+  if (isExternalHref(href)) {
+    return (
+      <a
+        href={href}
+        style={style}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
     <Link href={href} style={style}>

@@ -643,7 +643,31 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  margin-top: 18px;
   margin-bottom: 16px;
+  }
+
+  .early-registration-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  text-align: left;
+  }
+
+  .early-registration-flyer {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  }
+
+  .early-registration-sessions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
   }
 
   @media (max-width: 768px) {
@@ -745,5 +769,15 @@
 
   .upcoming-event-card__details {
   grid-template-columns: 1fr;
+  }
+
+  .early-registration-layout,
+  .early-registration-sessions {
+  grid-template-columns: 1fr;
+  }
+
+  .early-registration-flyer {
+  max-width: 360px;
+  margin: 0 auto;
   }
   }

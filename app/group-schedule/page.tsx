@@ -3,10 +3,11 @@ import {
   CANCELLED_CLASS_DATES,
   GROUP_SCHEDULE_MONTHS,
   GROUP_SCHEDULE_YEAR,
-  PROGRAM_END_NOTES,
+  PROGRAM_NOTES,
   WEEKLY_GROUP_CLASSES,
   type GroupClassTemplate,
 } from "@/content/groupSchedule";
+import { SCHOOL_YEAR_FLYER } from "@/content/schoolYearGroupClasses";
 
 type DayClass = GroupClassTemplate & { cancelled?: boolean };
 
@@ -53,15 +54,20 @@ function getWeeksForMonth(year: number, month: number) {
   return weeks;
 }
 
+function isScheduledOn(session: GroupClassTemplate, date: Date) {
+  if (session.dayOfWeek !== date.getDay()) return false;
+  if (date < parseDateKey(session.startDate)) return false;
+  if (date > parseDateKey(session.endDate)) return false;
+  return true;
+}
+
 function getClassesForDate(date: Date): DayClass[] {
   const dateKey = toDateKey(date);
+  const scheduled = WEEKLY_GROUP_CLASSES.filter((session) =>
+    isScheduledOn(session, date)
+  );
 
   if (CANCELLED_CLASS_DATES.includes(dateKey)) {
-    const scheduled = WEEKLY_GROUP_CLASSES.filter((session) => {
-      if (session.dayOfWeek !== date.getDay()) return false;
-      return date <= parseDateKey(session.endDate);
-    });
-
     if (scheduled.length > 0) {
       return scheduled.map((session) => ({ ...session, cancelled: true }));
     }
@@ -69,10 +75,7 @@ function getClassesForDate(date: Date): DayClass[] {
     return [];
   }
 
-  return WEEKLY_GROUP_CLASSES.filter((session) => {
-    if (session.dayOfWeek !== date.getDay()) return false;
-    return date <= parseDateKey(session.endDate);
-  });
+  return scheduled;
 }
 
 function MonthCalendar({
@@ -177,10 +180,10 @@ export default function GroupSchedulePage() {
     <main className="group-schedule-page" style={pageStyle}>
       <section style={heroStyle}>
         <p style={eyebrowStyle}>Group Performance Training</p>
-        <h1 style={titleStyle}>Summer Class Schedule</h1>
+        <h1 style={titleStyle}>School Year Class Schedule</h1>
         <p style={subtitleStyle}>
-          Weekly group classes for Summer Intensive and Summer Jam. Times are
-          shown in Pacific Time.
+          Sunday group classes for middle school and high school athletes,
+          starting September 6, 2026. Times are shown in Pacific Time.
         </p>
       </section>
 
@@ -216,13 +219,8 @@ export default function GroupSchedulePage() {
         <h2 style={sectionTitleStyle}>Program notes</h2>
 
         <ul style={notesListStyle}>
-          <li>
-            <strong>No class:</strong> Friday, July 3 and July 6
-          </li>
-          {PROGRAM_END_NOTES.map((note) => (
-            <li key={note.program}>
-              <strong>{note.program} ends:</strong> {note.endDate} ({note.detail})
-            </li>
+          {PROGRAM_NOTES.map((note) => (
+            <li key={note}>{note}</li>
           ))}
         </ul>
       </section>
@@ -231,8 +229,8 @@ export default function GroupSchedulePage() {
         <CallToAction href="/services/youth-performance-training" variant="secondary">
           Back to Group Performance Training
         </CallToAction>
-        <CallToAction href="/intake" variant="primary">
-          Reserve early access
+        <CallToAction href={SCHOOL_YEAR_FLYER.registerHref} variant="primary">
+          Register now
         </CallToAction>
       </div>
     </main>

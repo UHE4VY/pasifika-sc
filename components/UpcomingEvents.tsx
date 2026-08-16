@@ -14,10 +14,10 @@ export default function UpcomingEvents() {
 
   return (
     <section style={sectionStyle}>
-      <h2 style={sectionTitleStyle}>Upcoming classes, workshops &amp; seminars</h2>
+      <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        Stay up to date on special training opportunities at PSC and partner
-        facilities across the Peninsula.
+        Sunday group classes for middle school and high school athletes are open
+        for early registration.
       </p>
 
       <div style={eventsStackStyle}>
@@ -36,52 +36,46 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
-              <p style={eventInstructorStyle}>{event.instructor}</p>
-              <ul style={credentialsListStyle}>
-                {event.credentials.map((credential) => (
-                  <li key={credential}>{credential}</li>
-                ))}
-              </ul>
+              {event.instructor ? (
+                <p style={eventInstructorStyle}>{event.instructor}</p>
+              ) : null}
+
+              {event.credentials && event.credentials.length > 0 ? (
+                <ul style={credentialsListStyle}>
+                  {event.credentials.map((credential) => (
+                    <li key={credential}>{credential}</li>
+                  ))}
+                </ul>
+              ) : null}
 
               <div className="upcoming-event-card__details">
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Schedule</p>
-                  <p style={detailValueStyle}>{event.schedule}</p>
-                </div>
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Time</p>
-                  <p style={detailValueStyle}>{event.time}</p>
-                </div>
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Format</p>
-                  <p style={detailValueStyle}>{event.duration}</p>
-                </div>
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Ages</p>
-                  <p style={detailValueStyle}>{event.audience}</p>
-                </div>
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Investment</p>
-                  <p style={detailValueStyle}>{event.price}</p>
-                </div>
-                <div style={detailItemStyle}>
-                  <p style={detailLabelStyle}>Skills covered</p>
-                  <p style={detailValueStyle}>{event.skills.join(", ")}</p>
-                </div>
+                {event.details.map((detail) => (
+                  <div key={detail.label} style={detailItemStyle}>
+                    <p style={detailLabelStyle}>{detail.label}</p>
+                    <p style={detailValueStyle}>{detail.value}</p>
+                  </div>
+                ))}
               </div>
 
-              <div style={locationStyle}>
-                <p style={detailLabelStyle}>Location</p>
-                <p style={detailValueStyle}>{event.locationName}</p>
-                <p style={locationAddressStyle}>{event.locationAddress}</p>
-              </div>
+              {event.locationName ? (
+                <div style={locationStyle}>
+                  <p style={detailLabelStyle}>Location</p>
+                  <p style={detailValueStyle}>{event.locationName}</p>
+                  {event.locationAddress ? (
+                    <p style={locationAddressStyle}>{event.locationAddress}</p>
+                  ) : null}
+                </div>
+              ) : null}
 
               <div style={ctaRowStyle}>
                 <CallToAction href={event.registerHref} variant="primary">
                   Register now
                 </CallToAction>
-                <CallToAction href="/contact" variant="secondary">
-                  Ask a question
+                <CallToAction
+                  href={event.secondaryHref ?? "/contact"}
+                  variant="secondary"
+                >
+                  {event.secondaryLabel ?? "Ask a question"}
                 </CallToAction>
               </div>
             </div>
