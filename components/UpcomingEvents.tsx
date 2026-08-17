@@ -36,6 +36,21 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
+              {event.sessions && event.sessions.length > 0 ? (
+                <div className="upcoming-event-card__sessions">
+                  {event.sessions.map((session, index) => (
+                    <div key={session.id} style={sessionCardStyle}>
+                      <p style={sessionEyebrowStyle}>Session {index + 1}</p>
+                      <h4 style={sessionTitleStyle}>{session.title}</h4>
+                      <p style={sessionAudienceStyle}>{session.audience}</p>
+                      <p style={sessionTimeStyle}>
+                        {session.startTime} – {session.endTime}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
               {event.instructor ? (
                 <p style={eventInstructorStyle}>{event.instructor}</p>
               ) : null}
@@ -147,6 +162,44 @@ const eventSubtitleStyle: React.CSSProperties = {
   fontSize: 16,
   fontWeight: 700,
   color: "var(--accent2)",
+};
+
+const sessionCardStyle: React.CSSProperties = {
+  border: "1px solid var(--border)",
+  borderRadius: 14,
+  padding: "12px 14px",
+  background: "var(--panel)",
+};
+
+const sessionEyebrowStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 12,
+  fontWeight: 800,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--accent)",
+};
+
+const sessionTitleStyle: React.CSSProperties = {
+  margin: "8px 0 4px",
+  fontSize: 20,
+  fontWeight: 800,
+  lineHeight: 1.2,
+  color: "var(--navy)",
+};
+
+const sessionAudienceStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 15,
+  fontWeight: 700,
+  color: "var(--accent2)",
+};
+
+const sessionTimeStyle: React.CSSProperties = {
+  margin: "8px 0 0",
+  fontSize: 15,
+  fontWeight: 700,
+  color: "var(--navy)",
 };
 
 const eventInstructorStyle: React.CSSProperties = {

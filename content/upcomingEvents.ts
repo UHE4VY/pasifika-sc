@@ -2,6 +2,7 @@ import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
   getSessionCtas,
+  type SchoolYearSession,
 } from "./schoolYearGroupClasses";
 
 export type UpcomingEventDetail = {
@@ -15,6 +16,11 @@ export type UpcomingEventRegisterAction = {
   variant?: "primary" | "secondary";
 };
 
+export type UpcomingEventSession = Pick<
+  SchoolYearSession,
+  "id" | "title" | "audience" | "startTime" | "endTime"
+>;
+
 export type UpcomingEvent = {
   id: string;
   type: "workshop" | "class" | "seminar";
@@ -22,6 +28,7 @@ export type UpcomingEvent = {
   subtitle: string;
   instructor?: string;
   credentials?: string[];
+  sessions?: UpcomingEventSession[];
   details: UpcomingEventDetail[];
   locationName?: string;
   locationAddress?: string;
@@ -39,16 +46,15 @@ export const upcomingEvents: UpcomingEvent[] = [
     type: "class",
     title: "School Year Group Classes",
     subtitle: SCHOOL_YEAR_FLYER.headline,
+    sessions: SCHOOL_YEAR_SESSIONS.map((session) => ({
+      id: session.id,
+      title: session.title,
+      audience: session.audience,
+      startTime: session.startTime,
+      endTime: session.endTime,
+    })),
     details: [
       { label: "Schedule", value: SCHOOL_YEAR_FLYER.startLabel },
-      {
-        label: "Session 1",
-        value: `${SCHOOL_YEAR_SESSIONS[0].title} (${SCHOOL_YEAR_SESSIONS[0].audience}) ${SCHOOL_YEAR_SESSIONS[0].startTime} – ${SCHOOL_YEAR_SESSIONS[0].endTime}`,
-      },
-      {
-        label: "Session 2",
-        value: `${SCHOOL_YEAR_SESSIONS[1].title} (${SCHOOL_YEAR_SESSIONS[1].audience}) ${SCHOOL_YEAR_SESSIONS[1].startTime} – ${SCHOOL_YEAR_SESSIONS[1].endTime}`,
-      },
       { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
       { label: "Investment", value: SCHOOL_YEAR_FLYER.priceSummary },
     ],

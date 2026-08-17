@@ -78,8 +78,8 @@ export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
     endTime: "7:00 PM",
     programKey: "intensive",
     registerHref: "https://square.link/u/XcwsaOXt",
-    registerLabel: "Register — High School",
+    registerLabel: "Register — High School Girls",
     dropInHref: "https://square.link/u/LRGW4MhW",
-    dropInLabel: "Drop-in — High School",
+    dropInLabel: "Drop-in — High School Girls",
   },
 ];
