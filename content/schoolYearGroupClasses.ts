@@ -72,14 +72,14 @@ export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
   },
   {
     id: "high-school",
-    title: "Fall Intensive",
+    title: "High School",
     audience: "Girls only",
     startTime: "5:30 PM",
     endTime: "7:00 PM",
     programKey: "intensive",
     registerHref: "https://square.link/u/XcwsaOXt",
-    registerLabel: "Register — Fall Intensive",
+    registerLabel: "Register — High School",
     dropInHref: "https://square.link/u/LRGW4MhW",
-    dropInLabel: "Drop-in — Fall Intensive",
+    dropInLabel: "Drop-in — High School",
   },
 ];
