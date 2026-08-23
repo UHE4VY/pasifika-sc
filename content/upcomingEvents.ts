@@ -60,9 +60,10 @@ export const upcomingEvents: UpcomingEvent[] = [
     ],
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
-    registerActions: SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-      getSessionCtas(session)
-    ),
+    registerActions: [
+      ...SCHOOL_YEAR_SESSIONS.flatMap((session) => getSessionCtas(session)),
+      { href: "/waiver", label: "Sign waiver", variant: "secondary" },
+    ],
     secondaryHref: "/group-schedule",
     secondaryLabel: "View class schedule",
   },

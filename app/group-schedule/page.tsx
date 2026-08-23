@@ -187,7 +187,14 @@ export default function GroupSchedulePage() {
         <p style={subtitleStyle}>
           Sunday group classes for middle school and high school athletes,
           starting September 6, 2026. Times are shown in Pacific Time.
+          Parents must complete the waiver before their athlete can train.
         </p>
+
+        <div style={{ ...ctaRowStyle, marginTop: 18 }}>
+          <CallToAction href="/waiver" variant="secondary">
+            Sign waiver
+          </CallToAction>
+        </div>
       </section>
 
       <section className="group-schedule-panel" style={panelStyle}>
@@ -240,6 +247,9 @@ export default function GroupSchedulePage() {
       </section>
 
       <div className="group-schedule-cta-row" style={ctaRowStyle}>
+        <CallToAction href="/waiver" variant="secondary">
+          Sign waiver
+        </CallToAction>
         <CallToAction href="/services/youth-performance-training" variant="secondary">
           Back to Group Performance Training
         </CallToAction>

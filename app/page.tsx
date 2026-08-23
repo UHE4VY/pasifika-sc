@@ -405,6 +405,13 @@ export default function HomePage() {
       We recommend the right coaching structure and guide you in your custom trainingplan built for your goals.
     </p>
   </div>
+
+  <div style={cardStyle}>
+    <h3 style={cardTitleStyle}>4) Complete the parent waiver</h3>
+    <p style={cardBodyStyle}>
+      Parents and guardians must sign the waiver before their athlete can participate in PSC programs.
+    </p>
+  </div>
 </div>
 
           <div
@@ -412,6 +419,10 @@ export default function HomePage() {
           >
             <CallToAction href="/intake" variant="primary">
               Start athlete intake
+            </CallToAction>
+
+            <CallToAction href="/waiver" variant="secondary">
+              Sign waiver
             </CallToAction>
 
             <CallToAction href="/schedule" variant="secondary">

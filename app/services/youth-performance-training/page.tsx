@@ -32,6 +32,9 @@ export default function YouthPerformancePage() {
               </CallToAction>
             ))
           )}
+          <CallToAction href="/waiver" variant="secondary">
+            Sign waiver
+          </CallToAction>
           <CallToAction href="/group-schedule" variant="secondary">
             View class schedule
           </CallToAction>
@@ -98,6 +101,9 @@ export default function YouthPerformancePage() {
             </div>
 
             <div style={{ ...ctaRowStyle, justifyContent: "flex-start" }}>
+              <CallToAction href="/waiver" variant="secondary">
+                Sign waiver
+              </CallToAction>
               <CallToAction href="/group-schedule" variant="secondary">
                 View class schedule
               </CallToAction>
@@ -212,7 +218,8 @@ export default function YouthPerformancePage() {
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
           Start with the athlete intake so we can understand your athlete’s
-          goals and guide you through the onboarding process.
+          goals. Parents must also complete the waiver before their athlete can
+          train.
         </p>
 
         <div
@@ -235,6 +242,9 @@ export default function YouthPerformancePage() {
               </CallToAction>
             ))
           )}
+          <CallToAction href="/waiver" variant="secondary">
+            Sign waiver
+          </CallToAction>
           <CallToAction href="/services" variant="secondary">
             Back to services
           </CallToAction>
