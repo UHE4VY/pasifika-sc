@@ -60,6 +60,11 @@ export default function YouthPerformancePage() {
           <div>
             <p style={startLabelStyle}>{SCHOOL_YEAR_FLYER.startLabel}</p>
             <p style={{ ...cardBodyStyle, marginTop: 8 }}>
+              {SCHOOL_YEAR_FLYER.venueName}
+              <br />
+              {SCHOOL_YEAR_FLYER.venueAddress}
+            </p>
+            <p style={{ ...cardBodyStyle, marginTop: 8 }}>
               {SCHOOL_YEAR_FLYER.duration}. Limited to 15 athletes per class.
             </p>
 

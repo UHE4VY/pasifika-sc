@@ -11,6 +11,8 @@ export const SCHOOL_YEAR_FLYER = {
   monthlyDetail: "four sessions",
   siblingDiscount: "15% off for siblings",
   priceSummary: "$45 drop-in · $150/mo for four sessions · 15% sibling discount",
+  venueName: "Maximum Fitness & Performance",
+  venueAddress: "1700 Industrial Rd, STE C, San Carlos, CA 94070",
 } as const;
 
 export type SchoolYearSession = {

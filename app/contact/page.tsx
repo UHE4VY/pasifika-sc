@@ -13,15 +13,23 @@ export default function ContactPage() {
           we’ll help guide you to the best training option.
         </p>
 
-        <p style={emailStyle}>
-          Email us directly at{" "}
-          <a
-            href="mailto:pasifikasc@gmail.com"
-            style={{ color: "var(--accent)", fontWeight: 700 }}
-          >
-            pasifikasc@gmail.com
-          </a>
-        </p>
+        <p style={emailStyle}>
+          Email us directly at{" "}
+          <a
+            href="mailto:pasifikasc@gmail.com"
+            style={{ color: "var(--accent)", fontWeight: 700 }}
+          >
+            pasifikasc@gmail.com
+          </a>
+        </p>
+
+        <p style={locationLabelStyle}>Training location</p>
+        <p style={locationNameStyle}>Maximum Fitness & Performance</p>
+        <p style={locationAddressStyle}>
+          1700 Industrial Rd, STE C
+          <br />
+          San Carlos, CA 94070
+        </p>
 
         <div style={ctaRowStyle}>
           <CallToAction
@@ -79,9 +87,32 @@ const subtitleStyle: React.CSSProperties = {
 };
 
 const emailStyle: React.CSSProperties = {
-  marginBottom: 20,
-  fontSize: 16,
-  color: "var(--navy)",
+  marginBottom: 20,
+  fontSize: 16,
+  color: "var(--navy)",
+};
+
+const locationLabelStyle: React.CSSProperties = {
+  margin: "0 0 6px",
+  fontSize: 12,
+  fontWeight: 800,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--muted)",
+};
+
+const locationNameStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 16,
+  fontWeight: 800,
+  color: "var(--navy)",
+};
+
+const locationAddressStyle: React.CSSProperties = {
+  margin: "4px 0 20px",
+  lineHeight: 1.5,
+  color: "var(--navy)",
+  opacity: 0.88,
 };
 
 const ctaRowStyle: React.CSSProperties = {

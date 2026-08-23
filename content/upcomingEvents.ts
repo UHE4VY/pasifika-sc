@@ -58,6 +58,8 @@ export const upcomingEvents: UpcomingEvent[] = [
       { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
       { label: "Investment", value: SCHOOL_YEAR_FLYER.priceSummary },
     ],
+    locationName: SCHOOL_YEAR_FLYER.venueName,
+    locationAddress: SCHOOL_YEAR_FLYER.venueAddress,
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
     registerActions: [

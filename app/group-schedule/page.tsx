@@ -8,6 +8,7 @@ import {
   type GroupClassTemplate,
 } from "@/content/groupSchedule";
 import {
+  SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
   getSessionCtas,
 } from "@/content/schoolYearGroupClasses";
@@ -187,7 +188,9 @@ export default function GroupSchedulePage() {
         <p style={subtitleStyle}>
           Sunday group classes for middle school and high school athletes,
           starting September 6, 2026. Times are shown in Pacific Time.
-          Parents must complete the waiver before their athlete can train.
+          Classes are held at {SCHOOL_YEAR_FLYER.venueName},{" "}
+          {SCHOOL_YEAR_FLYER.venueAddress}. Parents must complete the waiver
+          before their athlete can train.
         </p>
 
         <div style={{ ...ctaRowStyle, marginTop: 18 }}>

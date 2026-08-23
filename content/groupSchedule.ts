@@ -47,5 +47,6 @@ export const PROGRAM_NOTES = [
   SCHOOL_YEAR_FLYER.startLabel,
   "Each class is 90 minutes.",
   SCHOOL_YEAR_FLYER.priceSummary,
+  `Classes are held at ${SCHOOL_YEAR_FLYER.venueName}, ${SCHOOL_YEAR_FLYER.venueAddress}.`,
   "Parents must complete the waiver before their athlete can train.",
 ];
