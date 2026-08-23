@@ -17,7 +17,7 @@ export default function IntakePage() {
       </p>
 
       <div style={ctaWrap}>
-        <CallToAction href="/waiver" variant="secondary">
+        <CallToAction href="/waiver" variant="waiver">
           Sign waiver
         </CallToAction>
       </div>

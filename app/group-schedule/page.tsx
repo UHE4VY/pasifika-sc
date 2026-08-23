@@ -191,7 +191,7 @@ export default function GroupSchedulePage() {
         </p>
 
         <div style={{ ...ctaRowStyle, marginTop: 18 }}>
-          <CallToAction href="/waiver" variant="secondary">
+          <CallToAction href="/waiver" variant="waiver">
             Sign waiver
           </CallToAction>
         </div>
@@ -247,7 +247,7 @@ export default function GroupSchedulePage() {
       </section>
 
       <div className="group-schedule-cta-row" style={ctaRowStyle}>
-        <CallToAction href="/waiver" variant="secondary">
+        <CallToAction href="/waiver" variant="waiver">
           Sign waiver
         </CallToAction>
         <CallToAction href="/services/youth-performance-training" variant="secondary">

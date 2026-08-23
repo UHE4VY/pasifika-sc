@@ -18,7 +18,7 @@ export default function WaiverPage() {
       </p>
 
       <div style={ctaWrap}>
-        <CallToAction href={WAIVER_FALLBACK_URL} variant="secondary">
+        <CallToAction href={WAIVER_FALLBACK_URL} variant="waiver">
           Fill out this form
         </CallToAction>
       </div>

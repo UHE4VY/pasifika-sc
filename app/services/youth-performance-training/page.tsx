@@ -32,7 +32,7 @@ export default function YouthPerformancePage() {
               </CallToAction>
             ))
           )}
-          <CallToAction href="/waiver" variant="secondary">
+          <CallToAction href="/waiver" variant="waiver">
             Sign waiver
           </CallToAction>
           <CallToAction href="/group-schedule" variant="secondary">
@@ -101,7 +101,7 @@ export default function YouthPerformancePage() {
             </div>
 
             <div style={{ ...ctaRowStyle, justifyContent: "flex-start" }}>
-              <CallToAction href="/waiver" variant="secondary">
+              <CallToAction href="/waiver" variant="waiver">
                 Sign waiver
               </CallToAction>
               <CallToAction href="/group-schedule" variant="secondary">
@@ -242,7 +242,7 @@ export default function YouthPerformancePage() {
               </CallToAction>
             ))
           )}
-          <CallToAction href="/waiver" variant="secondary">
+          <CallToAction href="/waiver" variant="waiver">
             Sign waiver
           </CallToAction>
           <CallToAction href="/services" variant="secondary">

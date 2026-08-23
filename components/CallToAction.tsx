@@ -6,7 +6,7 @@ import React from "react";
 type Props = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "link";
+  variant?: "primary" | "secondary" | "link" | "waiver";
 };
 
 function isExternalHref(href: string) {
@@ -23,6 +23,8 @@ export default function CallToAction({
       ? primaryStyle
       : variant === "secondary"
       ? secondaryStyle
+      : variant === "waiver"
+      ? waiverStyle
       : linkStyle;
 
   if (isExternalHref(href)) {
@@ -72,6 +74,14 @@ const secondaryStyle: React.CSSProperties = {
   color: "#0b1f3a",
   border: "1px solid #e6e1d8",
   boxShadow: "0 8px 20px rgba(0,0,0,0.04)",
+};
+
+const waiverStyle: React.CSSProperties = {
+  ...baseStyle,
+  backgroundColor: "#f97316",
+  color: "#ffffff",
+  border: "1px solid #f97316",
+  boxShadow: "0 8px 20px rgba(249,115,22,0.28)",
 };
 
 const linkStyle: React.CSSProperties = {

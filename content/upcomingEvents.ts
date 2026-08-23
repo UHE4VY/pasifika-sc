@@ -13,7 +13,7 @@ export type UpcomingEventDetail = {
 export type UpcomingEventRegisterAction = {
   href: string;
   label: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "waiver";
 };
 
 export type UpcomingEventSession = Pick<
@@ -62,7 +62,7 @@ export const upcomingEvents: UpcomingEvent[] = [
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
     registerActions: [
       ...SCHOOL_YEAR_SESSIONS.flatMap((session) => getSessionCtas(session)),
-      { href: "/waiver", label: "Sign waiver", variant: "secondary" },
+      { href: "/waiver", label: "Sign waiver", variant: "waiver" },
     ],
     secondaryHref: "/group-schedule",
     secondaryLabel: "View class schedule",

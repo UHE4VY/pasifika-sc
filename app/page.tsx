@@ -421,7 +421,7 @@ export default function HomePage() {
               Start athlete intake
             </CallToAction>
 
-            <CallToAction href="/waiver" variant="secondary">
+            <CallToAction href="/waiver" variant="waiver">
               Sign waiver
             </CallToAction>
 
