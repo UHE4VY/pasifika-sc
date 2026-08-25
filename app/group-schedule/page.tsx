@@ -1,4 +1,6 @@
 import CallToAction from "@/components/CallToAction";
+import ClassPaymentOptions from "@/components/ClassPaymentOptions";
+import { getGymdeskBookUrl } from "@/content/gymdesk";
 import {
   CANCELLED_CLASS_DATES,
   GROUP_SCHEDULE_MONTHS,
@@ -10,6 +12,7 @@ import {
 import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
+  getDropInCtas,
   getSessionCtas,
 } from "@/content/schoolYearGroupClasses";
 
@@ -80,6 +83,22 @@ function getClassesForDate(date: Date): DayClass[] {
   }
 
   return scheduled;
+}
+
+function getActiveClassDatesForMonth(year: number, month: number) {
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const dates: Date[] = [];
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const date = new Date(year, month - 1, day);
+    const classes = getClassesForDate(date).filter((session) => !session.cancelled);
+
+    if (classes.length > 0) {
+      dates.push(date);
+    }
+  }
+
+  return dates;
 }
 
 function MonthCalendar({
@@ -163,6 +182,19 @@ function MonthCalendar({
                           <p className="group-schedule-event__subtitle">
                             {session.subtitle}
                           </p>
+                          {!session.cancelled ? (
+                            <a
+                              href={getGymdeskBookUrl({
+                                classId: session.id,
+                                date: dateKey,
+                              })}
+                              className="group-schedule-event__dropin"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Book
+                            </a>
+                          ) : null}
                         </div>
                       ))}
                     </div>
@@ -179,6 +211,71 @@ function MonthCalendar({
   );
 }
 
+function SeptemberDropInDates() {
+  const dates = getActiveClassDatesForMonth(GROUP_SCHEDULE_YEAR, 9);
+
+  if (dates.length === 0) return null;
+
+  return (
+    <section className="group-schedule-panel" style={panelStyle}>
+      <h2 style={sectionTitleStyle}>September drop-in dates</h2>
+      <p style={dropInIntroStyle}>
+        These Sundays match Gymdesk. Pay {SCHOOL_YEAR_FLYER.dropInPrice} per
+        drop-in, or{" "}
+        <a href="/schedule#book-sessions">
+          pick several dates and check out
+        </a>{" "}
+        on the Book page. There is no monthly charge unless you choose a month
+        commitment.
+      </p>
+
+      <div className="september-dropin-dates">
+        {dates.map((date) => {
+          const dateKey = toDateKey(date);
+          const classes = getClassesForDate(date).filter(
+            (session) => !session.cancelled
+          );
+          const dateLabel = date.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          });
+
+          return (
+            <article key={dateKey} style={dropInDateCardStyle}>
+              <h3 style={dropInDateTitleStyle}>{dateLabel}</h3>
+              <div className="september-dropin-dates__sessions">
+                {classes.map((session) => (
+                  <div
+                    key={`${dateKey}-${session.programKey}-${session.startTime}`}
+                    style={dropInSessionRowStyle}
+                  >
+                    <div>
+                      <p style={weeklyTitleStyle}>{session.title}</p>
+                      <p style={weeklySubtitleStyle}>
+                        {session.subtitle} · {session.startTime} – {session.endTime}
+                      </p>
+                    </div>
+                    <CallToAction
+                      href={getGymdeskBookUrl({
+                        classId: session.id,
+                        date: dateKey,
+                      })}
+                      variant="primary"
+                    >
+                      Book in Gymdesk
+                    </CallToAction>
+                  </div>
+                ))}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function GroupSchedulePage() {
   return (
     <main className="group-schedule-page" style={pageStyle}>
@@ -186,16 +283,34 @@ export default function GroupSchedulePage() {
         <p style={eyebrowStyle}>Group Performance Training</p>
         <h1 style={titleStyle}>School Year Class Schedule</h1>
         <p style={subtitleStyle}>
-          Sunday group classes for middle school and high school athletes,
-          starting September 6, 2026. Times are shown in Pacific Time.
-          Classes are held at {SCHOOL_YEAR_FLYER.venueName},{" "}
-          {SCHOOL_YEAR_FLYER.venueAddress}. Parents must complete the waiver
+          Sunday group classes for middle school and high school athletes.{" "}
+          {SCHOOL_YEAR_FLYER.startLabel} {SCHOOL_YEAR_FLYER.endLabel}. Times are
+          shown in Pacific Time. Classes are held at{" "}
+          {SCHOOL_YEAR_FLYER.venueName}, {SCHOOL_YEAR_FLYER.venueAddress}.{" "}
+          {SCHOOL_YEAR_FLYER.tryFirstNote} Parents must complete the waiver
           before their athlete can train.
         </p>
 
         <div style={{ ...ctaRowStyle, marginTop: 18 }}>
+          <CallToAction href="/schedule#book-sessions" variant="primary">
+            Book a session
+          </CallToAction>
+          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
+            getDropInCtas(session).map((action) => (
+              <CallToAction
+                key={action.href}
+                href={action.href}
+                variant={action.variant}
+              >
+                {action.label}
+              </CallToAction>
+            ))
+          )}
+          <CallToAction href="#how-to-join" variant="secondary">
+            See monthly plans
+          </CallToAction>
           <CallToAction href="/waiver" variant="waiver">
-            Sign waiver
+            Sign waiver and register
           </CallToAction>
         </div>
       </section>
@@ -230,6 +345,13 @@ export default function GroupSchedulePage() {
         </div>
       </section>
 
+      <section className="group-schedule-panel" style={panelStyle}>
+        <h2 style={sectionTitleStyle}>Choose how to start</h2>
+        <ClassPaymentOptions />
+      </section>
+
+      <SeptemberDropInDates />
+
       {GROUP_SCHEDULE_MONTHS.map(({ month, label }) => (
         <MonthCalendar
           key={label}
@@ -250,23 +372,18 @@ export default function GroupSchedulePage() {
       </section>
 
       <div className="group-schedule-cta-row" style={ctaRowStyle}>
+        <CallToAction href="/schedule#book-sessions" variant="primary">
+          Book a session
+        </CallToAction>
+        <CallToAction href="#how-to-join" variant="secondary">
+          Choose drop-in or monthly
+        </CallToAction>
         <CallToAction href="/waiver" variant="waiver">
-          Sign waiver
+          Sign waiver and register
         </CallToAction>
         <CallToAction href="/services/youth-performance-training" variant="secondary">
           Back to Group Performance Training
         </CallToAction>
-        {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-          getSessionCtas(session).map((action) => (
-            <CallToAction
-              key={action.href}
-              href={action.href}
-              variant={action.variant}
-            >
-              {action.label}
-            </CallToAction>
-          ))
-        )}
       </div>
     </main>
   );
@@ -395,4 +512,37 @@ const ctaRowStyle: React.CSSProperties = {
   flexWrap: "wrap",
   justifyContent: "center",
   marginTop: 8,
+};
+
+const dropInIntroStyle: React.CSSProperties = {
+  margin: "0 auto 16px",
+  maxWidth: 720,
+  lineHeight: 1.7,
+  color: "var(--navy)",
+  opacity: 0.88,
+  textAlign: "center",
+};
+
+const dropInDateCardStyle: React.CSSProperties = {
+  border: "1px solid var(--border)",
+  borderRadius: 16,
+  padding: 16,
+  background: "var(--panel2)",
+};
+
+const dropInDateTitleStyle: React.CSSProperties = {
+  margin: "0 0 12px",
+  fontSize: 16,
+  fontWeight: 800,
+  color: "var(--navy)",
+};
+
+const dropInSessionRowStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: 12,
+  flexWrap: "wrap",
+  padding: "10px 0",
+  borderTop: "1px solid var(--border)",
 };

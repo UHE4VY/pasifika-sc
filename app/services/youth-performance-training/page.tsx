@@ -2,9 +2,11 @@
 
 import React from "react";
 import CallToAction from "../../../components/CallToAction";
+import ClassPaymentOptions from "../../../components/ClassPaymentOptions";
 import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
+  getDropInCtas,
   getSessionCtas,
 } from "../../../content/schoolYearGroupClasses";
 
@@ -17,12 +19,16 @@ export default function YouthPerformancePage() {
         <p style={subtitleStyle}>
           Structured, coach-led training for youth athletes who thrive in a
           competitive environment and want consistent progress in speed,
-          strength, movement quality, and confidence.
+          strength, movement quality, and confidence. Start with a few
+          September drop-ins if you are not ready for a monthly plan.
         </p>
 
         <div style={ctaRowStyle}>
+          <CallToAction href="/schedule" variant="primary">
+            Book a session
+          </CallToAction>
           {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-            getSessionCtas(session).map((action) => (
+            getDropInCtas(session).map((action) => (
               <CallToAction
                 key={action.href}
                 href={action.href}
@@ -32,14 +38,14 @@ export default function YouthPerformancePage() {
               </CallToAction>
             ))
           )}
+          <CallToAction href="#how-to-join" variant="secondary">
+            See monthly plans
+          </CallToAction>
           <CallToAction href="/waiver" variant="waiver">
             Sign waiver
           </CallToAction>
           <CallToAction href="/group-schedule" variant="secondary">
             View class schedule
-          </CallToAction>
-          <CallToAction href="/schedule" variant="secondary">
-            Book a consultation
           </CallToAction>
         </div>
       </section>
@@ -103,6 +109,9 @@ export default function YouthPerformancePage() {
                 {SCHOOL_YEAR_FLYER.monthlyPrice} for {SCHOOL_YEAR_FLYER.monthlyDetail}
               </p>
               <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.siblingDiscount}</p>
+              <p style={{ ...cardBodyStyle, marginTop: 10 }}>
+                {SCHOOL_YEAR_FLYER.tryFirstNote}
+              </p>
             </div>
 
             <div style={{ ...ctaRowStyle, justifyContent: "flex-start" }}>
@@ -118,6 +127,11 @@ export default function YouthPerformancePage() {
       </section>
 
       <section style={panelStyle}>
+        <h2 style={sectionTitleStyle}>Choose how to start</h2>
+        <ClassPaymentOptions />
+      </section>
+
+      <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Program Availability</h2>
 
         <p style={cardBodyStyle}>
@@ -127,10 +141,10 @@ export default function YouthPerformancePage() {
 
         <div style={gridStyle}>
           <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>Flexible Packages</h3>
+            <h3 style={cardTitleStyle}>Try September first</h3>
             <p style={cardBodyStyle}>
-              Choose a drop-in or a monthly package based on your athlete’s
-              schedule, training goals, and level of support needed.
+              Drop in for a few Sundays in September before joining the monthly
+              plan. Pay only for the sessions you attend.
             </p>
           </div>
 
@@ -145,8 +159,8 @@ export default function YouthPerformancePage() {
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Best Fit First</h3>
             <p style={cardBodyStyle}>
-              We recommend starting with the athlete intake so we can guide
-              families toward the right training option.
+              Drop-in if you want to try the class. Book a consultation if you
+              want help choosing between drop-in, monthly, or another program.
             </p>
           </div>
 
@@ -165,19 +179,11 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-            getSessionCtas(session).map((action) => (
-              <CallToAction
-                key={action.href}
-                href={action.href}
-                variant={action.variant}
-              >
-                {action.label}
-              </CallToAction>
-            ))
-          )}
-          <CallToAction href="/schedule" variant="secondary">
-            Book a consultation
+          <CallToAction href="/schedule" variant="primary">
+            Book a session
+          </CallToAction>
+          <CallToAction href="#how-to-join" variant="secondary">
+            Choose drop-in or monthly
           </CallToAction>
         </div>
       </section>
@@ -222,8 +228,8 @@ export default function YouthPerformancePage() {
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
-          Start with the athlete intake so we can understand your athlete’s
-          goals. Parents must also complete the waiver before their athlete can
+          Start with a few September drop-ins or join monthly when you are
+          ready. Parents must also complete the waiver before their athlete can
           train.
         </p>
 
@@ -236,17 +242,9 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-            getSessionCtas(session).map((action) => (
-              <CallToAction
-                key={action.href}
-                href={action.href}
-                variant={action.variant}
-              >
-                {action.label}
-              </CallToAction>
-            ))
-          )}
+          <CallToAction href="#how-to-join" variant="primary">
+            Choose drop-in or monthly
+          </CallToAction>
           <CallToAction href="/waiver" variant="waiver">
             Sign waiver
           </CallToAction>

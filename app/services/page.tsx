@@ -141,7 +141,7 @@ export default function ServicesPage() {
 
       <div style={{ marginTop: 14, textAlign: "center" }}>
         <CallToAction href="/group-schedule" variant="secondary">
-          View summer class schedule
+          View class schedule
         </CallToAction>
       </div>
 

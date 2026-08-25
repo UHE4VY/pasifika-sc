@@ -609,6 +609,125 @@
   color: var(--muted);
   }
 
+  .group-schedule-event__dropin {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  }
+
+  .september-dropin-dates {
+  display: grid;
+  gap: 12px;
+  }
+
+  .schedule-plan-toggle,
+  .schedule-month-toggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  }
+
+  .schedule-month-toggle {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 700px) {
+  .schedule-month-toggle {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  }
+
+  .schedule-plan-toggle__option,
+  .schedule-month-toggle__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 10px;
+  background: var(--panel2);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--navy);
+  cursor: pointer;
+  text-align: center;
+  }
+
+  .schedule-plan-toggle__option--selected,
+  .schedule-month-toggle__option--selected {
+  border-color: var(--accent);
+  background: var(--ice);
+  color: var(--accent);
+  }
+
+  .september-session-picker {
+  display: grid;
+  gap: 10px;
+  }
+
+  .september-session-picker__date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--panel2);
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  }
+
+  .september-session-picker__date--selected {
+  border-color: var(--accent);
+  background: var(--ice);
+  }
+
+  .september-session-checkout {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  }
+
+  .september-session-checkout a {
+  width: 100%;
+  }
+
+  .september-session-checkout__date {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: #ffffff;
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  }
+
+  .september-session-checkout__date--active {
+  border-color: var(--accent);
+  background: var(--ice);
+  color: var(--accent);
+  }
+
+  .september-dropin-dates__sessions > div:first-child {
+  border-top: none;
+  padding-top: 0;
+  }
+
+  .class-payment-options {
+  scroll-margin-top: 96px;
+  }
+
+  .class-payment-options__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  }
+
   /* Upcoming events */
 
   .upcoming-event-card {
@@ -745,6 +864,10 @@
   line-height: 1.45;
   }
 
+  .group-schedule-event__dropin {
+  font-size: 13px;
+  }
+
   .group-schedule-weekly-grid {
   grid-template-columns: 1fr !important;
   }
@@ -781,6 +904,10 @@
 
   .early-registration-layout,
   .early-registration-sessions {
+  grid-template-columns: 1fr;
+  }
+
+  .class-payment-options__grid {
   grid-template-columns: 1fr;
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import CallToAction from "../../components/CallToAction";
+import { GYMDESK } from "../../content/gymdesk";
 
 const WAIVER_EMBED_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSe4tsv_tA2-mDXFiNkLnnNbfZyd6Hl9LOpkWkWEhBcZ20cKrw/viewform?embedded=true";
@@ -12,16 +13,26 @@ export default function WaiverPage() {
       <h1 style={title}>Parent Waiver</h1>
 
       <p style={subtitle}>
-        Parents and guardians must complete this waiver before their athlete can
-        participate in PSC programs. Please fill it out prior to the first
-        session so we can provide safe, structured training.
+        Sign the waiver in Gymdesk, then register. Gymdesk keeps the signed
+        copy on the athlete’s profile and can require it before a booking is
+        complete. Parents and guardians must finish this before the first
+        session.
       </p>
 
       <div style={ctaWrap}>
-        <CallToAction href={WAIVER_FALLBACK_URL} variant="waiver">
-          Fill out this form
+        <CallToAction href={GYMDESK.signupUrl} variant="waiver">
+          Sign waiver and register
+        </CallToAction>
+        <CallToAction href="/schedule#book-sessions" variant="secondary">
+          Book sessions
         </CallToAction>
       </div>
+
+      <p style={subtitle}>
+        The Google Form below is still available if you already started it.
+        New families should use Gymdesk so the waiver and registration stay
+        together.
+      </p>
 
       <iframe
         src={WAIVER_EMBED_URL}
@@ -35,7 +46,7 @@ export default function WaiverPage() {
       <p style={fallbackNote}>
         If the form does not load,{" "}
         <a href={WAIVER_FALLBACK_URL} target="_blank" rel="noopener noreferrer">
-          open it in a new tab
+          open the Google Form in a new tab
         </a>
         .
       </p>
@@ -61,6 +72,9 @@ const subtitle: React.CSSProperties = {
 };
 
 const ctaWrap: React.CSSProperties = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: 12,
   marginBottom: 24,
 };
 

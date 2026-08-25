@@ -1,6 +1,12 @@
-import { SCHOOL_YEAR_FLYER, SCHOOL_YEAR_SESSIONS } from "./schoolYearGroupClasses";
+import { GYMDESK } from "./gymdesk";
+import {
+  SCHOOL_YEAR_FLYER,
+  SCHOOL_YEAR_SESSIONS,
+  type SchoolYearSession,
+} from "./schoolYearGroupClasses";
 
 export type GroupClassTemplate = {
+  id: SchoolYearSession["id"];
   dayOfWeek: number;
   startTime: string;
   endTime: string;
@@ -26,6 +32,7 @@ export const GROUP_SCHEDULE_MONTHS = [
 
 export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.map(
   (session) => ({
+    id: session.id,
     dayOfWeek: 0,
     startTime: session.startTime,
     endTime: session.endTime,
@@ -33,7 +40,7 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
     subtitle: session.audience,
     programKey: session.programKey,
     startDate: SCHOOL_YEAR_FLYER.startDate,
-    endDate: "2026-12-31",
+    endDate: GYMDESK.series.endDate,
     registerHref: session.registerHref,
     registerLabel: session.registerLabel,
     dropInHref: session.dropInHref,
@@ -44,8 +51,10 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
 export const CANCELLED_CLASS_DATES: string[] = [];
 
 export const PROGRAM_NOTES = [
-  SCHOOL_YEAR_FLYER.startLabel,
+  `${SCHOOL_YEAR_FLYER.startLabel} ${SCHOOL_YEAR_FLYER.endLabel}.`,
+  "Class dates match the live Gymdesk calendar: 14 Sundays, September 6 through December 6.",
   "Each class is 90 minutes.",
+  SCHOOL_YEAR_FLYER.tryFirstNote,
   SCHOOL_YEAR_FLYER.priceSummary,
   `Classes are held at ${SCHOOL_YEAR_FLYER.venueName}, ${SCHOOL_YEAR_FLYER.venueAddress}.`,
   "Parents must complete the waiver before their athlete can train.",

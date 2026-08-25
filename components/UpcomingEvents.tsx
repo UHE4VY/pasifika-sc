@@ -1,4 +1,5 @@
 import CallToAction from "./CallToAction";
+import ClassPaymentOptions from "./ClassPaymentOptions";
 import { upcomingEvents } from "../content/upcomingEvents";
 
 const eventTypeLabels = {
@@ -16,8 +17,8 @@ export default function UpcomingEvents() {
     <section style={sectionStyle}>
       <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        Sunday group classes for middle school and high school athletes are open
-        for early registration.
+        Sunday group classes start September 6. Pay for a few drop-in sessions
+        first, then join monthly when you are ready.
       </p>
 
       <div style={eventsStackStyle}>
@@ -82,26 +83,31 @@ export default function UpcomingEvents() {
                 </div>
               ) : null}
 
-              <div style={ctaRowStyle}>
-                {(event.registerActions ??
-                  (event.registerHref
-                    ? [{ href: event.registerHref, label: "Register now" }]
-                    : [])
-                ).map((action) => (
+              <div style={ctaColumnStyle}>
+                {event.sessions && event.sessions.length > 0 ? (
+                  <ClassPaymentOptions />
+                ) : null}
+                <div style={ctaRowStyle}>
+                  {(event.registerActions ??
+                    (event.registerHref
+                      ? [{ href: event.registerHref, label: "Register now" }]
+                      : [])
+                  ).map((action) => (
+                    <CallToAction
+                      key={action.href}
+                      href={action.href}
+                      variant={action.variant ?? "primary"}
+                    >
+                      {action.label}
+                    </CallToAction>
+                  ))}
                   <CallToAction
-                    key={action.href}
-                    href={action.href}
-                    variant={action.variant ?? "primary"}
+                    href={event.secondaryHref ?? "/contact"}
+                    variant="secondary"
                   >
-                    {action.label}
+                    {event.secondaryLabel ?? "Ask a question"}
                   </CallToAction>
-                ))}
-                <CallToAction
-                  href={event.secondaryHref ?? "/contact"}
-                  variant="secondary"
-                >
-                  {event.secondaryLabel ?? "Ask a question"}
-                </CallToAction>
+                </div>
               </div>
             </div>
           </article>
@@ -254,6 +260,11 @@ const locationAddressStyle: React.CSSProperties = {
   lineHeight: 1.5,
   color: "var(--navy)",
   opacity: 0.88,
+};
+
+const ctaColumnStyle: React.CSSProperties = {
+  display: "grid",
+  gap: 16,
 };
 
 const ctaRowStyle: React.CSSProperties = {

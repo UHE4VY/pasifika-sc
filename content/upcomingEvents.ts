@@ -1,7 +1,6 @@
 import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
-  getSessionCtas,
   type SchoolYearSession,
 } from "./schoolYearGroupClasses";
 
@@ -56,14 +55,16 @@ export const upcomingEvents: UpcomingEvent[] = [
     details: [
       { label: "Schedule", value: SCHOOL_YEAR_FLYER.startLabel },
       { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
-      { label: "Investment", value: SCHOOL_YEAR_FLYER.priceSummary },
+      {
+        label: "Investment",
+        value: `${SCHOOL_YEAR_FLYER.dropInPrice} drop-in · ${SCHOOL_YEAR_FLYER.monthlyPrice} once you are ready · ${SCHOOL_YEAR_FLYER.siblingDiscount}`,
+      },
     ],
     locationName: SCHOOL_YEAR_FLYER.venueName,
     locationAddress: SCHOOL_YEAR_FLYER.venueAddress,
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
     registerActions: [
-      ...SCHOOL_YEAR_SESSIONS.flatMap((session) => getSessionCtas(session)),
       { href: "/waiver", label: "Sign waiver", variant: "waiver" },
     ],
     secondaryHref: "/group-schedule",
