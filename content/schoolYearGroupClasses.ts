@@ -20,7 +20,7 @@ export const SCHOOL_YEAR_FLYER = {
   priceSummary:
     "$45 drop-in · $150/mo for four sessions · 15% sibling discount",
   tryFirstNote:
-    "Sign the waiver first, pick the Sundays you want for the month, then pay once on Square — $45 per drop-in or $150 for four sessions.",
+    "Sign the waiver first, pick the Sundays you want for the month, then pay once on Square — $45 per drop-in or $150 for four sessions. We add your athlete to the Gymdesk roster automatically after payment.",
   venueName: "Maximum Fitness & Performance",
   venueAddress: "1700 Industrial Rd, STE C, San Carlos, CA 94070",
 } as const;
@@ -31,7 +31,7 @@ export const PAYMENT_OPTIONS = {
     title: "Drop-in sessions",
     price: "$45 per Sunday",
     description:
-      "Pick one or more Sundays in a month, then pay on Square. Set the quantity to match how many Sundays you selected.",
+      "Pick one or more Sundays in a month, then pay on Square. Checkout total matches your selected dates.",
   },
   monthly: {
     eyebrow: "Month commitment",

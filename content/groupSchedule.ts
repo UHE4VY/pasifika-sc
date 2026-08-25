@@ -58,5 +58,5 @@ export const PROGRAM_NOTES = [
   "Each class is 90 minutes.",
   SCHOOL_YEAR_FLYER.priceSummary,
   `At ${SCHOOL_YEAR_FLYER.venueName}, ${SCHOOL_YEAR_FLYER.venueAddress}.`,
-  "Sign the waiver, pick Sundays, then pay once on Square.",
+  "Sign the waiver, pick Sundays, and pay once on Square. We add your athlete to the Gymdesk roster automatically after payment.",
 ];

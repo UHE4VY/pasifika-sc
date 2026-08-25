@@ -5,9 +5,7 @@ import CallToAction from "./CallToAction";
 import { GROUP_SCHEDULE_MONTHS } from "../content/groupSchedule";
 import {
   GYMDESK,
-  getGymdeskBookUrl,
   getGymdeskDatesForMonth,
-  getSquareCheckoutUrl,
   type GymdeskClassId,
   type GymdeskPlan,
 } from "../content/gymdesk";
@@ -47,19 +45,59 @@ export default function ScheduleBooking() {
   const [plan, setPlan] = useState<GymdeskPlan>("drop-in");
   const [month, setMonth] = useState(9);
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
+  const [athleteName, setAthleteName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isPaying, setIsPaying] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
 
   const monthDates = useMemo(() => getGymdeskDatesForMonth(month), [month]);
   const selectedCount = selectedDates.length;
   const dropInTotal = selectedCount * GYMDESK.dropInPrice;
+  const trimmedAthleteName = athleteName.trim();
+  const trimmedEmail = email.trim();
   const canCheckout =
     waiverDone &&
+    trimmedAthleteName.length > 0 &&
+    trimmedEmail.includes("@") &&
     selectedCount > 0 &&
     (plan === "drop-in" || selectedCount === GYMDESK.monthlySessionCount);
-  const payHref = getSquareCheckoutUrl(classId, plan);
-  const reserveHref = getGymdeskBookUrl({
-    classId,
-    date: selectedDates[0],
-  });
+
+  async function startCheckout() {
+    if (!canCheckout || isPaying) return;
+
+    setIsPaying(true);
+    setPayError(null);
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          classId,
+          plan,
+          selectedDates,
+          athleteName: trimmedAthleteName,
+          email: trimmedEmail,
+        }),
+      });
+
+      const data = (await response.json()) as {
+        checkoutUrl?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !data.checkoutUrl) {
+        throw new Error(data.error || "Unable to start Square checkout.");
+      }
+
+      window.location.href = data.checkoutUrl;
+    } catch (error) {
+      setPayError(
+        error instanceof Error ? error.message : "Unable to start Square checkout."
+      );
+      setIsPaying(false);
+    }
+  }
 
   function applyPlanAndMonth(nextPlan: GymdeskPlan, nextMonth: number) {
     setPlan(nextPlan);
@@ -89,8 +127,9 @@ export default function ScheduleBooking() {
     >
       <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        Sign the waiver, pick Sundays for one month, then pay once on Square.
-        No class on November 1 or November 29.
+        Sign the waiver once, pick your Sundays here, and pay on Square. We
+        automatically add your athlete to the Gymdesk class roster after
+        payment. No class on November 1 or November 29.
       </p>
 
       <ol className="booking-steps" style={stepsStyle}>
@@ -118,7 +157,31 @@ export default function ScheduleBooking() {
             pointerEvents: waiverDone ? "auto" : "none",
           }}
         >
-          <strong>2. Choose class, month, and Sundays</strong>
+          <strong>2. Choose athlete, class, month, and Sundays</strong>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Athlete name</legend>
+            <input
+              type="text"
+              value={athleteName}
+              onChange={(event) => setAthleteName(event.target.value)}
+              placeholder="First and last name"
+              autoComplete="name"
+              style={inputStyle}
+            />
+          </fieldset>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Parent email</legend>
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="parent@email.com"
+              autoComplete="email"
+              style={inputStyle}
+            />
+          </fieldset>
 
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Plan</legend>
@@ -248,6 +311,14 @@ export default function ScheduleBooking() {
               <p style={panelBodyStyle}>
                 Select the Sundays you want, then continue to Square.
               </p>
+            ) : !trimmedAthleteName ? (
+              <p style={panelBodyStyle}>
+                Enter the athlete’s name so we can put them on the roster.
+              </p>
+            ) : !trimmedEmail.includes("@") ? (
+              <p style={panelBodyStyle}>
+                Enter the parent email used for Gymdesk registration.
+              </p>
             ) : plan === "monthly" &&
               selectedCount !== GYMDESK.monthlySessionCount ? (
               <p style={panelBodyStyle}>
@@ -260,41 +331,60 @@ export default function ScheduleBooking() {
               </p>
             ) : plan === "monthly" ? (
               <p style={panelBodyStyle}>
-                {selectedCount} Sundays selected · ${GYMDESK.monthlyPrice} one
-                checkout on Square.
+                {trimmedAthleteName} · {selectedCount} Sundays · $
+                {GYMDESK.monthlyPrice} on Square. After payment we add them to
+                the Gymdesk roster automatically.
               </p>
             ) : (
               <p style={panelBodyStyle}>
-                {selectedCount} Sunday{selectedCount === 1 ? "" : "s"} selected ·
-                ${dropInTotal} total. On Square, set quantity to {selectedCount}.
+                {trimmedAthleteName} · {selectedCount} Sunday
+                {selectedCount === 1 ? "" : "s"} · ${dropInTotal} on Square.
+                After payment we add them to the Gymdesk roster automatically.
               </p>
             )}
           </div>
 
+          {payError ? <p style={errorStyle}>{payError}</p> : null}
+
           <div style={ctaRowStyle}>
-            <CallToAction
-              href={canCheckout ? payHref : GYMDESK.signupUrl}
-              variant="primary"
-            >
-              {canCheckout
-                ? plan === "monthly"
-                  ? `Pay $${GYMDESK.monthlyPrice} on Square`
-                  : `Pay $${dropInTotal} on Square`
-                : "Sign waiver first"}
-            </CallToAction>
+            {canCheckout ? (
+              <button
+                type="button"
+                onClick={startCheckout}
+                disabled={isPaying}
+                style={{
+                  ...primaryButtonStyle,
+                  opacity: isPaying ? 0.7 : 1,
+                  cursor: isPaying ? "wait" : "pointer",
+                }}
+              >
+                {isPaying
+                  ? "Opening Square…"
+                  : plan === "monthly"
+                    ? `Pay $${GYMDESK.monthlyPrice} on Square`
+                    : `Pay $${dropInTotal} on Square`}
+              </button>
+            ) : !waiverDone ? (
+              <CallToAction href={GYMDESK.signupUrl} variant="primary">
+                Sign waiver first
+              </CallToAction>
+            ) : (
+              <button type="button" disabled style={{ ...primaryButtonStyle, opacity: 0.55, cursor: "not-allowed" }}>
+                {!trimmedAthleteName
+                  ? "Enter athlete name"
+                  : !trimmedEmail.includes("@")
+                    ? "Enter parent email"
+                    : selectedCount === 0
+                      ? "Select Sundays"
+                      : "Finish selecting Sundays"}
+              </button>
+            )}
           </div>
 
           {canCheckout ? (
             <p style={remainingStyle}>
-              After you pay,{" "}
-              <a href={reserveHref} target="_blank" rel="noopener noreferrer">
-                reserve those Sundays in Gymdesk
-              </a>{" "}
-              so we see your athlete on the class roster
-              {selectedDates.length > 1
-                ? ` (${selectedDates.map(formatDateLabel).join("; ")})`
-                : ""}
-              .
+              Selected: {selectedDates.map(formatDateLabel).join("; ")}. You’re
+              done after Square confirms payment.
             </p>
           ) : null}
         </li>
@@ -360,6 +450,19 @@ const legendStyle: React.CSSProperties = {
   marginBottom: 10,
 };
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  maxWidth: 420,
+  boxSizing: "border-box",
+  padding: "12px 14px",
+  borderRadius: 12,
+  border: "1px solid var(--border)",
+  background: "#ffffff",
+  color: "var(--navy)",
+  fontSize: 15,
+  fontWeight: 600,
+};
+
 const classRowStyle: React.CSSProperties = {
   display: "grid",
   gap: 10,
@@ -394,4 +497,30 @@ const remainingStyle: React.CSSProperties = {
   color: "var(--navy)",
   opacity: 0.88,
   fontSize: 14,
+};
+
+const primaryButtonStyle: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "12px 18px",
+  borderRadius: 12,
+  textDecoration: "none",
+  fontWeight: 800,
+  fontSize: 14,
+  lineHeight: 1.2,
+  whiteSpace: "nowrap",
+  backgroundColor: "#1f6feb",
+  color: "#ffffff",
+  border: "1px solid #1f6feb",
+  boxShadow: "0 8px 20px rgba(31,111,235,0.22)",
+};
+
+const errorStyle: React.CSSProperties = {
+  margin: "12px 0 0",
+  maxWidth: 720,
+  lineHeight: 1.6,
+  color: "#b42318",
+  fontSize: 14,
+  fontWeight: 600,
 };

@@ -171,7 +171,8 @@ export default function YouthPerformancePage() {
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
-          Sign the waiver, pick your Sundays, then pay once on Square.
+          Sign the waiver, pick your Sundays, and pay once on Square. We add
+          your athlete to the Gymdesk roster automatically after payment.
         </p>
 
         <div
