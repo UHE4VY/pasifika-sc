@@ -5,8 +5,7 @@
  * Sign-up (waiver + register): https://pasifika-strength-conditioning.gymdesk.com/signup
  *
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
- * Open booking and sign-up in a new tab. An on-site widget requires the
- * dashboard embed snippet (Website → Schedule → Embed Code).
+ * Parents sign the waiver in Gymdesk, pick dates on /schedule, then pay on Square.
  */
 export type GymdeskClassId = "middle-school" | "high-school";
 export type GymdeskPlan = "drop-in" | "monthly";
@@ -36,7 +35,8 @@ export const GYMDESK = {
       startTime: "4:00 PM",
       endTime: "5:30 PM",
       dropInOption: "Standard Drop-In",
-      monthlyOption: null,
+      monthlyOption: null as string | null,
+      squareDropInUrl: "https://square.link/u/RrK3yuwu",
       squareMonthlyUrl: "https://square.link/u/1joWZmRg",
     },
     "high-school": {
@@ -48,6 +48,7 @@ export const GYMDESK = {
       endTime: "7:00 PM",
       dropInOption: "Drop-In Rate",
       monthlyOption: "Monthly Commitment Rate",
+      squareDropInUrl: "https://square.link/u/LRGW4MhW",
       squareMonthlyUrl: "https://square.link/u/XcwsaOXt",
     },
   },
@@ -113,10 +114,17 @@ export function getGymdeskBookUrl(options?: {
   return url.toString();
 }
 
-export function getMonthlyCheckoutUrl(classId: GymdeskClassId) {
+export function getSquareCheckoutUrl(
+  classId: GymdeskClassId,
+  plan: GymdeskPlan
+) {
   const schedule = GYMDESK.schedules[classId];
-  if (schedule.monthlyOption) {
-    return getGymdeskBookUrl({ classId });
-  }
-  return schedule.squareMonthlyUrl;
+  return plan === "monthly"
+    ? schedule.squareMonthlyUrl
+    : schedule.squareDropInUrl;
+}
+
+/** @deprecated Prefer getSquareCheckoutUrl for payment. */
+export function getMonthlyCheckoutUrl(classId: GymdeskClassId) {
+  return getSquareCheckoutUrl(classId, "monthly");
 }

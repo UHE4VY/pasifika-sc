@@ -7,7 +7,7 @@ import {
   GYMDESK,
   getGymdeskBookUrl,
   getGymdeskDatesForMonth,
-  getMonthlyCheckoutUrl,
+  getSquareCheckoutUrl,
   type GymdeskClassId,
   type GymdeskPlan,
 } from "../content/gymdesk";
@@ -35,29 +35,31 @@ function formatDateLabel(dateKey: string) {
 
 function defaultDatesForPlan(month: number, plan: GymdeskPlan) {
   const dates = getGymdeskDatesForMonth(month);
-  if (plan === "monthly") return dates.slice(0, GYMDESK.monthlySessionCount);
-  return dates;
+  if (plan === "monthly") {
+    return dates.slice(0, Math.min(GYMDESK.monthlySessionCount, dates.length));
+  }
+  return [];
 }
 
 export default function ScheduleBooking() {
+  const [waiverDone, setWaiverDone] = useState(false);
   const [classId, setClassId] = useState<GymdeskClassId>("middle-school");
   const [plan, setPlan] = useState<GymdeskPlan>("drop-in");
   const [month, setMonth] = useState(9);
-  const [selectedDates, setSelectedDates] = useState<string[]>(() =>
-    defaultDatesForPlan(9, "drop-in")
-  );
+  const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
   const monthDates = useMemo(() => getGymdeskDatesForMonth(month), [month]);
   const selectedCount = selectedDates.length;
   const dropInTotal = selectedCount * GYMDESK.dropInPrice;
-  const monthlyHref = getMonthlyCheckoutUrl(classId);
-  const firstDate = selectedDates[0];
-  const firstBookHref = firstDate
-    ? getGymdeskBookUrl({ classId, date: firstDate })
-    : getGymdeskBookUrl({ classId });
-  const remainingDates = selectedDates.slice(1);
-  const schedule = GYMDESK.schedules[classId];
-  const monthlyUsesGymdesk = Boolean(schedule.monthlyOption);
+  const canCheckout =
+    waiverDone &&
+    selectedCount > 0 &&
+    (plan === "drop-in" || selectedCount === GYMDESK.monthlySessionCount);
+  const payHref = getSquareCheckoutUrl(classId, plan);
+  const reserveHref = getGymdeskBookUrl({
+    classId,
+    date: selectedDates[0],
+  });
 
   function applyPlanAndMonth(nextPlan: GymdeskPlan, nextMonth: number) {
     setPlan(nextPlan);
@@ -85,203 +87,218 @@ export default function ScheduleBooking() {
       className="schedule-booking-panel"
       style={panelStyle}
     >
-      <h2 style={sectionTitleStyle}>Choose sessions and check out</h2>
+      <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        Dates match Gymdesk: {SCHOOL_YEAR_FLYER.startLabel}{" "}
-        {SCHOOL_YEAR_FLYER.endLabel}. Pick drop-ins or a month commitment, then
-        check out in Gymdesk. Card payments go through Square.
+        Sign the waiver, pick Sundays for one month, then pay once on Square.
+        No class on November 1 or November 29.
       </p>
 
-      <fieldset style={fieldsetStyle}>
-        <legend style={legendStyle}>Plan</legend>
-        <div className="schedule-plan-toggle">
-          <label
-            className={`schedule-plan-toggle__option${
-              plan === "drop-in" ? " schedule-plan-toggle__option--selected" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              name="schedule-plan"
-              value="drop-in"
-              checked={plan === "drop-in"}
-              onChange={() => applyPlanAndMonth("drop-in", month)}
-            />
-            <span>
-              Drop-in · {SCHOOL_YEAR_FLYER.dropInPrice} each
-            </span>
-          </label>
-          <label
-            className={`schedule-plan-toggle__option${
-              plan === "monthly" ? " schedule-plan-toggle__option--selected" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              name="schedule-plan"
-              value="monthly"
-              checked={plan === "monthly"}
-              onChange={() => applyPlanAndMonth("monthly", month)}
-            />
-            <span>
-              Month commitment · {SCHOOL_YEAR_FLYER.monthlyPrice}
-            </span>
-          </label>
-        </div>
-      </fieldset>
-
-      <fieldset style={fieldsetStyle}>
-        <legend style={legendStyle}>Class</legend>
-        <div style={classRowStyle}>
-          {CLASS_OPTIONS.map((option) => (
-            <label key={option.id} style={choiceStyle}>
-              <input
-                type="radio"
-                name="schedule-class"
-                value={option.id}
-                checked={classId === option.id}
-                onChange={() => setClassId(option.id)}
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset style={fieldsetStyle}>
-        <legend style={legendStyle}>Month</legend>
-        <div className="schedule-month-toggle">
-          {GROUP_SCHEDULE_MONTHS.map((option) => (
-            <button
-              key={option.month}
-              type="button"
-              className={`schedule-month-toggle__option${
-                month === option.month
-                  ? " schedule-month-toggle__option--selected"
-                  : ""
-              }`}
-              onClick={() => applyPlanAndMonth(plan, option.month)}
-            >
-              {option.label.replace(" 2026", "")}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset style={fieldsetStyle}>
-        <legend style={legendStyle}>
-          {plan === "monthly"
-            ? `Choose ${GYMDESK.monthlySessionCount} Sundays`
-            : "Choose Sundays"}
-        </legend>
-        <div className="september-session-picker">
-          {monthDates.map((dateKey) => {
-            const checked = selectedDates.includes(dateKey);
-            return (
-              <label
-                key={dateKey}
-                className={`september-session-picker__date${
-                  checked ? " september-session-picker__date--selected" : ""
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => toggleDate(dateKey)}
-                />
-                <span>{formatDateLabel(dateKey)}</span>
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
-
-      <div style={summaryStyle}>
-        {selectedCount === 0 ? (
-          <p style={panelBodyStyle}>
-            Select at least one Sunday to continue to checkout.
-          </p>
-        ) : plan === "monthly" ? (
-          <p style={panelBodyStyle}>
-            {selectedCount} Sunday{selectedCount === 1 ? "" : "s"} selected.
-            Month commitment is ${GYMDESK.monthlyPrice} for{" "}
-            {GYMDESK.monthlySessionCount} sessions
-            {selectedCount === GYMDESK.monthlySessionCount
-              ? " — one checkout."
-              : `. Select ${GYMDESK.monthlySessionCount} dates, or switch to drop-in.`}
-            {monthlyUsesGymdesk
-              ? ` In Gymdesk, choose ${schedule.monthlyOption}.`
-              : " Middle School monthly still checks out with Square until the $150 option is added in Gymdesk."}
-          </p>
-        ) : (
-          <p style={panelBodyStyle}>
-            {selectedCount} Sunday{selectedCount === 1 ? "" : "s"} selected · $
-            {dropInTotal} drop-in. Gymdesk checks out one Sunday at a time;
-            use the list below for each date.
-          </p>
-        )}
-      </div>
-
-      {selectedCount > 0 && plan === "drop-in" ? (
-        <div className="september-session-checkout">
-          {selectedDates.map((dateKey) => (
-            <CallToAction
-              key={dateKey}
-              href={getGymdeskBookUrl({ classId, date: dateKey })}
-              variant="primary"
-            >
-              Checkout {formatDateLabel(dateKey)} · {SCHOOL_YEAR_FLYER.dropInPrice}
-            </CallToAction>
-          ))}
-        </div>
-      ) : null}
-
-      {selectedCount > 0 && plan === "monthly" ? (
-        <>
+      <ol className="booking-steps" style={stepsStyle}>
+        <li style={stepStyle}>
+          <strong>1. Sign waiver</strong>
           <div style={ctaRowStyle}>
-            <CallToAction href={monthlyHref} variant="primary">
-              Checkout month commitment · ${GYMDESK.monthlyPrice}
-            </CallToAction>
-            <CallToAction href={GYMDESK.signupUrl} variant="secondary">
+            <CallToAction href={GYMDESK.signupUrl} variant="waiver">
               Sign waiver and register
             </CallToAction>
           </div>
-          {remainingDates.length > 0 ? (
+          <label style={choiceStyle}>
+            <input
+              type="checkbox"
+              checked={waiverDone}
+              onChange={(event) => setWaiverDone(event.target.checked)}
+            />
+            <span>I signed the waiver in Gymdesk</span>
+          </label>
+        </li>
+
+        <li
+          style={{
+            ...stepStyle,
+            opacity: waiverDone ? 1 : 0.45,
+            pointerEvents: waiverDone ? "auto" : "none",
+          }}
+        >
+          <strong>2. Choose class, month, and Sundays</strong>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Plan</legend>
+            <div className="schedule-plan-toggle">
+              <label
+                className={`schedule-plan-toggle__option${
+                  plan === "drop-in"
+                    ? " schedule-plan-toggle__option--selected"
+                    : ""
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="schedule-plan"
+                  value="drop-in"
+                  checked={plan === "drop-in"}
+                  onChange={() => applyPlanAndMonth("drop-in", month)}
+                />
+                <span>Drop-in · {SCHOOL_YEAR_FLYER.dropInPrice} each</span>
+              </label>
+              <label
+                className={`schedule-plan-toggle__option${
+                  plan === "monthly"
+                    ? " schedule-plan-toggle__option--selected"
+                    : ""
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="schedule-plan"
+                  value="monthly"
+                  checked={plan === "monthly"}
+                  onChange={() => applyPlanAndMonth("monthly", month)}
+                />
+                <span>
+                  Month commitment · {SCHOOL_YEAR_FLYER.monthlyPrice}
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Class</legend>
+            <div style={classRowStyle}>
+              {CLASS_OPTIONS.map((option) => (
+                <label key={option.id} style={choiceStyle}>
+                  <input
+                    type="radio"
+                    name="schedule-class"
+                    value={option.id}
+                    checked={classId === option.id}
+                    onChange={() => setClassId(option.id)}
+                  />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Month</legend>
+            <div className="schedule-month-toggle">
+              {GROUP_SCHEDULE_MONTHS.map((option) => (
+                <button
+                  key={option.month}
+                  type="button"
+                  className={`schedule-month-toggle__option${
+                    month === option.month
+                      ? " schedule-month-toggle__option--selected"
+                      : ""
+                  }`}
+                  onClick={() => applyPlanAndMonth(plan, option.month)}
+                >
+                  {option.label.replace(" 2026", "")}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>
+              {plan === "monthly"
+                ? `Choose ${GYMDESK.monthlySessionCount} Sundays`
+                : "Choose Sundays"}
+            </legend>
+            {monthDates.length === 0 ? (
+              <p style={panelBodyStyle}>No open Sundays this month.</p>
+            ) : (
+              <div className="september-session-picker">
+                {monthDates.map((dateKey) => {
+                  const checked = selectedDates.includes(dateKey);
+                  return (
+                    <label
+                      key={dateKey}
+                      className={`september-session-picker__date${
+                        checked
+                          ? " september-session-picker__date--selected"
+                          : ""
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleDate(dateKey)}
+                      />
+                      <span>{formatDateLabel(dateKey)}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+          </fieldset>
+        </li>
+
+        <li
+          style={{
+            ...stepStyle,
+            opacity: waiverDone ? 1 : 0.45,
+            pointerEvents: waiverDone ? "auto" : "none",
+          }}
+        >
+          <strong>3. Pay on Square</strong>
+          <div style={summaryStyle}>
+            {!waiverDone ? (
+              <p style={panelBodyStyle}>Sign the waiver to unlock booking.</p>
+            ) : selectedCount === 0 ? (
+              <p style={panelBodyStyle}>
+                Select the Sundays you want, then continue to Square.
+              </p>
+            ) : plan === "monthly" &&
+              selectedCount !== GYMDESK.monthlySessionCount ? (
+              <p style={panelBodyStyle}>
+                Monthly is ${GYMDESK.monthlyPrice} for{" "}
+                {GYMDESK.monthlySessionCount} Sundays. You have {selectedCount}{" "}
+                selected
+                {monthDates.length < GYMDESK.monthlySessionCount
+                  ? ` (${monthDates.length} available this month — switch to drop-in or another month).`
+                  : "."}
+              </p>
+            ) : plan === "monthly" ? (
+              <p style={panelBodyStyle}>
+                {selectedCount} Sundays selected · ${GYMDESK.monthlyPrice} one
+                checkout on Square.
+              </p>
+            ) : (
+              <p style={panelBodyStyle}>
+                {selectedCount} Sunday{selectedCount === 1 ? "" : "s"} selected ·
+                ${dropInTotal} total. On Square, set quantity to {selectedCount}.
+              </p>
+            )}
+          </div>
+
+          <div style={ctaRowStyle}>
+            <CallToAction
+              href={canCheckout ? payHref : GYMDESK.signupUrl}
+              variant="primary"
+            >
+              {canCheckout
+                ? plan === "monthly"
+                  ? `Pay $${GYMDESK.monthlyPrice} on Square`
+                  : `Pay $${dropInTotal} on Square`
+                : "Sign waiver first"}
+            </CallToAction>
+          </div>
+
+          {canCheckout ? (
             <p style={remainingStyle}>
-              After checkout, reserve the rest of the month in Gymdesk:
+              After you pay,{" "}
+              <a href={reserveHref} target="_blank" rel="noopener noreferrer">
+                reserve those Sundays in Gymdesk
+              </a>{" "}
+              so we see your athlete on the class roster
+              {selectedDates.length > 1
+                ? ` (${selectedDates.map(formatDateLabel).join("; ")})`
+                : ""}
+              .
             </p>
           ) : null}
-          <div className="september-session-checkout">
-            {selectedDates.map((dateKey) => (
-              <CallToAction
-                key={dateKey}
-                href={getGymdeskBookUrl({ classId, date: dateKey })}
-                variant="secondary"
-              >
-                Reserve {formatDateLabel(dateKey)}
-              </CallToAction>
-            ))}
-          </div>
-        </>
-      ) : null}
-
-      {plan === "drop-in" && remainingDates.length > 0 && firstDate ? (
-        <p style={remainingStyle}>
-          Start with {formatDateLabel(firstDate)}, then check out the remaining
-          Sundays from this list.
-        </p>
-      ) : null}
-
-      {plan === "drop-in" && selectedCount > 0 ? (
-        <div style={ctaRowStyle}>
-          <CallToAction href={firstBookHref} variant="secondary">
-            Open first date in Gymdesk
-          </CallToAction>
-          <CallToAction href={GYMDESK.signupUrl} variant="waiver">
-            Sign waiver and register
-          </CallToAction>
-        </div>
-      ) : null}
+        </li>
+      </ol>
     </section>
   );
 }
@@ -312,9 +329,25 @@ const panelBodyStyle: React.CSSProperties = {
   textAlign: "center",
 };
 
+const stepsStyle: React.CSSProperties = {
+  listStyle: "none",
+  margin: "18px 0 0",
+  padding: 0,
+  display: "grid",
+  gap: 18,
+};
+
+const stepStyle: React.CSSProperties = {
+  border: "1px solid var(--border)",
+  borderRadius: 16,
+  padding: 16,
+  background: "var(--panel2)",
+  color: "var(--navy)",
+};
+
 const fieldsetStyle: React.CSSProperties = {
   border: "none",
-  margin: "18px 0 0",
+  margin: "14px 0 0",
   padding: 0,
 };
 
@@ -339,26 +372,26 @@ const choiceStyle: React.CSSProperties = {
   lineHeight: 1.5,
   color: "var(--navy)",
   fontWeight: 600,
+  marginTop: 12,
 };
 
 const ctaRowStyle: React.CSSProperties = {
   display: "flex",
   gap: 12,
   flexWrap: "wrap",
-  marginTop: 16,
-  justifyContent: "center",
+  marginTop: 12,
+  justifyContent: "flex-start",
 };
 
 const summaryStyle: React.CSSProperties = {
-  marginTop: 16,
+  marginTop: 8,
 };
 
 const remainingStyle: React.CSSProperties = {
-  margin: "12px auto 0",
+  margin: "12px 0 0",
   maxWidth: 720,
   lineHeight: 1.6,
   color: "var(--navy)",
   opacity: 0.88,
-  textAlign: "center",
   fontSize: 14,
 };

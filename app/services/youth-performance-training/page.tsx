@@ -4,9 +4,10 @@ import React from "react";
 import CallToAction from "../../../components/CallToAction";
 import ClassPaymentOptions from "../../../components/ClassPaymentOptions";
 import {
+  BOOK_SESSIONS_HREF,
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
-  getDropInCtas,
+  WAIVER_HREF,
   getSessionCtas,
 } from "../../../content/schoolYearGroupClasses";
 
@@ -17,35 +18,15 @@ export default function YouthPerformancePage() {
         <p style={eyebrowStyle}>Training Program</p>
         <h1 style={titleStyle}>Group Performance Training</h1>
         <p style={subtitleStyle}>
-          Structured, coach-led training for youth athletes who thrive in a
-          competitive environment and want consistent progress in speed,
-          strength, movement quality, and confidence. Start with a few
-          September drop-ins if you are not ready for a monthly plan.
+          Coach-led Sunday sessions for speed, strength, and movement quality.
         </p>
 
         <div style={ctaRowStyle}>
-          <CallToAction href="/schedule" variant="primary">
-            Book a session
+          <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
+            Book and pay
           </CallToAction>
-          {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-            getDropInCtas(session).map((action) => (
-              <CallToAction
-                key={action.href}
-                href={action.href}
-                variant={action.variant}
-              >
-                {action.label}
-              </CallToAction>
-            ))
-          )}
-          <CallToAction href="#how-to-join" variant="secondary">
-            See monthly plans
-          </CallToAction>
-          <CallToAction href="/waiver" variant="waiver">
+          <CallToAction href={WAIVER_HREF} variant="waiver">
             Sign waiver
-          </CallToAction>
-          <CallToAction href="/group-schedule" variant="secondary">
-            View class schedule
           </CallToAction>
         </div>
       </section>
@@ -106,28 +87,17 @@ export default function YouthPerformancePage() {
                 {SCHOOL_YEAR_FLYER.dropInPrice} drop-in
               </p>
               <p style={cardBodyStyle}>
-                {SCHOOL_YEAR_FLYER.monthlyPrice} for {SCHOOL_YEAR_FLYER.monthlyDetail}
+                {SCHOOL_YEAR_FLYER.monthlyPrice} for{" "}
+                {SCHOOL_YEAR_FLYER.monthlyDetail}
               </p>
               <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.siblingDiscount}</p>
-              <p style={{ ...cardBodyStyle, marginTop: 10 }}>
-                {SCHOOL_YEAR_FLYER.tryFirstNote}
-              </p>
-            </div>
-
-            <div style={{ ...ctaRowStyle, justifyContent: "flex-start" }}>
-              <CallToAction href="/waiver" variant="waiver">
-                Sign waiver
-              </CallToAction>
-              <CallToAction href="/group-schedule" variant="secondary">
-                View class schedule
-              </CallToAction>
             </div>
           </div>
         </div>
       </section>
 
       <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>Choose how to start</h2>
+        <h2 style={sectionTitleStyle}>How to join</h2>
         <ClassPaymentOptions />
       </section>
 
@@ -135,32 +105,29 @@ export default function YouthPerformancePage() {
         <h2 style={sectionTitleStyle}>Program Availability</h2>
 
         <p style={cardBodyStyle}>
-          Group Performance Training is offered through Sunday group classes
-          designed to keep athletes progressing through the school year.
+          Group Performance Training runs Sundays through the school year.
         </p>
 
         <div style={gridStyle}>
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Try September first</h3>
             <p style={cardBodyStyle}>
-              Drop in for a few Sundays in September before joining the monthly
-              plan. Pay only for the sessions you attend.
+              Drop in for a few Sundays before joining the monthly plan.
             </p>
           </div>
 
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Limited Class Size</h3>
             <p style={cardBodyStyle}>
-              Group sizes are limited to 15 athletes per class to keep coaching
-              quality high.
+              Groups are capped at 15 athletes so coaching stays sharp.
             </p>
           </div>
 
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Best Fit First</h3>
             <p style={cardBodyStyle}>
-              Drop-in if you want to try the class. Book a consultation if you
-              want help choosing between drop-in, monthly, or another program.
+              Drop-in to try the class, or book a consultation if you want help
+              choosing a plan.
             </p>
           </div>
 
@@ -168,23 +135,6 @@ export default function YouthPerformancePage() {
             <h3 style={cardTitleStyle}>School-Year Pricing</h3>
             <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.priceSummary}.</p>
           </div>
-        </div>
-
-        <div
-          style={{
-            marginTop: 18,
-            display: "flex",
-            gap: 12,
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <CallToAction href="/schedule" variant="primary">
-            Book a session
-          </CallToAction>
-          <CallToAction href="#how-to-join" variant="secondary">
-            Choose drop-in or monthly
-          </CallToAction>
         </div>
       </section>
 
@@ -195,32 +145,25 @@ export default function YouthPerformancePage() {
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Intentional Coaching</h3>
             <p style={cardBodyStyle}>
-              Sessions are structured and outcome-driven, ensuring athletes
-              receive purposeful coaching rather than random workouts.
+              Sessions are structured and outcome-driven — not random workouts.
             </p>
           </div>
 
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Limited Group Sizes</h3>
             <p style={cardBodyStyle}>
-              With a maximum of 15 athletes per class, each participant receives
-              meaningful feedback and accountability.
+              With a max of 15 athletes, each participant gets real feedback.
             </p>
           </div>
 
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>A Clear Development Path</h3>
             <p style={cardBodyStyle}>
-              Athletes progress through a structured system focused on movement
-              quality, strength and long-term athletic development.
+              Athletes progress through movement quality, strength, and long-term
+              athletic development.
             </p>
           </div>
         </div>
-
-        <p style={launchNoteStyle}>
-          Families can expect a professional environment with clear standards
-          and measurable progress.
-        </p>
       </section>
 
       <div style={dividerStyle} />
@@ -228,9 +171,7 @@ export default function YouthPerformancePage() {
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
-          Start with a few September drop-ins or join monthly when you are
-          ready. Parents must also complete the waiver before their athlete can
-          train.
+          Sign the waiver, pick your Sundays, then pay once on Square.
         </p>
 
         <div
@@ -242,11 +183,8 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          <CallToAction href="#how-to-join" variant="primary">
-            Choose drop-in or monthly
-          </CallToAction>
-          <CallToAction href="/waiver" variant="waiver">
-            Sign waiver
+          <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
+            Book and pay
           </CallToAction>
           <CallToAction href="/services" variant="secondary">
             Back to services
@@ -296,7 +234,7 @@ const titleStyle: React.CSSProperties = {
 
 const subtitleStyle: React.CSSProperties = {
   margin: "0 auto",
-  maxWidth: 720,
+  maxWidth: 560,
   lineHeight: 1.75,
   color: "var(--navy)",
   opacity: 0.88,
@@ -364,13 +302,6 @@ const cardBodyStyle: React.CSSProperties = {
   lineHeight: 1.7,
   color: "var(--navy)",
   textAlign: "center",
-};
-
-const launchNoteStyle: React.CSSProperties = {
-  marginTop: 14,
-  lineHeight: 1.65,
-  opacity: 0.82,
-  color: "var(--navy)",
 };
 
 const startLabelStyle: React.CSSProperties = {

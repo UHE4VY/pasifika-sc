@@ -9,16 +9,8 @@ export default function WaiverPage() {
       <h1 style={title}>Parent Waiver</h1>
 
       <p style={subtitle}>
-        Sign the waiver in Gymdesk, then register. The signed copy is stored
-        on the athlete’s profile and can be required before a booking is
-        complete. Parents and guardians must finish this before the first
-        session.
-      </p>
-
-      <p style={subtitle}>
-        Signing up more than one athlete? Complete the waiver for the first
-        child, then add each sibling as a family member so each athlete has
-        their own signed copy.
+        Sign the waiver in Gymdesk before booking. For more than one athlete,
+        add each sibling as a family member so each has their own signed copy.
       </p>
 
       <div style={ctaWrap}>
@@ -26,7 +18,7 @@ export default function WaiverPage() {
           Sign waiver and register
         </CallToAction>
         <CallToAction href="/schedule#book-sessions" variant="secondary">
-          Book sessions
+          Book and pay
         </CallToAction>
       </div>
     </main>

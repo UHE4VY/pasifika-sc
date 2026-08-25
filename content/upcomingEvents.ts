@@ -65,6 +65,11 @@ export const upcomingEvents: UpcomingEvent[] = [
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
     registerActions: [
+      {
+        href: "/schedule#book-sessions",
+        label: "Book and pay",
+        variant: "primary",
+      },
       { href: "/waiver", label: "Sign waiver", variant: "waiver" },
     ],
     secondaryHref: "/group-schedule",

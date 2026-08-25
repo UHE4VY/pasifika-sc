@@ -1,8 +1,7 @@
-import {
-  getGymdeskBookUrl,
-  getMonthlyCheckoutUrl,
-  type GymdeskClassId,
-} from "./gymdesk";
+import { type GymdeskClassId } from "./gymdesk";
+
+export const BOOK_SESSIONS_HREF = "/schedule#book-sessions";
+export const WAIVER_HREF = "/waiver";
 
 export const SCHOOL_YEAR_FLYER = {
   imageSrc: "/events/school-year-group-classes.png",
@@ -21,7 +20,7 @@ export const SCHOOL_YEAR_FLYER = {
   priceSummary:
     "$45 drop-in · $150/mo for four sessions · 15% sibling discount",
   tryFirstNote:
-    "Pick the Sundays you want, then check out in Gymdesk. Pay $45 per drop-in, or $150 for a four-session month commitment. No extra charge until you check out.",
+    "Sign the waiver first, pick the Sundays you want for the month, then pay once on Square — $45 per drop-in or $150 for four sessions.",
   venueName: "Maximum Fitness & Performance",
   venueAddress: "1700 Industrial Rd, STE C, San Carlos, CA 94070",
 } as const;
@@ -32,14 +31,14 @@ export const PAYMENT_OPTIONS = {
     title: "Drop-in sessions",
     price: "$45 per Sunday",
     description:
-      "Select one or more Sundays, then check out each date in Gymdesk. A good way to try a month before committing.",
+      "Pick one or more Sundays in a month, then pay on Square. Set the quantity to match how many Sundays you selected.",
   },
   monthly: {
     eyebrow: "Month commitment",
     title: "Monthly plan",
     price: "$150 per month",
     description:
-      "Four sessions in the month you choose, one checkout. Best once your athlete is ready to train through the school year. 15% sibling discount.",
+      "Four sessions in the month you choose, one Square checkout. Best once your athlete is ready for the school year. 15% sibling discount.",
   },
 } as const;
 
@@ -70,37 +69,38 @@ type SessionPaymentLinks = {
 };
 
 export function getDropInCtas(
-  session: SessionPaymentLinks,
+  _session: SessionPaymentLinks,
   variant: SessionCta["variant"] = "primary"
 ): SessionCta[] {
-  if (!session.dropInHref || !session.dropInLabel) return [];
-
   return [
     {
-      href: session.dropInHref,
-      label: session.dropInLabel,
+      href: BOOK_SESSIONS_HREF,
+      label: "Book drop-ins",
       variant,
     },
   ];
 }
 
 export function getMonthlyCtas(
-  session: SessionPaymentLinks,
+  _session: SessionPaymentLinks,
   variant: SessionCta["variant"] = "primary"
 ): SessionCta[] {
   return [
     {
-      href: session.registerHref,
-      label: session.registerLabel,
+      href: BOOK_SESSIONS_HREF,
+      label: "Book monthly",
       variant,
     },
   ];
 }
 
-export function getSessionCtas(session: SessionPaymentLinks): SessionCta[] {
+export function getSessionCtas(_session: SessionPaymentLinks): SessionCta[] {
   return [
-    ...getDropInCtas(session, "primary"),
-    ...getMonthlyCtas(session, "secondary"),
+    {
+      href: BOOK_SESSIONS_HREF,
+      label: "Book and pay",
+      variant: "primary",
+    },
   ];
 }
 
@@ -112,10 +112,10 @@ export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
     startTime: "4:00 PM",
     endTime: "5:30 PM",
     programKey: "jam",
-    registerHref: getMonthlyCheckoutUrl("middle-school"),
-    registerLabel: "Monthly — Middle School",
-    dropInHref: getGymdeskBookUrl({ classId: "middle-school" }),
-    dropInLabel: "Drop-in — Middle School",
+    registerHref: BOOK_SESSIONS_HREF,
+    registerLabel: "Book Middle School",
+    dropInHref: BOOK_SESSIONS_HREF,
+    dropInLabel: "Book Middle School",
   },
   {
     id: "high-school",
@@ -124,9 +124,9 @@ export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
     startTime: "5:30 PM",
     endTime: "7:00 PM",
     programKey: "intensive",
-    registerHref: getMonthlyCheckoutUrl("high-school"),
-    registerLabel: "Monthly — High School Girls",
-    dropInHref: getGymdeskBookUrl({ classId: "high-school" }),
-    dropInLabel: "Drop-in — High School Girls",
+    registerHref: BOOK_SESSIONS_HREF,
+    registerLabel: "Book High School",
+    dropInHref: BOOK_SESSIONS_HREF,
+    dropInLabel: "Book High School",
   },
 ];

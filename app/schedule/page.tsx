@@ -15,36 +15,14 @@ export default function SchedulePage() {
       <main style={pageStyle}>
         <section style={heroStyle}>
           <p style={eyebrowStyle}>Scheduling</p>
-
           <h1 style={titleStyle}>Book a session</h1>
-
           <p style={subtitleStyle}>
-            Pick drop-in Sundays or a {SCHOOL_YEAR_FLYER.monthlyPrice} month
-            commitment, then check out in Gymdesk. Card payments go through
-            Square. Classes are limited to 15 athletes.
-          </p>
-
-          <p style={scheduleNoteStyle}>
-            {SCHOOL_YEAR_FLYER.startLabel} {SCHOOL_YEAR_FLYER.endLabel} at{" "}
-            {SCHOOL_YEAR_FLYER.venueName}. Class dates match the Gymdesk
-            calendar.
+            Sign the waiver, pick your Sundays, then pay once on Square.
           </p>
 
           <div style={ctaRowStyle}>
-            <CallToAction href={GYMDESK.bookingUrl} variant="primary">
-              Book now
-            </CallToAction>
-
-            <CallToAction href="#book-sessions" variant="secondary">
-              Pick dates and check out
-            </CallToAction>
-
-            <CallToAction href="/group-schedule" variant="secondary">
-              View class schedule
-            </CallToAction>
-
-            <CallToAction href={GYMDESK.signupUrl} variant="waiver">
-              Sign waiver and register
+            <CallToAction href="#book-sessions" variant="primary">
+              Book and pay
             </CallToAction>
           </div>
         </section>
@@ -52,16 +30,12 @@ export default function SchedulePage() {
         <ScheduleBooking />
 
         <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Sunday group classes</h2>
+          <h2 style={sectionTitleStyle}>Pricing</h2>
           <p style={panelBodyStyle}>
-            Middle School (Coed) is 4:00–5:30 PM. High School (Girls only) is
-            5:30–7:00 PM. Book the sessions you want in Gymdesk — several
-            drop-ins or a month commitment — and we will see the roster for
-            each class.
+            Middle School (Coed) 4:00–5:30 PM · High School (Girls only)
+            5:30–7:00 PM · {SCHOOL_YEAR_FLYER.priceSummary}
           </p>
-
           <ClassPaymentOptions />
-
           <div style={ctaRowStyle}>
             <CallToAction href={GYMDESK.loginUrl} variant="secondary">
               Member login
@@ -112,19 +86,10 @@ const titleStyle: React.CSSProperties = {
 
 const subtitleStyle: React.CSSProperties = {
   margin: "0 auto",
-  maxWidth: 720,
+  maxWidth: 560,
   lineHeight: 1.75,
   color: "var(--navy)",
   opacity: 0.88,
-  textAlign: "center",
-};
-
-const scheduleNoteStyle: React.CSSProperties = {
-  margin: "14px auto 0",
-  maxWidth: 720,
-  lineHeight: 1.7,
-  color: "var(--navy)",
-  opacity: 0.9,
   textAlign: "center",
 };
 
@@ -154,7 +119,7 @@ const sectionTitleStyle: React.CSSProperties = {
 };
 
 const panelBodyStyle: React.CSSProperties = {
-  margin: "0 auto",
+  margin: "0 auto 8px",
   maxWidth: 680,
   lineHeight: 1.7,
   color: "var(--navy)",

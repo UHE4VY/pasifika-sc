@@ -1,10 +1,8 @@
 import CallToAction from "./CallToAction";
 import {
+  BOOK_SESSIONS_HREF,
   PAYMENT_OPTIONS,
-  SCHOOL_YEAR_FLYER,
-  SCHOOL_YEAR_SESSIONS,
-  getDropInCtas,
-  getMonthlyCtas,
+  WAIVER_HREF,
 } from "../content/schoolYearGroupClasses";
 
 export default function ClassPaymentOptions({
@@ -14,27 +12,12 @@ export default function ClassPaymentOptions({
 }) {
   return (
     <div id={id} className="class-payment-options">
-      <p style={introStyle}>{SCHOOL_YEAR_FLYER.tryFirstNote}</p>
-
       <div className="class-payment-options__grid">
         <article style={cardStyle}>
           <p style={eyebrowStyle}>{PAYMENT_OPTIONS.dropIn.eyebrow}</p>
           <h3 style={titleStyle}>{PAYMENT_OPTIONS.dropIn.title}</h3>
           <p style={priceStyle}>{PAYMENT_OPTIONS.dropIn.price}</p>
           <p style={bodyStyle}>{PAYMENT_OPTIONS.dropIn.description}</p>
-          <div style={ctaRowStyle}>
-            {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-              getDropInCtas(session).map((action) => (
-                <CallToAction
-                  key={action.href}
-                  href={action.href}
-                  variant={action.variant}
-                >
-                  {action.label}
-                </CallToAction>
-              ))
-            )}
-          </div>
         </article>
 
         <article style={cardStyle}>
@@ -42,33 +25,20 @@ export default function ClassPaymentOptions({
           <h3 style={titleStyle}>{PAYMENT_OPTIONS.monthly.title}</h3>
           <p style={priceStyle}>{PAYMENT_OPTIONS.monthly.price}</p>
           <p style={bodyStyle}>{PAYMENT_OPTIONS.monthly.description}</p>
-          <div style={ctaRowStyle}>
-            {SCHOOL_YEAR_SESSIONS.flatMap((session) =>
-              getMonthlyCtas(session).map((action) => (
-                <CallToAction
-                  key={action.href}
-                  href={action.href}
-                  variant={action.variant}
-                >
-                  {action.label}
-                </CallToAction>
-              ))
-            )}
-          </div>
         </article>
+      </div>
+
+      <div style={ctaRowStyle}>
+        <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
+          Book and pay
+        </CallToAction>
+        <CallToAction href={WAIVER_HREF} variant="waiver">
+          Sign waiver
+        </CallToAction>
       </div>
     </div>
   );
 }
-
-const introStyle: React.CSSProperties = {
-  margin: "0 auto 18px",
-  maxWidth: 720,
-  lineHeight: 1.7,
-  color: "var(--navy)",
-  opacity: 0.88,
-  textAlign: "center",
-};
 
 const cardStyle: React.CSSProperties = {
   border: "1px solid var(--border)",
@@ -116,5 +86,5 @@ const ctaRowStyle: React.CSSProperties = {
   gap: 12,
   flexWrap: "wrap",
   justifyContent: "center",
-  marginTop: 16,
+  marginTop: 18,
 };
