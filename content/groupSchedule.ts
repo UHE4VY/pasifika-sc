@@ -48,11 +48,14 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
   })
 );
 
-export const CANCELLED_CLASS_DATES: string[] = [];
+export const CANCELLED_CLASS_DATES: string[] = [
+  ...GYMDESK.series.cancelledDates,
+];
 
 export const PROGRAM_NOTES = [
   `${SCHOOL_YEAR_FLYER.startLabel} ${SCHOOL_YEAR_FLYER.endLabel}.`,
-  "Class dates match the live Gymdesk calendar: 14 Sundays, September 6 through December 6.",
+  "Class dates match the live Gymdesk calendar: Sundays from September 6 through December 6.",
+  "No class on November 1 or November 29.",
   "Each class is 90 minutes.",
   SCHOOL_YEAR_FLYER.tryFirstNote,
   SCHOOL_YEAR_FLYER.priceSummary,

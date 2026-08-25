@@ -277,8 +277,8 @@ export default function ScheduleBooking() {
           <CallToAction href={firstBookHref} variant="secondary">
             Open first date in Gymdesk
           </CallToAction>
-          <CallToAction href="/waiver" variant="waiver">
-            Sign waiver
+          <CallToAction href={GYMDESK.signupUrl} variant="waiver">
+            Sign waiver and register
           </CallToAction>
         </div>
       ) : null}

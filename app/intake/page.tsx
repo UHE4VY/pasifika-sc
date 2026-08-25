@@ -1,6 +1,7 @@
 "use client";
 
 import CallToAction from "../../components/CallToAction";
+import { GYMDESK } from "../../content/gymdesk";
 
 export default function IntakePage() {
   return (
@@ -9,6 +10,8 @@ export default function IntakePage() {
 
       <p style={subtitle}>
         Tell us about the athlete so we can recommend the right training path.
+        Complete intake in Gymdesk so medical history, goals, and scheduling
+        preferences stay on the athlete’s profile with booking and waiver.
       </p>
 
       <p style={note}>
@@ -17,19 +20,16 @@ export default function IntakePage() {
       </p>
 
       <div style={ctaWrap}>
-        <CallToAction href="/waiver" variant="waiver">
-          Sign waiver
+        <CallToAction href={GYMDESK.signupUrl} variant="primary">
+          Complete intake in Gymdesk
+        </CallToAction>
+        <CallToAction href={GYMDESK.signupUrl} variant="waiver">
+          Sign waiver and register
+        </CallToAction>
+        <CallToAction href="/schedule#book-sessions" variant="secondary">
+          Book sessions
         </CallToAction>
       </div>
-
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLScHagjfrQeiFE4wDAXcuojunsiglJeVebAfWDvilANzVI-cKQ/viewform?usp=header"
-        title="Pasifika S&C athlete intake"
-        width="100%"
-        height="900"
-        frameBorder="0"
-        style={{ borderRadius: 12 }}
-      />
     </main>
   );
 }
@@ -48,6 +48,7 @@ const title: React.CSSProperties = {
 const subtitle: React.CSSProperties = {
   marginBottom: 16,
   opacity: 0.8,
+  lineHeight: 1.7,
 };
 
 const note: React.CSSProperties = {
@@ -57,5 +58,8 @@ const note: React.CSSProperties = {
 };
 
 const ctaWrap: React.CSSProperties = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: 12,
   marginBottom: 24,
 };

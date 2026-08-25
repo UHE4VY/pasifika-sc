@@ -24,6 +24,8 @@ export const GYMDESK = {
     startDate: "2026-09-06",
     endDate: "2026-12-06",
     sundayCount: 14,
+    /** Synced from Gymdesk cancel_dates on both class series. */
+    cancelledDates: ["2026-11-01", "2026-11-29"] as const,
   },
   schedules: {
     "middle-school": {
@@ -63,21 +65,28 @@ export function toDateKey(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-export function getGymdeskClassDates() {
+export function getGymdeskClassDates(options?: { includeCancelled?: boolean }) {
   const start = parseDateKey(GYMDESK.series.startDate);
+  const cancelled = new Set<string>(GYMDESK.series.cancelledDates);
   const dates: string[] = [];
 
   for (let index = 0; index < GYMDESK.series.sundayCount; index += 1) {
     const date = new Date(start);
     date.setDate(start.getDate() + index * 7);
-    dates.push(toDateKey(date));
+    const dateKey = toDateKey(date);
+
+    if (!options?.includeCancelled && cancelled.has(dateKey)) continue;
+    dates.push(dateKey);
   }
 
   return dates;
 }
 
-export function getGymdeskDatesForMonth(month: number) {
-  return getGymdeskClassDates().filter((dateKey) => {
+export function getGymdeskDatesForMonth(
+  month: number,
+  options?: { includeCancelled?: boolean }
+) {
+  return getGymdeskClassDates(options).filter((dateKey) => {
     const date = parseDateKey(dateKey);
     return date.getMonth() + 1 === month;
   });
