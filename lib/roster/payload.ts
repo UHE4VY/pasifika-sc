@@ -114,6 +114,10 @@ export function buildRosterWebhookEvents(payload: RosterPayload) {
       .join(" · ");
 
     // Include Gymdesk API-style aliases so Zapier mapping is obvious.
+    const idempotencyKey = payload.orderId
+      ? `${payload.orderId}:${date}`
+      : undefined;
+
     return {
       // Primary fields (use these in Zapier)
       name: payload.athleteName,
@@ -124,6 +128,7 @@ export function buildRosterWebhookEvents(payload: RosterPayload) {
       start: schedule.startTime,
       notes,
       disabled_multiple_pricing: true,
+      ...(idempotencyKey ? { idempotencyKey } : {}),
 
       // Aliases / extras
       athleteName: payload.athleteName,

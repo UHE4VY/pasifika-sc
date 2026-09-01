@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { GYMDESK, type GymdeskClassId, type GymdeskPlan } from "../../../content/gymdesk";
 import { BOOK_SESSIONS_HREF } from "../../../content/schoolYearGroupClasses";
-import { rosterAthleteOnGymdesk } from "../../../lib/gymdesk/roster";
+import {
+  getRosterWebhookUrl,
+  rosterAthleteOnGymdesk,
+} from "../../../lib/gymdesk/roster";
 
 type SearchParams = {
   class?: string;
@@ -54,42 +57,31 @@ export default async function PaymentCompletePage({
   let rosterMessage =
     "If Square confirmed your payment, you’re all set. We’ll add your athlete to the Gymdesk class roster for those Sundays.";
 
-  const useRedirectRoster =
-    Boolean(process.env.GYMDESK_ROSTER_WEBHOOK_URL) &&
-    !process.env.SQUARE_WEBHOOK_SIGNATURE_KEY;
+  const rosterWebhookConfigured = Boolean(getRosterWebhookUrl());
 
-  if (
-    useRedirectRoster &&
-    hasBookingSummary &&
-    classId &&
-    plan &&
-    athlete &&
-    email
-  ) {
-    const roster = await rosterAthleteOnGymdesk({
-      athleteName: athlete,
-      email,
-      classId,
-      plan,
-      selectedDates: dates,
-      orderId,
-    });
+  if (hasBookingSummary && classId && plan && athlete && email) {
+    if (rosterWebhookConfigured) {
+      const roster = await rosterAthleteOnGymdesk({
+        athleteName: athlete,
+        email,
+        classId,
+        plan,
+        selectedDates: dates,
+        orderId,
+      });
 
-    if (!roster.configured) {
-      rosterMessage =
-        "Payment received. Auto-roster isn’t connected yet — we’ll add your athlete to the Gymdesk roster from this booking.";
-    } else if (roster.ok) {
-      rosterMessage =
-        "Payment received and your athlete was added to the Gymdesk class roster for the Sundays below. You’re done — no second booking step.";
+      if (roster.ok) {
+        rosterMessage =
+          "Payment received and your athlete was added to the Gymdesk class roster for the Sundays below. You’re done — no second booking step.";
+      } else {
+        rosterMessage =
+          "Payment received. We’re finishing the Gymdesk roster update — if a Sunday is missing, contact us and we’ll fix it from your Square receipt.";
+        console.error("payment-complete roster errors:", roster.errors);
+      }
     } else {
       rosterMessage =
-        "Payment received. We’re finishing the Gymdesk roster update — if a Sunday is missing, contact us and we’ll fix it from your Square receipt.";
-      console.error("payment-complete roster errors:", roster.errors);
+        "Payment received. Auto-roster isn’t connected yet — we’ll add your athlete to the Gymdesk roster from this booking.";
     }
-  } else if (hasBookingSummary) {
-    rosterMessage = process.env.GYMDESK_ROSTER_WEBHOOK_URL
-      ? "Payment received. Your athlete is being added to the Gymdesk class roster for the Sundays below. You’re done — no second booking step."
-      : "Payment received. We’ll add your athlete to the Gymdesk roster from this booking.";
   }
 
   return (

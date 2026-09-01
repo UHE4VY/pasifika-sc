@@ -11,10 +11,21 @@ export type RosterResult = {
   errors: string[];
 };
 
+/** Strip accidental "VAR_NAME=https://..." paste mistakes from Vercel env values. */
+export function getRosterWebhookUrl(): string | undefined {
+  const raw = process.env.GYMDESK_ROSTER_WEBHOOK_URL?.trim();
+  if (!raw) return undefined;
+
+  const prefixed = raw.match(/^GYMDESK_ROSTER_WEBHOOK_URL=(.+)$/i);
+  if (prefixed) return prefixed[1].trim();
+
+  return raw;
+}
+
 export async function rosterAthleteOnGymdesk(
   payload: RosterPayload
 ): Promise<RosterResult> {
-  const webhookUrl = process.env.GYMDESK_ROSTER_WEBHOOK_URL?.trim();
+  const webhookUrl = getRosterWebhookUrl();
 
   if (!webhookUrl) {
     return {

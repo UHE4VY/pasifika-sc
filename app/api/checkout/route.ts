@@ -18,8 +18,11 @@ export async function POST(request: Request) {
     redirect.searchParams.set("athlete", checkout.athleteName);
     redirect.searchParams.set("email", checkout.email);
 
+    const checkoutReferenceId = randomUUID();
+    redirect.searchParams.set("orderId", checkoutReferenceId);
+
     const checkoutUrl = await createSquarePaymentLink({
-      idempotencyKey: randomUUID(),
+      idempotencyKey: checkoutReferenceId,
       locationId: process.env.SQUARE_LOCATION_ID ?? "",
       lineItems: checkout.lineItems,
       paymentNote: checkout.paymentNote,
