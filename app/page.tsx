@@ -124,7 +124,7 @@ export default function HomePage() {
 
         <div style={dividerStyle} />
 
-{/* NEW CLIENT SPECIAL */}
+{/* 1:1 SESSION PACKAGE */}
 <section className="home-image-section home-image-section--new-client">
   <img
     src="/home/new-client-special.png"
@@ -135,29 +135,29 @@ export default function HomePage() {
   <div className="home-image-section__scrim" aria-hidden="true" />
 
   <div className="home-image-section__content">
-    <h2 style={newClientSpecialTitleStyle}>New Client Special</h2>
+    <h2 style={newClientSpecialTitleStyle}>1:1 Coaching Package</h2>
 
     <p style={newClientSpecialIntroStyle}>
-      Experience individualized coaching before committing to a larger package.
+      Focused private coaching for athletes who want individualized attention
+      and a clear starting plan.
     </p>
 
     <h3 style={newClientSpecialHeadingStyle}>5 1:1 Coaching Sessions</h3>
 
-    <p style={newClientSpecialPriceStyle}>5 Sessions for $500</p>
+    <p style={newClientSpecialPriceStyle}>5 Sessions for $650</p>
 
     <p style={newClientSpecialMetaStyle}>
-      $100 per session • New clients only
+      $130 per session • Current package rate
     </p>
 
     <p style={newClientSpecialBodyStyle}>
-      An ideal starting point for athletes and families who want to experience
-      Pasifika Strength &amp; Conditioning&apos;s coaching process and training
-      environment before committing to a larger package.
+      A straightforward way to get started with private coaching. Session rates
+      will increase to $140 soon—this package locks in the current rate.
     </p>
 
     <div style={{ marginTop: 20 }}>
-      <CallToAction href="/intake" variant="primary">
-        Claim New Client Special
+      <CallToAction href="/services/one-on-one/5-session-package" variant="primary">
+        View 5-session package
       </CallToAction>
     </div>
   </div>

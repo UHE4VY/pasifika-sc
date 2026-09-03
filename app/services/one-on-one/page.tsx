@@ -134,30 +134,31 @@ export default function OneOnOneServicePage() {
 
         <div style={dividerStyle} />
 
-       {/* NEW CLIENT SPECIAL */}
+       {/* 1:1 SESSION PACKAGE */}
 <section style={panelStyle}>
-  <h2 style={sectionTitleStyle}>New Client Special</h2>
+  <h2 style={sectionTitleStyle}>1:1 Session Package</h2>
 
   <p style={pricingNoteStyle}>
-    A simple entry point for athletes and families who want to experience 1:1
-    coaching before committing to a longer-term training plan.
+    A clear starting package for athletes and families who want private 1:1
+    coaching with a simple commitment.
   </p>
 
   <div style={pricingGridStyle}>
     <div style={pricingCardFeaturedStyle}>
-      <p style={pricingBadgeStyle}>New client special</p>
+      <p style={pricingBadgeStyle}>Current package rate</p>
 
       <p style={pricingTierStyle}>5 Private Coaching Sessions</p>
 
       <h3 style={pricingPriceStyle}>
-        $500<span style={pricingMonthStyle}> / 5 sessions</span>
+        $650<span style={pricingMonthStyle}> / 5 sessions</span>
       </h3>
 
-      <p style={pricingFreqStyle}>$100 per session</p>
+      <p style={pricingFreqStyle}>$130 per session</p>
 
       <p style={pricingDescStyle}>
         Includes a free initial consultation so we can understand the athlete’s
-        goals, training history, schedule, and best path forward.
+        goals, training history, schedule, and best path forward. Session rates
+        will increase to $140 soon—this package locks in the current rate.
       </p>
 
       <ul style={pricingListStyle}>
@@ -178,7 +179,7 @@ export default function OneOnOneServicePage() {
           href="/services/one-on-one/5-session-package"
           variant="primary"
         >
-          Claim new client special
+          View 5-session package
         </CallToAction>
       </div>
     </div>

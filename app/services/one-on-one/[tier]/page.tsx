@@ -17,20 +17,20 @@ const ONE_ON_ONE_TIERS: Record<
   }
 > = {
   "5-session-package": {
-    label: "New Client Special",
+    label: "5-Session Package",
     frequency: "5 private coaching sessions + free consultation",
     description:
-      "A simple entry point for student-athletes and families who want to experience 1:1 coaching before committing to a longer-term training plan.",
+      "Five 1:1 coaching sessions for $650 ($130 per session). A straightforward starting package for student-athletes and families. Session rates will increase to $140 soon—this package locks in the current rate.",
     features: [
       "Free initial consultation",
-      "5 private coaching sessions",
-      "$100 per session (5-session package)",
+      "5 private coaching sessions for $650",
+      "$130 per session (current package rate)",
       "Movement and training needs review",
       "Individualized coaching recommendations",
       "Package expires 90 days from purchase",
     ],
     bestFor:
-      "Student-athletes and families who want to build momentum, assess fitness and training needs and begin with individualized coaching support.",
+      "Student-athletes and families who want to build momentum, assess fitness and training needs, and begin with individualized coaching support.",
   },
 };
 
@@ -80,9 +80,8 @@ export default function OneOnOneTierPage({ params }: Props) {
           <div style={cardStyle}>
             <h3 style={cardTitle}>Package overview</h3>
             <p style={cardBody}>
-              This new client special gives student-athletes access to focused
-              1:1 coaching with a clear starting point and no long-term
-              commitment required.
+              This package gives student-athletes focused 1:1 coaching with a
+              clear starting point and no long-term commitment required.
             </p>
           </div>
 
