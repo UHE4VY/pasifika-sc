@@ -10,12 +10,15 @@ export default function IntakePage() {
 
       <p style={subtitle}>
         Complete intake in Gymdesk so medical history, goals, and scheduling
-        stay on the athlete’s profile with booking and waiver.
+        stay on the athlete’s profile with booking.
       </p>
 
       <div style={ctaWrap}>
         <CallToAction href={GYMDESK.signupUrl} variant="primary">
           Complete intake in Gymdesk
+        </CallToAction>
+        <CallToAction href="/waiver" variant="waiver">
+          Sign training waiver
         </CallToAction>
         <CallToAction href="/schedule#book-sessions" variant="secondary">
           Book and pay

@@ -70,7 +70,7 @@ export const upcomingEvents: UpcomingEvent[] = [
         label: "Book and pay",
         variant: "primary",
       },
-      { href: "/waiver", label: "Sign waiver", variant: "waiver" },
+      { href: "/waiver", label: "Sign training waiver", variant: "waiver" },
     ],
     secondaryHref: "/group-schedule",
     secondaryLabel: "View class schedule",

@@ -33,7 +33,7 @@ export default function ClassPaymentOptions({
           Book and pay
         </CallToAction>
         <CallToAction href={WAIVER_HREF} variant="waiver">
-          Sign waiver
+          Sign training waiver
         </CallToAction>
       </div>
     </div>

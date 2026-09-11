@@ -407,9 +407,9 @@ export default function HomePage() {
   </div>
 
   <div style={cardStyle}>
-    <h3 style={cardTitleStyle}>4) Complete the parent waiver</h3>
+    <h3 style={cardTitleStyle}>4) Complete the training waiver</h3>
     <p style={cardBodyStyle}>
-      Parents and guardians must sign the waiver before their athlete can participate in PSC programs.
+      Parents and guardians must sign the training waiver before their athlete can participate in PSC programs.
     </p>
   </div>
 </div>
@@ -422,7 +422,7 @@ export default function HomePage() {
             </CallToAction>
 
             <CallToAction href="/waiver" variant="waiver">
-              Sign waiver
+              Sign training waiver
             </CallToAction>
 
             <CallToAction href="/schedule" variant="secondary">

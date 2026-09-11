@@ -5,9 +5,10 @@
  * Sign-up (waiver + register): https://pasifika-strength-conditioning.gymdesk.com/signup
  *
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
- * Parents sign the waiver in Gymdesk, pick dates on /schedule, then pay via
- * dynamic Square checkout (/api/checkout). After payment, the site posts each
- * Sunday to GYMDESK_ROSTER_WEBHOOK_URL (Zapier → Gymdesk Create Booking).
+ * Parents sign the training waiver on /waiver (Google Form), pick dates on
+ * /schedule, then pay via dynamic Square checkout (/api/checkout). After
+ * payment, the site posts each Sunday to GYMDESK_ROSTER_WEBHOOK_URL
+ * (Zapier → Gymdesk Create Booking).
  */
 export type GymdeskClassId = "middle-school" | "high-school";
 export type GymdeskPlan = "drop-in" | "monthly";

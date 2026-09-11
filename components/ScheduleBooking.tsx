@@ -9,7 +9,10 @@ import {
   type GymdeskClassId,
   type GymdeskPlan,
 } from "../content/gymdesk";
-import { SCHOOL_YEAR_FLYER } from "../content/schoolYearGroupClasses";
+import {
+  SCHOOL_YEAR_FLYER,
+  WAIVER_HREF,
+} from "../content/schoolYearGroupClasses";
 
 const CLASS_OPTIONS: { id: GymdeskClassId; label: string }[] = [
   {
@@ -127,17 +130,17 @@ export default function ScheduleBooking() {
     >
       <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        Sign the waiver once, pick your Sundays here, and pay on Square. We
-        automatically add your athlete to the Gymdesk class roster after
-        payment. No class on November 1 or November 29.
+        Sign the training waiver once, pick your Sundays here, and pay on
+        Square. We automatically add your athlete to the Gymdesk class roster
+        after payment. No class on November 1 or November 29.
       </p>
 
       <ol className="booking-steps" style={stepsStyle}>
         <li style={stepStyle}>
-          <strong>1. Sign waiver</strong>
+          <strong>1. Sign training waiver</strong>
           <div style={ctaRowStyle}>
-            <CallToAction href={GYMDESK.signupUrl} variant="waiver">
-              Sign waiver and register
+            <CallToAction href={WAIVER_HREF} variant="waiver">
+              Sign training waiver
             </CallToAction>
           </div>
           <label style={choiceStyle}>
@@ -146,7 +149,7 @@ export default function ScheduleBooking() {
               checked={waiverDone}
               onChange={(event) => setWaiverDone(event.target.checked)}
             />
-            <span>I signed the waiver in Gymdesk</span>
+            <span>I signed the training waiver</span>
           </label>
         </li>
 
@@ -306,7 +309,7 @@ export default function ScheduleBooking() {
           <strong>3. Pay on Square</strong>
           <div style={summaryStyle}>
             {!waiverDone ? (
-              <p style={panelBodyStyle}>Sign the waiver to unlock booking.</p>
+              <p style={panelBodyStyle}>Sign the training waiver to unlock booking.</p>
             ) : selectedCount === 0 ? (
               <p style={panelBodyStyle}>
                 Select the Sundays you want, then continue to Square.
@@ -365,8 +368,8 @@ export default function ScheduleBooking() {
                     : `Pay $${dropInTotal} on Square`}
               </button>
             ) : !waiverDone ? (
-              <CallToAction href={GYMDESK.signupUrl} variant="primary">
-                Sign waiver first
+              <CallToAction href={WAIVER_HREF} variant="primary">
+                Sign training waiver first
               </CallToAction>
             ) : (
               <button type="button" disabled style={{ ...primaryButtonStyle, opacity: 0.55, cursor: "not-allowed" }}>
