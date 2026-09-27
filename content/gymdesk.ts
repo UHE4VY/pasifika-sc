@@ -5,10 +5,10 @@
  * Sign-up (waiver + register): https://pasifika-strength-conditioning.gymdesk.com/signup
  *
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
- * Parents sign the training waiver on /waiver (Google Form), pick dates on
- * /schedule, then pay via dynamic Square checkout (/api/checkout). After
- * payment, the site posts each Sunday to GYMDESK_ROSTER_WEBHOOK_URL
- * (Zapier → Gymdesk Create Booking).
+ * Parents sign the training waiver on /waiver, choose a class on /schedule,
+ * then pay on Square: $45 per drop-in Sunday, or $150 for any 4 Sundays
+ * they choose. After payment the site creates one free
+ * Gymdesk booking per Sunday so parents are not charged again.
  */
 export type GymdeskClassId = "middle-school" | "high-school";
 export type GymdeskPlan = "drop-in" | "monthly";
@@ -19,6 +19,7 @@ export const GYMDESK = {
   signupUrl: "https://pasifika-strength-conditioning.gymdesk.com/signup",
   loginUrl: "https://pasifika-strength-conditioning.gymdesk.com",
   gymId: "23528",
+  bookingFormId: "49602",
   dropInPrice: 45,
   monthlyPrice: 150,
   monthlySessionCount: 4,
@@ -33,26 +34,24 @@ export const GYMDESK = {
     "middle-school": {
       scheduleId: "36061",
       sessionId: "1774027",
+      dropInPricingId: "294487",
       title: "Middle School",
       audience: "Coed",
       startTime: "4:00 PM",
       endTime: "5:30 PM",
       dropInOption: "Standard Drop-In",
       monthlyOption: null as string | null,
-      squareDropInUrl: "https://square.link/u/RrK3yuwu",
-      squareMonthlyUrl: "https://square.link/u/1joWZmRg",
     },
     "high-school": {
       scheduleId: "36062",
       sessionId: "1774028",
+      dropInPricingId: "294489",
       title: "High School",
       audience: "Girls only",
       startTime: "5:30 PM",
       endTime: "7:00 PM",
       dropInOption: "Drop-In Rate",
       monthlyOption: "Monthly Commitment Rate",
-      squareDropInUrl: "https://square.link/u/LRGW4MhW",
-      squareMonthlyUrl: "https://square.link/u/XcwsaOXt",
     },
   },
 } as const;
@@ -86,11 +85,33 @@ export function getGymdeskClassDates(options?: { includeCancelled?: boolean }) {
   return dates;
 }
 
+/** Calendar date in Pacific time, as YYYY-MM-DD. */
+export function getPacificTodayKey(now = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+}
+
+export function getUpcomingGymdeskClassDates(now = new Date()) {
+  const today = getPacificTodayKey(now);
+  return getGymdeskClassDates().filter((dateKey) => dateKey >= today);
+}
+
 export function getGymdeskDatesForMonth(
   month: number,
   options?: { includeCancelled?: boolean }
 ) {
   return getGymdeskClassDates(options).filter((dateKey) => {
+    const date = parseDateKey(dateKey);
+    return date.getMonth() + 1 === month;
+  });
+}
+
+export function getUpcomingGymdeskDatesForMonth(month: number, now = new Date()) {
+  return getUpcomingGymdeskClassDates(now).filter((dateKey) => {
     const date = parseDateKey(dateKey);
     return date.getMonth() + 1 === month;
   });
@@ -107,7 +128,6 @@ export function getGymdeskBookUrl(options?: {
 
   if (schedule) {
     url.searchParams.set("schedule", schedule.scheduleId);
-    url.searchParams.set("s", schedule.sessionId);
   }
 
   if (options?.date) {
@@ -117,18 +137,3 @@ export function getGymdeskBookUrl(options?: {
   return url.toString();
 }
 
-/** @deprecated Static links — booking uses /api/checkout for dynamic totals. */
-export function getSquareCheckoutUrl(
-  classId: GymdeskClassId,
-  plan: GymdeskPlan
-) {
-  const schedule = GYMDESK.schedules[classId];
-  return plan === "monthly"
-    ? schedule.squareMonthlyUrl
-    : schedule.squareDropInUrl;
-}
-
-/** @deprecated Prefer getSquareCheckoutUrl for payment. */
-export function getMonthlyCheckoutUrl(classId: GymdeskClassId) {
-  return getSquareCheckoutUrl(classId, "monthly");
-}

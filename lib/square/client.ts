@@ -99,3 +99,31 @@ export async function createSquarePaymentLink(
 
   return checkoutUrl;
 }
+
+export async function getSquarePayment(paymentId: string) {
+  assertSquareConfigured();
+
+  const response = await fetch(
+    `${getSquareBaseUrl()}/v2/payments/${encodeURIComponent(paymentId)}`,
+    {
+      headers: {
+        "Square-Version": "2024-11-20",
+        Authorization: `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
+      },
+    }
+  );
+
+  const data = (await response.json()) as {
+    payment?: { id?: string; status?: string; note?: string; order_id?: string };
+    errors?: Array<{ detail?: string }>;
+  };
+
+  if (!response.ok || !data.payment) {
+    const detail =
+      data.errors?.map((error) => error.detail).filter(Boolean).join(" ") ||
+      "Square payment could not be confirmed.";
+    throw new Error(detail);
+  }
+
+  return data.payment;
+}

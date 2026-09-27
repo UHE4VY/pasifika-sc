@@ -1,8 +1,4 @@
-import {
-  GYMDESK,
-  type GymdeskClassId,
-  type GymdeskPlan,
-} from "../../content/gymdesk";
+import { type GymdeskClassId, type GymdeskPlan } from "../../content/gymdesk";
 
 export type RosterPayload = {
   athleteName: string;
@@ -10,6 +6,7 @@ export type RosterPayload = {
   classId: GymdeskClassId;
   plan: GymdeskPlan;
   selectedDates: string[];
+  phone?: string;
   orderId?: string;
 };
 
@@ -24,6 +21,7 @@ export function encodeRosterPaymentNote(payload: RosterPayload) {
       c: payload.classId,
       p: payload.plan,
       d: payload.selectedDates,
+      h: payload.phone || undefined,
     })
   );
 }
@@ -41,6 +39,7 @@ export function parseRosterPaymentNote(
         c?: string;
         p?: string;
         d?: string[];
+        h?: string;
       };
 
       if (
@@ -60,6 +59,7 @@ export function parseRosterPaymentNote(
         classId: raw.c,
         plan: raw.p,
         selectedDates: raw.d,
+        phone: raw.h,
       };
     } catch {
       return null;
@@ -95,51 +95,3 @@ export function parseRosterPaymentNote(
   };
 }
 
-function toUsDate(dateKey: string) {
-  const [year, month, day] = dateKey.split("-");
-  return `${month}/${day}/${year}`;
-}
-
-export function buildRosterWebhookEvents(payload: RosterPayload) {
-  const schedule = GYMDESK.schedules[payload.classId];
-  const eventId = Number(schedule.sessionId);
-
-  return payload.selectedDates.map((date) => {
-    const notes = [
-      "Paid on Square (website checkout)",
-      payload.plan,
-      payload.orderId ? `order ${payload.orderId}` : null,
-    ]
-      .filter(Boolean)
-      .join(" · ");
-
-    // Include Gymdesk API-style aliases so Zapier mapping is obvious.
-    const idempotencyKey = payload.orderId
-      ? `${payload.orderId}:${date}`
-      : undefined;
-
-    return {
-      // Primary fields (use these in Zapier)
-      name: payload.athleteName,
-      email: payload.email,
-      event_id: eventId,
-      date,
-      date_us: toUsDate(date),
-      start: schedule.startTime,
-      notes,
-      disabled_multiple_pricing: true,
-      ...(idempotencyKey ? { idempotencyKey } : {}),
-
-      // Aliases / extras
-      athleteName: payload.athleteName,
-      sessionId: schedule.sessionId,
-      scheduleId: schedule.scheduleId,
-      sessionTitle: `${schedule.title} (${schedule.audience})`,
-      startTime: schedule.startTime,
-      endTime: schedule.endTime,
-      classId: payload.classId,
-      plan: payload.plan,
-      orderId: payload.orderId ?? "",
-    };
-  });
-}

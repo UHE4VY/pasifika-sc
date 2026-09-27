@@ -112,7 +112,7 @@ export default function YouthPerformancePage() {
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Try September first</h3>
             <p style={cardBodyStyle}>
-              Drop in for a few Sundays before joining the monthly plan.
+              A drop-in is $45. Pay $150 and choose any 4 Sundays.
             </p>
           </div>
 
@@ -171,8 +171,7 @@ export default function YouthPerformancePage() {
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
-          Sign the waiver, pick your Sundays, and pay once on Square. We add
-          your athlete to the Gymdesk roster automatically after payment.
+          A drop-in is $45. Pay $150 and choose any 4 Sundays.
         </p>
 
         <div

@@ -2,9 +2,12 @@ import Link from "next/link";
 import { GYMDESK, type GymdeskClassId, type GymdeskPlan } from "../../../content/gymdesk";
 import { BOOK_SESSIONS_HREF } from "../../../content/schoolYearGroupClasses";
 import {
-  getRosterWebhookUrl,
-  rosterAthleteOnGymdesk,
-} from "../../../lib/gymdesk/roster";
+  CheckoutValidationError,
+  validateCheckoutRequest,
+} from "../../../lib/checkout/pricing";
+import { rosterAthleteOnGymdesk } from "../../../lib/gymdesk/roster";
+import { parseRosterPaymentNote } from "../../../lib/roster/payload";
+import { getSquarePayment } from "../../../lib/square/client";
 
 type SearchParams = {
   class?: string;
@@ -12,8 +15,10 @@ type SearchParams = {
   dates?: string;
   athlete?: string;
   email?: string;
+  phone?: string;
   orderId?: string;
   order_id?: string;
+  transactionId?: string;
 };
 
 function formatDateLabel(dateKey: string) {
@@ -26,69 +31,76 @@ function formatDateLabel(dateKey: string) {
   });
 }
 
-function isClassId(value: string | undefined): value is GymdeskClassId {
-  return value === "middle-school" || value === "high-school";
-}
-
-function isPlan(value: string | undefined): value is GymdeskPlan {
-  return value === "drop-in" || value === "monthly";
-}
-
 export default async function PaymentCompletePage({
   searchParams,
 }: {
   searchParams: Promise<SearchParams>;
 }) {
   const params = await searchParams;
-  const classId = isClassId(params.class) ? params.class : null;
-  const plan = isPlan(params.plan) ? params.plan : null;
-  const athlete = params.athlete?.trim() || null;
-  const email = params.email?.trim().toLowerCase() || null;
-  const orderId =
-    params.orderId?.trim() || params.order_id?.trim() || undefined;
-  const dates = (params.dates || "")
-    .split(",")
-    .map((date) => date.trim())
-    .filter(Boolean);
+  const transactionId = params.transactionId?.trim() || "";
 
-  const schedule = classId ? GYMDESK.schedules[classId] : null;
-  const hasBookingSummary = Boolean(schedule && dates.length > 0 && athlete && email);
-
+  let classId: GymdeskClassId | null = null;
+  let plan: GymdeskPlan | null = null;
+  let athlete: string | null = null;
+  let email: string | null = null;
+  let dates: string[] = [];
   let rosterMessage =
-    "If Square confirmed your payment, you’re all set. We’ll add your athlete to the Gymdesk class roster for those Sundays.";
+    "Choose a class on the schedule, then pay $45 per Sunday or $150 for any 4 Sundays.";
 
-  const rosterWebhookConfigured = Boolean(getRosterWebhookUrl());
+  if (transactionId) {
+    try {
+      const payment = await getSquarePayment(transactionId);
 
-  if (hasBookingSummary && classId && plan && athlete && email) {
-    if (rosterWebhookConfigured) {
-      const roster = await rosterAthleteOnGymdesk({
-        athleteName: athlete,
-        email,
-        classId,
-        plan,
-        selectedDates: dates,
-        orderId,
-      });
-
-      if (roster.ok) {
+      if (payment.status !== "COMPLETED") {
         rosterMessage =
-          "Payment received and your athlete was added to the Gymdesk class roster for the Sundays below. You’re done — no second booking step.";
+          "Square has not confirmed this payment, so nothing was booked.";
       } else {
-        rosterMessage =
-          "Payment received. We’re finishing the Gymdesk roster update — if a Sunday is missing, contact us and we’ll fix it from your Square receipt.";
-        console.error("payment-complete roster errors:", roster.errors);
+        const parsed = parseRosterPaymentNote(payment.note);
+        if (!parsed?.phone) {
+          rosterMessage =
+            "Payment received, but the booking details were missing. Contact us with your Square receipt.";
+        } else {
+          const checkout = validateCheckoutRequest(parsed);
+          const roster = await rosterAthleteOnGymdesk({
+            ...checkout,
+            orderId: payment.order_id || payment.id,
+          });
+
+          classId = checkout.classId;
+          plan = checkout.plan;
+          athlete = checkout.athleteName;
+          email = checkout.email;
+          dates = checkout.selectedDates;
+          rosterMessage = roster.ok
+            ? "Payment received. Your athlete is booked for the Sundays below."
+            : "Payment received. If a Sunday is missing from Gymdesk, contact us with your Square receipt.";
+
+          if (!roster.ok) {
+            console.error("payment-complete roster errors:", roster.errors);
+          }
+        }
       }
-    } else {
+    } catch (error) {
+      if (!(error instanceof CheckoutValidationError)) {
+        console.error("payment-complete confirmation error:", error);
+      }
       rosterMessage =
-        "Payment received. Auto-roster isn’t connected yet — we’ll add your athlete to the Gymdesk roster from this booking.";
+        "We couldn't confirm this Square payment, so nothing was booked. Contact us with your receipt if you were charged.";
     }
   }
+
+  const schedule = classId ? GYMDESK.schedules[classId] : null;
+  const hasBookingSummary = Boolean(
+    schedule && dates.length > 0 && athlete && email
+  );
 
   return (
     <main style={pageStyle}>
       <section style={panelStyle}>
         <p style={eyebrowStyle}>Payment</p>
-        <h1 style={titleStyle}>You’re booked</h1>
+        <h1 style={titleStyle}>
+          {hasBookingSummary ? "You’re booked" : "Book a session"}
+        </h1>
         <p style={bodyStyle}>{rosterMessage}</p>
 
         {hasBookingSummary ? (
@@ -103,7 +115,7 @@ export default async function PaymentCompletePage({
             ) : null}
             {plan ? (
               <p style={summaryLineStyle}>
-                {plan === "monthly" ? "Monthly plan" : "Drop-in"}
+                {plan === "monthly" ? "4 sessions · $150" : "Drop-in"}
               </p>
             ) : null}
             <ul style={dateListStyle}>

@@ -5,14 +5,11 @@ import CallToAction from "./CallToAction";
 import { GROUP_SCHEDULE_MONTHS } from "../content/groupSchedule";
 import {
   GYMDESK,
-  getGymdeskDatesForMonth,
+  getUpcomingGymdeskDatesForMonth,
   type GymdeskClassId,
   type GymdeskPlan,
 } from "../content/gymdesk";
-import {
-  SCHOOL_YEAR_FLYER,
-  WAIVER_HREF,
-} from "../content/schoolYearGroupClasses";
+import { WAIVER_HREF } from "../content/schoolYearGroupClasses";
 
 const CLASS_OPTIONS: { id: GymdeskClassId; label: string }[] = [
   {
@@ -34,14 +31,6 @@ function formatDateLabel(dateKey: string) {
   });
 }
 
-function defaultDatesForPlan(month: number, plan: GymdeskPlan) {
-  const dates = getGymdeskDatesForMonth(month);
-  if (plan === "monthly") {
-    return dates.slice(0, Math.min(GYMDESK.monthlySessionCount, dates.length));
-  }
-  return [];
-}
-
 export default function ScheduleBooking() {
   const [waiverDone, setWaiverDone] = useState(false);
   const [classId, setClassId] = useState<GymdeskClassId>("middle-school");
@@ -50,20 +39,55 @@ export default function ScheduleBooking() {
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [athleteName, setAthleteName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [isPaying, setIsPaying] = useState(false);
   const [payError, setPayError] = useState<string | null>(null);
 
-  const monthDates = useMemo(() => getGymdeskDatesForMonth(month), [month]);
+  const monthDates = useMemo(
+    () => getUpcomingGymdeskDatesForMonth(month),
+    [month]
+  );
   const selectedCount = selectedDates.length;
   const dropInTotal = selectedCount * GYMDESK.dropInPrice;
+  const fourSessionReady =
+    plan === "drop-in" || selectedCount === GYMDESK.monthlySessionCount;
   const trimmedAthleteName = athleteName.trim();
   const trimmedEmail = email.trim();
+  const trimmedPhone = phone.trim();
+  const phoneOk = trimmedPhone.replace(/\D/g, "").length >= 10;
   const canCheckout =
     waiverDone &&
     trimmedAthleteName.length > 0 &&
     trimmedEmail.includes("@") &&
+    phoneOk &&
     selectedCount > 0 &&
-    (plan === "drop-in" || selectedCount === GYMDESK.monthlySessionCount);
+    fourSessionReady;
+
+  function choosePlan(nextPlan: GymdeskPlan) {
+    setPlan(nextPlan);
+    if (nextPlan === "monthly") {
+      setSelectedDates((current) =>
+        current.slice(0, GYMDESK.monthlySessionCount)
+      );
+    }
+  }
+
+  function toggleDate(dateKey: string) {
+    setSelectedDates((current) => {
+      if (current.includes(dateKey)) {
+        return current.filter((date) => date !== dateKey);
+      }
+
+      if (
+        plan === "monthly" &&
+        current.length >= GYMDESK.monthlySessionCount
+      ) {
+        return current;
+      }
+
+      return [...current, dateKey].sort();
+    });
+  }
 
   async function startCheckout() {
     if (!canCheckout || isPaying) return;
@@ -81,6 +105,7 @@ export default function ScheduleBooking() {
           selectedDates,
           athleteName: trimmedAthleteName,
           email: trimmedEmail,
+          phone: trimmedPhone,
         }),
       });
 
@@ -90,36 +115,16 @@ export default function ScheduleBooking() {
       };
 
       if (!response.ok || !data.checkoutUrl) {
-        throw new Error(data.error || "Unable to start Square checkout.");
+        throw new Error(data.error || "Unable to start checkout.");
       }
 
       window.location.href = data.checkoutUrl;
     } catch (error) {
       setPayError(
-        error instanceof Error ? error.message : "Unable to start Square checkout."
+        error instanceof Error ? error.message : "Unable to start checkout."
       );
       setIsPaying(false);
     }
-  }
-
-  function applyPlanAndMonth(nextPlan: GymdeskPlan, nextMonth: number) {
-    setPlan(nextPlan);
-    setMonth(nextMonth);
-    setSelectedDates(defaultDatesForPlan(nextMonth, nextPlan));
-  }
-
-  function toggleDate(dateKey: string) {
-    setSelectedDates((current) => {
-      if (current.includes(dateKey)) {
-        return current.filter((date) => date !== dateKey);
-      }
-
-      if (plan === "monthly" && current.length >= GYMDESK.monthlySessionCount) {
-        return current;
-      }
-
-      return [...current, dateKey].sort();
-    });
   }
 
   return (
@@ -130,9 +135,9 @@ export default function ScheduleBooking() {
     >
       <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        Sign the training waiver once, pick your Sundays here, and pay on
-        Square. We automatically add your athlete to the Gymdesk class roster
-        after payment. No class on November 1 or November 29.
+        A drop-in is ${GYMDESK.dropInPrice}. Pay ${GYMDESK.monthlyPrice} and
+        choose any {GYMDESK.monthlySessionCount} Sundays. No class on November
+        1 or November 29.
       </p>
 
       <ol className="booking-steps" style={stepsStyle}>
@@ -160,8 +165,7 @@ export default function ScheduleBooking() {
             pointerEvents: waiverDone ? "auto" : "none",
           }}
         >
-          <strong>2. Choose athlete, class, month, and Sundays</strong>
-
+          <strong>2. Choose class, plan, and Sundays</strong>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Athlete name</legend>
             <input
@@ -173,7 +177,6 @@ export default function ScheduleBooking() {
               style={inputStyle}
             />
           </fieldset>
-
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Parent email</legend>
             <input
@@ -185,7 +188,17 @@ export default function ScheduleBooking() {
               style={inputStyle}
             />
           </fieldset>
-
+          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
+            <legend style={legendStyle}>Phone</legend>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              placeholder="(650) 555-0100"
+              autoComplete="tel"
+              style={inputStyle}
+            />
+          </fieldset>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Plan</legend>
             <div className="schedule-plan-toggle">
@@ -201,9 +214,9 @@ export default function ScheduleBooking() {
                   name="schedule-plan"
                   value="drop-in"
                   checked={plan === "drop-in"}
-                  onChange={() => applyPlanAndMonth("drop-in", month)}
+                  onChange={() => choosePlan("drop-in")}
                 />
-                <span>Drop-in · {SCHOOL_YEAR_FLYER.dropInPrice} each</span>
+                <span>Drop-in · ${GYMDESK.dropInPrice} each</span>
               </label>
               <label
                 className={`schedule-plan-toggle__option${
@@ -217,15 +230,15 @@ export default function ScheduleBooking() {
                   name="schedule-plan"
                   value="monthly"
                   checked={plan === "monthly"}
-                  onChange={() => applyPlanAndMonth("monthly", month)}
+                  onChange={() => choosePlan("monthly")}
                 />
                 <span>
-                  Month commitment · {SCHOOL_YEAR_FLYER.monthlyPrice}
+                  {GYMDESK.monthlySessionCount} sessions · $
+                  {GYMDESK.monthlyPrice}
                 </span>
               </label>
             </div>
           </fieldset>
-
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Class</legend>
             <div style={classRowStyle}>
@@ -243,7 +256,6 @@ export default function ScheduleBooking() {
               ))}
             </div>
           </fieldset>
-
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Month</legend>
             <div className="schedule-month-toggle">
@@ -256,14 +268,13 @@ export default function ScheduleBooking() {
                       ? " schedule-month-toggle__option--selected"
                       : ""
                   }`}
-                  onClick={() => applyPlanAndMonth(plan, option.month)}
+                  onClick={() => setMonth(option.month)}
                 >
                   {option.label.replace(" 2026", "")}
                 </button>
               ))}
             </div>
           </fieldset>
-
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>
               {plan === "monthly"
@@ -271,11 +282,15 @@ export default function ScheduleBooking() {
                 : "Choose Sundays"}
             </legend>
             {monthDates.length === 0 ? (
-              <p style={panelBodyStyle}>No open Sundays this month.</p>
+              <p style={panelBodyStyle}>No remaining Sundays this month.</p>
             ) : (
               <div className="september-session-picker">
                 {monthDates.map((dateKey) => {
                   const checked = selectedDates.includes(dateKey);
+                  const locked =
+                    plan === "monthly" &&
+                    !checked &&
+                    selectedCount >= GYMDESK.monthlySessionCount;
                   return (
                     <label
                       key={dateKey}
@@ -288,6 +303,7 @@ export default function ScheduleBooking() {
                       <input
                         type="checkbox"
                         checked={checked}
+                        disabled={locked}
                         onChange={() => toggleDate(dateKey)}
                       />
                       <span>{formatDateLabel(dateKey)}</span>
@@ -306,49 +322,28 @@ export default function ScheduleBooking() {
             pointerEvents: waiverDone ? "auto" : "none",
           }}
         >
-          <strong>3. Pay on Square</strong>
-          <div style={summaryStyle}>
-            {!waiverDone ? (
-              <p style={panelBodyStyle}>Sign the training waiver to unlock booking.</p>
-            ) : selectedCount === 0 ? (
-              <p style={panelBodyStyle}>
-                Select the Sundays you want, then continue to Square.
-              </p>
-            ) : !trimmedAthleteName ? (
-              <p style={panelBodyStyle}>
-                Enter the athlete’s name so we can put them on the roster.
-              </p>
-            ) : !trimmedEmail.includes("@") ? (
-              <p style={panelBodyStyle}>
-                Enter the parent email used for Gymdesk registration.
-              </p>
-            ) : plan === "monthly" &&
-              selectedCount !== GYMDESK.monthlySessionCount ? (
-              <p style={panelBodyStyle}>
-                Monthly is ${GYMDESK.monthlyPrice} for{" "}
-                {GYMDESK.monthlySessionCount} Sundays. You have {selectedCount}{" "}
-                selected
-                {monthDates.length < GYMDESK.monthlySessionCount
-                  ? ` (${monthDates.length} available this month — switch to drop-in or another month).`
-                  : "."}
-              </p>
-            ) : plan === "monthly" ? (
-              <p style={panelBodyStyle}>
-                {trimmedAthleteName} · {selectedCount} Sundays · $
-                {GYMDESK.monthlyPrice} on Square. After payment we add them to
-                the Gymdesk roster automatically.
-              </p>
-            ) : (
-              <p style={panelBodyStyle}>
-                {trimmedAthleteName} · {selectedCount} Sunday
-                {selectedCount === 1 ? "" : "s"} · ${dropInTotal} on Square.
-                After payment we add them to the Gymdesk roster automatically.
-              </p>
-            )}
-          </div>
-
+          <strong>3. Pay</strong>
+          <p style={{ ...panelBodyStyle, textAlign: "left", margin: "8px 0 0" }}>
+            {!waiverDone
+              ? "Sign the training waiver to unlock booking."
+              : selectedCount === 0
+                ? "Select the Sundays you want."
+                : plan === "monthly" &&
+                    selectedCount !== GYMDESK.monthlySessionCount
+                  ? `Choose ${GYMDESK.monthlySessionCount} Sundays. You have ${selectedCount} selected.`
+                  : !trimmedAthleteName
+                    ? "Enter the athlete’s name."
+                    : !trimmedEmail.includes("@")
+                      ? "Enter the parent email."
+                      : !phoneOk
+                        ? "Enter a phone number."
+                        : plan === "monthly"
+                          ? `${trimmedAthleteName} · ${selectedCount} Sundays · $${GYMDESK.monthlyPrice}.`
+                          : `${trimmedAthleteName} · ${selectedCount} Sunday${
+                              selectedCount === 1 ? "" : "s"
+                            } · $${dropInTotal}.`}
+          </p>
           {payError ? <p style={errorStyle}>{payError}</p> : null}
-
           <div style={ctaRowStyle}>
             {canCheckout ? (
               <button
@@ -362,34 +357,21 @@ export default function ScheduleBooking() {
                 }}
               >
                 {isPaying
-                  ? "Opening Square…"
+                  ? "Opening checkout…"
                   : plan === "monthly"
-                    ? `Pay $${GYMDESK.monthlyPrice} on Square`
-                    : `Pay $${dropInTotal} on Square`}
+                    ? `Pay $${GYMDESK.monthlyPrice}`
+                    : `Pay $${dropInTotal}`}
               </button>
-            ) : !waiverDone ? (
-              <CallToAction href={WAIVER_HREF} variant="primary">
-                Sign training waiver first
-              </CallToAction>
             ) : (
-              <button type="button" disabled style={{ ...primaryButtonStyle, opacity: 0.55, cursor: "not-allowed" }}>
-                {!trimmedAthleteName
-                  ? "Enter athlete name"
-                  : !trimmedEmail.includes("@")
-                    ? "Enter parent email"
-                    : selectedCount === 0
-                      ? "Select Sundays"
-                      : "Finish selecting Sundays"}
+              <button
+                type="button"
+                disabled
+                style={{ ...primaryButtonStyle, opacity: 0.55, cursor: "not-allowed" }}
+              >
+                Finish booking details
               </button>
             )}
           </div>
-
-          {canCheckout ? (
-            <p style={remainingStyle}>
-              Selected: {selectedDates.map(formatDateLabel).join("; ")}. You’re
-              done after Square confirms payment.
-            </p>
-          ) : null}
         </li>
       </ol>
     </section>
@@ -487,19 +469,6 @@ const ctaRowStyle: React.CSSProperties = {
   flexWrap: "wrap",
   marginTop: 12,
   justifyContent: "flex-start",
-};
-
-const summaryStyle: React.CSSProperties = {
-  marginTop: 8,
-};
-
-const remainingStyle: React.CSSProperties = {
-  margin: "12px 0 0",
-  maxWidth: 720,
-  lineHeight: 1.6,
-  color: "var(--navy)",
-  opacity: 0.88,
-  fontSize: 14,
 };
 
 const primaryButtonStyle: React.CSSProperties = {

@@ -57,7 +57,7 @@ export const upcomingEvents: UpcomingEvent[] = [
       { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
       {
         label: "Investment",
-        value: `${SCHOOL_YEAR_FLYER.dropInPrice} drop-in · ${SCHOOL_YEAR_FLYER.monthlyPrice} once you are ready · ${SCHOOL_YEAR_FLYER.siblingDiscount}`,
+        value: `${SCHOOL_YEAR_FLYER.dropInPrice} drop-in · ${SCHOOL_YEAR_FLYER.monthlyPrice} for ${SCHOOL_YEAR_FLYER.monthlyDetail} · ${SCHOOL_YEAR_FLYER.siblingDiscount}`,
       },
     ],
     locationName: SCHOOL_YEAR_FLYER.venueName,

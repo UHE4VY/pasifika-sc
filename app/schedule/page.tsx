@@ -17,8 +17,7 @@ export default function SchedulePage() {
           <p style={eyebrowStyle}>Scheduling</p>
           <h1 style={titleStyle}>Book a session</h1>
           <p style={subtitleStyle}>
-            Sign the waiver, pick your Sundays, and pay once on Square. We add
-            your athlete to the Gymdesk roster automatically after payment.
+            A drop-in is $45. Pay $150 and choose any 4 Sundays.
           </p>
 
           <div style={ctaRowStyle}>

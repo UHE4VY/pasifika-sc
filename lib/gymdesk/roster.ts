@@ -1,7 +1,8 @@
 import {
-  buildRosterWebhookEvents,
-  type RosterPayload,
-} from "../roster/payload";
+  GYMDESK,
+  getGymdeskBookUrl,
+} from "../../content/gymdesk";
+import { type RosterPayload } from "../roster/payload";
 
 export type RosterResult = {
   ok: boolean;
@@ -11,32 +12,98 @@ export type RosterResult = {
   errors: string[];
 };
 
-/** Strip accidental "VAR_NAME=https://..." paste mistakes from Vercel env values. */
-export function getRosterWebhookUrl(): string | undefined {
-  const raw = process.env.GYMDESK_ROSTER_WEBHOOK_URL?.trim();
-  if (!raw) return undefined;
+function cookieHeader(response: Response) {
+  const cookies =
+    typeof response.headers.getSetCookie === "function"
+      ? response.headers.getSetCookie()
+      : [];
+  return cookies
+    .map((cookie) => cookie.split(";")[0])
+    .filter(Boolean)
+    .join("; ");
+}
 
-  const prefixed = raw.match(/^GYMDESK_ROSTER_WEBHOOK_URL=(.+)$/i);
-  if (prefixed) return prefixed[1].trim();
+async function createGymdeskBooking(input: {
+  classId: RosterPayload["classId"];
+  date: string;
+  athleteName: string;
+  email: string;
+  phone: string;
+}) {
+  const schedule = GYMDESK.schedules[input.classId];
+  const pageUrl = getGymdeskBookUrl({
+    classId: input.classId,
+    date: input.date,
+  });
+  const page = await fetch(pageUrl, {
+    headers: { Accept: "text/html" },
+  });
+  const cookie = cookieHeader(page);
+  const body = new URLSearchParams({
+    name: input.athleteName,
+    email: input.email,
+    phone: input.phone,
+    event_id: schedule.sessionId,
+    book_date: input.date,
+    selected_pricing_id: schedule.dropInPricingId,
+    form_id: GYMDESK.bookingFormId,
+    waitlist: "0",
+  });
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Accept: "application/json",
+    "X-Requested-With": "XMLHttpRequest",
+    Referer: pageUrl,
+    ...(cookie ? { Cookie: cookie } : {}),
+  };
 
-  return raw;
+  const validate = await fetch(`${GYMDESK.origin}/book/validatebook`, {
+    method: "POST",
+    headers,
+    body,
+  });
+  const validatePayload = (await validate.json().catch(() => null)) as {
+    success?: boolean;
+    message?: string;
+  } | null;
+
+  if (!validate.ok || !validatePayload?.success) {
+    throw new Error(
+      validatePayload?.message || "Gymdesk could not accept this Sunday."
+    );
+  }
+
+  const book = await fetch(`${GYMDESK.origin}/book`, {
+    method: "POST",
+    headers,
+    body,
+  });
+  const bookPayload = (await book.json().catch(() => null)) as {
+    success?: boolean;
+    message?: string;
+    errors?: string[];
+  } | null;
+  const alreadyBooked = [bookPayload?.message, ...(bookPayload?.errors || [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (alreadyBooked.includes("already")) {
+    return;
+  }
+
+  if (!book.ok || !bookPayload?.success) {
+    throw new Error(
+      bookPayload?.message ||
+        bookPayload?.errors?.[0] ||
+        "Gymdesk booking was not created."
+    );
+  }
 }
 
 export async function rosterAthleteOnGymdesk(
   payload: RosterPayload
 ): Promise<RosterResult> {
-  const webhookUrl = getRosterWebhookUrl();
-
-  if (!webhookUrl) {
-    return {
-      ok: false,
-      configured: false,
-      attempted: 0,
-      succeeded: 0,
-      errors: ["GYMDESK_ROSTER_WEBHOOK_URL is not configured."],
-    };
-  }
-
   if (!payload.email) {
     return {
       ok: false,
@@ -47,40 +114,42 @@ export async function rosterAthleteOnGymdesk(
     };
   }
 
-  const events = buildRosterWebhookEvents(payload);
+  if (!payload.phone) {
+    return {
+      ok: false,
+      configured: true,
+      attempted: 0,
+      succeeded: 0,
+      errors: ["A phone number is required to create Gymdesk bookings."],
+    };
+  }
+
   const errors: string[] = [];
   let succeeded = 0;
 
-  for (const event of events) {
+  for (const date of payload.selectedDates) {
     try {
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(event),
+      await createGymdeskBooking({
+        classId: payload.classId,
+        date,
+        athleteName: payload.athleteName,
+        email: payload.email,
+        phone: payload.phone,
       });
-
-      if (!response.ok) {
-        const text = await response.text();
-        errors.push(
-          `${event.date}: webhook failed (${response.status}) ${text.slice(0, 160)}`
-        );
-        continue;
-      }
-
       succeeded += 1;
     } catch (error) {
       errors.push(
-        `${event.date}: ${
-          error instanceof Error ? error.message : "webhook request failed"
+        `${date}: ${
+          error instanceof Error ? error.message : "Gymdesk booking failed"
         }`
       );
     }
   }
 
   return {
-    ok: succeeded === events.length && errors.length === 0,
+    ok: succeeded === payload.selectedDates.length && errors.length === 0,
     configured: true,
-    attempted: events.length,
+    attempted: payload.selectedDates.length,
     succeeded,
     errors,
   };

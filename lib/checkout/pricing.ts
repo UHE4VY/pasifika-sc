@@ -1,6 +1,6 @@
 import {
   GYMDESK,
-  getGymdeskClassDates,
+  getUpcomingGymdeskClassDates,
   type GymdeskClassId,
   type GymdeskPlan,
 } from "../../content/gymdesk";
@@ -12,6 +12,7 @@ export type CheckoutRequest = {
   selectedDates: string[];
   athleteName: string;
   email: string;
+  phone: string;
 };
 
 export type CheckoutLineItem = {
@@ -26,6 +27,7 @@ export type ValidatedCheckout = {
   selectedDates: string[];
   athleteName: string;
   email: string;
+  phone: string;
   lineItems: CheckoutLineItem[];
   totalCents: number;
   paymentNote: string;
@@ -53,15 +55,21 @@ function normalizeEmail(value: unknown) {
   return value.trim().toLowerCase().slice(0, 120);
 }
 
+function normalizePhone(value: unknown) {
+  if (typeof value !== "string") return "";
+  return value.trim().slice(0, 20);
+}
+
 export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
   if (!body || typeof body !== "object") {
     throw new CheckoutValidationError("Invalid request body.");
   }
 
-  const { classId, plan, selectedDates, athleteName, email } =
+  const { classId, plan, selectedDates, athleteName, email, phone } =
     body as Partial<CheckoutRequest>;
   const normalizedName = normalizeAthleteName(athleteName);
   const normalizedEmail = normalizeEmail(email);
+  const normalizedPhone = normalizePhone(phone);
 
   if (!normalizedName) {
     throw new CheckoutValidationError("Enter the athlete’s name.");
@@ -69,6 +77,10 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
 
   if (!normalizedEmail || !EMAIL_PATTERN.test(normalizedEmail)) {
     throw new CheckoutValidationError("Enter a valid parent email.");
+  }
+
+  if (normalizedPhone.replace(/\D/g, "").length < 10) {
+    throw new CheckoutValidationError("Enter a valid phone number.");
   }
 
   if (classId !== "middle-school" && classId !== "high-school") {
@@ -94,7 +106,7 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     }
   }
 
-  const allowedDates = new Set(getGymdeskClassDates());
+  const allowedDates = new Set(getUpcomingGymdeskClassDates());
   const invalidDates = uniqueDates.filter((dateKey) => !allowedDates.has(dateKey));
   if (invalidDates.length > 0) {
     throw new CheckoutValidationError("One or more dates are not bookable.");
@@ -111,12 +123,13 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     classId,
     plan,
     selectedDates: sortedDates,
+    phone: normalizedPhone,
   });
 
   if (plan === "monthly") {
     if (sortedDates.length !== GYMDESK.monthlySessionCount) {
       throw new CheckoutValidationError(
-        `Monthly checkout requires exactly ${GYMDESK.monthlySessionCount} Sundays.`
+        `The $150 payment books exactly ${GYMDESK.monthlySessionCount} Sundays.`
       );
     }
 
@@ -126,9 +139,10 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
       selectedDates: sortedDates,
       athleteName: who,
       email: normalizedEmail,
+      phone: normalizedPhone,
       lineItems: [
         {
-          name: `${schedule.title} monthly (${GYMDESK.monthlySessionCount} sessions)`,
+          name: `${schedule.title} · ${GYMDESK.monthlySessionCount} sessions`,
           quantity: 1,
           unitAmountCents: GYMDESK.monthlyPrice * 100,
         },
@@ -145,6 +159,7 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     selectedDates: sortedDates,
     athleteName: who,
     email: normalizedEmail,
+    phone: normalizedPhone,
     lineItems: [
       {
         name: `${schedule.title} drop-in`,

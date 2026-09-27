@@ -1,5 +1,9 @@
 import { createHmac, timingSafeEqual } from "crypto";
 import { NextResponse } from "next/server";
+import {
+  CheckoutValidationError,
+  validateCheckoutRequest,
+} from "../../../../lib/checkout/pricing";
 import { rosterAthleteOnGymdesk } from "../../../../lib/gymdesk/roster";
 import { parseRosterPaymentNote } from "../../../../lib/roster/payload";
 
@@ -77,20 +81,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, ignored: true, status: payment.status });
   }
 
-  const roster = parseRosterPaymentNote(payment.note);
-  if (!roster) {
+  const parsed = parseRosterPaymentNote(payment.note);
+  if (!parsed) {
     return NextResponse.json({ ok: true, ignored: true, reason: "not_psc_roster" });
   }
 
+  let checkout;
+  try {
+    checkout = validateCheckoutRequest(parsed);
+  } catch (error) {
+    if (error instanceof CheckoutValidationError) {
+      return NextResponse.json({ ok: true, ignored: true, reason: "invalid_booking" });
+    }
+    throw error;
+  }
+
   const result = await rosterAthleteOnGymdesk({
-    ...roster,
+    ...checkout,
     orderId: payment.order_id || payment.id,
   });
-
-  if (!result.configured) {
-    console.warn("Square webhook: roster webhook URL not configured.");
-    return NextResponse.json({ ok: true, roster: result });
-  }
 
   if (!result.ok) {
     console.error("Square webhook roster errors:", result.errors);
