@@ -6,7 +6,7 @@
  *
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
  * Parents sign the training waiver on /waiver, choose a class on /schedule,
- * then pay on Square: $45 per drop-in Sunday, or $150 for any 4 Sundays
+ * then pay on Square: $45 per class. PRO-EDGE athletes receive a 15% discount.
  * they choose. After payment the site creates one free
  * Gymdesk booking per Sunday so parents are not charged again.
  */
@@ -35,7 +35,7 @@ export const GYMDESK = {
       scheduleId: "36061",
       sessionId: "1774027",
       dropInPricingId: "294487",
-      title: "Middle School",
+      title: "PSC Elite",
       audience: "Coed",
       startTime: "4:00 PM",
       endTime: "5:30 PM",

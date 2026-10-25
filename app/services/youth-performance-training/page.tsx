@@ -4,11 +4,8 @@ import React from "react";
 import CallToAction from "../../../components/CallToAction";
 import ClassPaymentOptions from "../../../components/ClassPaymentOptions";
 import {
-  BOOK_SESSIONS_HREF,
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
-  WAIVER_HREF,
-  getSessionCtas,
 } from "../../../content/schoolYearGroupClasses";
 
 export default function YouthPerformancePage() {
@@ -21,14 +18,6 @@ export default function YouthPerformancePage() {
           Coach-led Sunday sessions for speed, strength, and movement quality.
         </p>
 
-        <div style={ctaRowStyle}>
-          <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
-            Book and pay
-          </CallToAction>
-          <CallToAction href={WAIVER_HREF} variant="waiver">
-            Sign training waiver
-          </CallToAction>
-        </div>
       </section>
 
       <section style={panelStyle}>
@@ -58,25 +47,14 @@ export default function YouthPerformancePage() {
             <div className="early-registration-sessions">
               {SCHOOL_YEAR_SESSIONS.map((session) => (
                 <div key={session.id} style={cardStyle}>
-                  <p style={sessionEyebrowStyle}>
-                    {session.id === "middle-school" ? "Session 1" : "Session 2"}
-                  </p>
                   <h3 style={cardTitleStyle}>{session.title}</h3>
                   <p style={cardBodyStyle}>{session.audience}</p>
+                  {session.description ? (
+                    <p style={cardBodyStyle}>{session.description}</p>
+                  ) : null}
                   <p style={sessionTimeStyle}>
                     {session.startTime} – {session.endTime}
                   </p>
-                  <div style={sessionCtaStyle}>
-                    {getSessionCtas(session).map((action) => (
-                      <CallToAction
-                        key={action.href}
-                        href={action.href}
-                        variant={action.variant}
-                      >
-                        {action.label}
-                      </CallToAction>
-                    ))}
-                  </div>
                 </div>
               ))}
             </div>
@@ -84,13 +62,9 @@ export default function YouthPerformancePage() {
             <div style={pricingBoxStyle}>
               <p style={pricingLabelStyle}>Pricing</p>
               <p style={pricingValueStyle}>
-                {SCHOOL_YEAR_FLYER.dropInPrice} drop-in
+                {SCHOOL_YEAR_FLYER.priceSummary}
               </p>
-              <p style={cardBodyStyle}>
-                {SCHOOL_YEAR_FLYER.monthlyPrice} for{" "}
-                {SCHOOL_YEAR_FLYER.monthlyDetail}
-              </p>
-              <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.siblingDiscount}</p>
+              <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.proEdgeNote}</p>
             </div>
           </div>
         </div>
@@ -112,7 +86,8 @@ export default function YouthPerformancePage() {
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Try September first</h3>
             <p style={cardBodyStyle}>
-              A drop-in is $45. Pay $150 and choose any 4 Sundays.
+              Each class is $45. PRO-EDGE athletes receive a 15% discount.
+              Please contact Coach Josh for the code.
             </p>
           </div>
 
@@ -171,7 +146,8 @@ export default function YouthPerformancePage() {
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
         <p style={cardBodyStyle}>
-          A drop-in is $45. Pay $150 and choose any 4 Sundays.
+          Each class is $45. PRO-EDGE athletes receive a 15% discount. Please
+          contact Coach Josh for the code.
         </p>
 
         <div
@@ -183,9 +159,6 @@ export default function YouthPerformancePage() {
             justifyContent: "center",
           }}
         >
-          <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
-            Book and pay
-          </CallToAction>
           <CallToAction href="/services" variant="secondary">
             Back to services
           </CallToAction>
@@ -239,15 +212,6 @@ const subtitleStyle: React.CSSProperties = {
   color: "var(--navy)",
   opacity: 0.88,
   textAlign: "center",
-};
-
-const ctaRowStyle: React.CSSProperties = {
-  display: "flex",
-  gap: 12,
-  flexWrap: "wrap",
-  marginTop: 18,
-  justifyContent: "center",
-  alignItems: "center",
 };
 
 const dividerStyle: React.CSSProperties = {
@@ -311,28 +275,11 @@ const startLabelStyle: React.CSSProperties = {
   color: "var(--navy)",
 };
 
-const sessionEyebrowStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 12,
-  fontWeight: 800,
-  letterSpacing: "0.04em",
-  textTransform: "uppercase",
-  color: "var(--accent)",
-};
-
 const sessionTimeStyle: React.CSSProperties = {
   margin: "10px 0 0",
   fontSize: 18,
   fontWeight: 800,
   color: "var(--navy)",
-};
-
-const sessionCtaStyle: React.CSSProperties = {
-  marginTop: 14,
-  display: "flex",
-  gap: 12,
-  flexWrap: "wrap",
-  justifyContent: "center",
 };
 
 const pricingBoxStyle: React.CSSProperties = {

@@ -17,14 +17,10 @@ export default function SchedulePage() {
           <p style={eyebrowStyle}>Scheduling</p>
           <h1 style={titleStyle}>Book a session</h1>
           <p style={subtitleStyle}>
-            A drop-in is $45. Pay $150 and choose any 4 Sundays.
+            Each class is $45. PRO-EDGE athletes receive a 15% discount.
+            Please contact Coach Josh for the code.
           </p>
 
-          <div style={ctaRowStyle}>
-            <CallToAction href="#book-sessions" variant="primary">
-              Book and pay
-            </CallToAction>
-          </div>
         </section>
 
         <ScheduleBooking />
@@ -32,8 +28,7 @@ export default function SchedulePage() {
         <section style={panelStyle}>
           <h2 style={sectionTitleStyle}>Pricing</h2>
           <p style={panelBodyStyle}>
-            Middle School (Coed) 4:00–5:30 PM · High School (Girls only)
-            5:30–7:00 PM · {SCHOOL_YEAR_FLYER.priceSummary}
+            PSC Elite (Coed) 4:00–5:30 PM · {SCHOOL_YEAR_FLYER.priceSummary}
           </p>
           <ClassPaymentOptions />
           <div style={ctaRowStyle}>

@@ -1,4 +1,3 @@
-import CallToAction from "@/components/CallToAction";
 import ClassPaymentOptions from "@/components/ClassPaymentOptions";
 import {
   CANCELLED_CLASS_DATES,
@@ -11,7 +10,6 @@ import {
 import {
   BOOK_SESSIONS_HREF,
   SCHOOL_YEAR_FLYER,
-  WAIVER_HREF,
 } from "@/content/schoolYearGroupClasses";
 
 type DayClass = GroupClassTemplate & { cancelled?: boolean };
@@ -199,14 +197,6 @@ export default function GroupSchedulePage() {
           {SCHOOL_YEAR_FLYER.startLabel} {SCHOOL_YEAR_FLYER.endLabel}.
         </p>
 
-        <div style={{ ...ctaRowStyle, marginTop: 18 }}>
-          <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
-            Book and pay
-          </CallToAction>
-          <CallToAction href={WAIVER_HREF} variant="waiver">
-            Sign training waiver
-          </CallToAction>
-        </div>
       </section>
 
       <section className="group-schedule-panel" style={panelStyle}>
@@ -226,6 +216,9 @@ export default function GroupSchedulePage() {
               </p>
               <p style={weeklyTitleStyle}>{session.title}</p>
               <p style={weeklySubtitleStyle}>{session.subtitle}</p>
+              {session.description ? (
+                <p style={weeklySubtitleStyle}>{session.description}</p>
+              ) : null}
             </div>
           ))}
         </div>
@@ -364,12 +357,4 @@ const notesListStyle: React.CSSProperties = {
   paddingLeft: 20,
   lineHeight: 1.8,
   color: "var(--navy)",
-};
-
-const ctaRowStyle: React.CSSProperties = {
-  display: "flex",
-  gap: 12,
-  flexWrap: "wrap",
-  justifyContent: "center",
-  marginTop: 8,
 };

@@ -742,6 +742,10 @@
   box-shadow: 0 8px 20px var(--shadow);
   }
 
+  .upcoming-event-card--text {
+  grid-template-columns: 1fr;
+  }
+
   .upcoming-event-card__poster {
   width: 100%;
   }

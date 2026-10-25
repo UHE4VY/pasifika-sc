@@ -6,7 +6,7 @@ export const WAIVER_HREF = "/waiver";
 export const SCHOOL_YEAR_FLYER = {
   imageSrc: "/events/school-year-group-classes.png",
   imageAlt:
-    "Pasifika S&C school-year group classes flyer for Sunday middle school and high school sessions",
+    "Pasifika Strength & Conditioning logo with PSC Elite class details: Sundays 4:00–5:30 PM, $45 per class",
   headline: "Maintain and level up your gains this school year",
   startDate: "2026-09-06",
   endDate: "2026-12-06",
@@ -17,28 +17,28 @@ export const SCHOOL_YEAR_FLYER = {
   monthlyPrice: "$150",
   monthlyDetail: "four sessions",
   siblingDiscount: "15% off for siblings",
-  priceSummary:
-    "$45 drop-in · $150 for any 4 Sundays · 15% sibling discount",
+  priceSummary: "$45 per class",
+  proEdgeNote:
+    "PRO-EDGE athletes receive a 15% discount. Please contact Coach Josh for the code.",
   tryFirstNote:
-    "Sign the waiver first. A drop-in is $45. Pay $150 and choose any 4 Sundays.",
+    "Each class is $45. PRO-EDGE athletes receive a 15% discount. Please contact Coach Josh for the code.",
   venueName: "Maximum Fitness & Performance",
   venueAddress: "1700 Industrial Rd, STE C, San Carlos, CA 94070",
 } as const;
 
 export const PAYMENT_OPTIONS = {
   dropIn: {
-    eyebrow: "No monthly commitment",
-    title: "Drop-in sessions",
-    price: "$45 per Sunday",
-    description:
-      "Pick the Sundays you want. Each one is $45.",
+    eyebrow: "Each class",
+    title: "PSC Elite",
+    price: "$45 per class",
+    description: "Pick the Sundays you want. Each class is $45.",
   },
   monthly: {
-    eyebrow: "Four sessions",
-    title: "4-session pack",
-    price: "$150",
+    eyebrow: "PRO-EDGE athletes",
+    title: "15% discount",
+    price: "",
     description:
-      "Choose any 4 Sundays for $150. 15% sibling discount.",
+      "PRO-EDGE athletes receive a 15% discount. Please contact Coach Josh for the code.",
   },
 } as const;
 
@@ -46,6 +46,7 @@ export type SchoolYearSession = {
   id: GymdeskClassId;
   title: string;
   audience: string;
+  description?: string;
   startTime: string;
   endTime: string;
   programKey: "jam" | "intensive";
@@ -107,26 +108,16 @@ export function getSessionCtas(_session: SessionPaymentLinks): SessionCta[] {
 export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
   {
     id: "middle-school",
-    title: "Middle School",
+    title: "PSC Elite",
     audience: "Coed",
+    description:
+      "7th grade and up. Athletes must be able to execute the core barbell lifts. Includes Olympic lifts, plyometrics, power development, and more.",
     startTime: "4:00 PM",
     endTime: "5:30 PM",
     programKey: "jam",
     registerHref: BOOK_SESSIONS_HREF,
-    registerLabel: "Book Middle School",
+    registerLabel: "Book PSC Elite",
     dropInHref: BOOK_SESSIONS_HREF,
-    dropInLabel: "Book Middle School",
-  },
-  {
-    id: "high-school",
-    title: "High School",
-    audience: "Girls only",
-    startTime: "5:30 PM",
-    endTime: "7:00 PM",
-    programKey: "intensive",
-    registerHref: BOOK_SESSIONS_HREF,
-    registerLabel: "Book High School",
-    dropInHref: BOOK_SESSIONS_HREF,
-    dropInLabel: "Book High School",
+    dropInLabel: "Book PSC Elite",
   },
 ];

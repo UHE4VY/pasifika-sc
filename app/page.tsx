@@ -144,15 +144,12 @@ export default function HomePage() {
 
     <h3 style={newClientSpecialHeadingStyle}>5 1:1 Coaching Sessions</h3>
 
-    <p style={newClientSpecialPriceStyle}>5 Sessions for $650</p>
+    <p style={newClientSpecialPriceStyle}>5 Sessions for $700</p>
 
-    <p style={newClientSpecialMetaStyle}>
-      $130 per session • Current package rate
-    </p>
+    <p style={newClientSpecialMetaStyle}>$140 per session</p>
 
     <p style={newClientSpecialBodyStyle}>
-      A straightforward way to get started with private coaching. Session rates
-      will increase to $140 soon—this package locks in the current rate.
+      A straightforward way to get started with private coaching.
     </p>
 
     <div style={{ marginTop: 20 }}>
@@ -419,10 +416,6 @@ export default function HomePage() {
           >
             <CallToAction href="/intake" variant="primary">
               Start athlete intake
-            </CallToAction>
-
-            <CallToAction href="/waiver" variant="waiver">
-              Sign training waiver
             </CallToAction>
 
             <CallToAction href="/schedule" variant="secondary">

@@ -17,20 +17,27 @@ export default function UpcomingEvents() {
     <section style={sectionStyle}>
       <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        Sunday group classes start September 6. Pay for a few drop-in sessions
-        first, then join monthly when you are ready.
+        Sunday group classes are $45 per class. PRO-EDGE athletes receive a
+        15% discount. Please contact Coach Josh for the code.
       </p>
 
       <div style={eventsStackStyle}>
         {upcomingEvents.map((event) => (
-          <article key={event.id} className="upcoming-event-card">
-            <div className="upcoming-event-card__poster">
-              <img
-                src={event.imageSrc}
-                alt={event.imageAlt}
-                className="upcoming-event-card__image"
-              />
-            </div>
+          <article
+            key={event.id}
+            className={`upcoming-event-card${
+              event.imageSrc ? "" : " upcoming-event-card--text"
+            }`}
+          >
+            {event.imageSrc ? (
+              <div className="upcoming-event-card__poster">
+                <img
+                  src={event.imageSrc}
+                  alt={event.imageAlt}
+                  className="upcoming-event-card__image"
+                />
+              </div>
+            ) : null}
 
             <div className="upcoming-event-card__content">
               <p style={eventTypeStyle}>{eventTypeLabels[event.type]}</p>
@@ -41,9 +48,14 @@ export default function UpcomingEvents() {
                 <div className="upcoming-event-card__sessions">
                   {event.sessions.map((session, index) => (
                     <div key={session.id} style={sessionCardStyle}>
-                      <p style={sessionEyebrowStyle}>Session {index + 1}</p>
+                      {event.sessions && event.sessions.length > 1 ? (
+                        <p style={sessionEyebrowStyle}>Session {index + 1}</p>
+                      ) : null}
                       <h4 style={sessionTitleStyle}>{session.title}</h4>
                       <p style={sessionAudienceStyle}>{session.audience}</p>
+                      {session.description ? (
+                        <p style={sessionAudienceStyle}>{session.description}</p>
+                      ) : null}
                       <p style={sessionTimeStyle}>
                         {session.startTime} – {session.endTime}
                       </p>

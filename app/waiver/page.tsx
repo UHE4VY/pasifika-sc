@@ -1,7 +1,5 @@
 "use client";
 
-import CallToAction from "../../components/CallToAction";
-
 const WAIVER_EMBED_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfw4ZJOMzBxBRzEPoNiA6JZXwP6SQ8RLMZJqAtESATG9zY_dw/viewform?embedded=true";
 const WAIVER_FALLBACK_URL = "https://forms.gle/2cFrfQcDwp74DMJ78";
@@ -16,15 +14,6 @@ export default function WaiverPage() {
         athlete can participate in PSC programs. Please fill it out prior to the
         first session so we can provide safe, structured training.
       </p>
-
-      <div style={ctaWrap}>
-        <CallToAction href={WAIVER_FALLBACK_URL} variant="waiver">
-          Sign training waiver
-        </CallToAction>
-        <CallToAction href="/schedule#book-sessions" variant="secondary">
-          Book and pay
-        </CallToAction>
-      </div>
 
       <iframe
         src={WAIVER_EMBED_URL}
@@ -61,13 +50,6 @@ const subtitle: React.CSSProperties = {
   marginBottom: 18,
   opacity: 0.8,
   lineHeight: 1.7,
-};
-
-const ctaWrap: React.CSSProperties = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: 12,
-  marginBottom: 24,
 };
 
 const fallbackNote: React.CSSProperties = {

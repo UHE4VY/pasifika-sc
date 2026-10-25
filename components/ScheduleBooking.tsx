@@ -6,21 +6,16 @@ import { GROUP_SCHEDULE_MONTHS } from "../content/groupSchedule";
 import {
   GYMDESK,
   getUpcomingGymdeskDatesForMonth,
-  type GymdeskClassId,
-  type GymdeskPlan,
 } from "../content/gymdesk";
-import { WAIVER_HREF } from "../content/schoolYearGroupClasses";
+import {
+  SCHOOL_YEAR_SESSIONS,
+  WAIVER_HREF,
+} from "../content/schoolYearGroupClasses";
 
-const CLASS_OPTIONS: { id: GymdeskClassId; label: string }[] = [
-  {
-    id: "middle-school",
-    label: `${GYMDESK.schedules["middle-school"].title} (${GYMDESK.schedules["middle-school"].audience}) · ${GYMDESK.schedules["middle-school"].startTime}–${GYMDESK.schedules["middle-school"].endTime}`,
-  },
-  {
-    id: "high-school",
-    label: `${GYMDESK.schedules["high-school"].title} (${GYMDESK.schedules["high-school"].audience}) · ${GYMDESK.schedules["high-school"].startTime}–${GYMDESK.schedules["high-school"].endTime}`,
-  },
-];
+const BOOKABLE_CLASS = GYMDESK.schedules["middle-school"];
+const BOOKABLE_CLASS_DESCRIPTION = SCHOOL_YEAR_SESSIONS.find(
+  (session) => session.id === "middle-school"
+)?.description;
 
 function formatDateLabel(dateKey: string) {
   const [year, month, day] = dateKey.split("-").map(Number);
@@ -33,8 +28,8 @@ function formatDateLabel(dateKey: string) {
 
 export default function ScheduleBooking() {
   const [waiverDone, setWaiverDone] = useState(false);
-  const [classId, setClassId] = useState<GymdeskClassId>("middle-school");
-  const [plan, setPlan] = useState<GymdeskPlan>("drop-in");
+  const classId = "middle-school" as const;
+  const plan = "drop-in" as const;
   const [month, setMonth] = useState(9);
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [athleteName, setAthleteName] = useState("");
@@ -49,8 +44,6 @@ export default function ScheduleBooking() {
   );
   const selectedCount = selectedDates.length;
   const dropInTotal = selectedCount * GYMDESK.dropInPrice;
-  const fourSessionReady =
-    plan === "drop-in" || selectedCount === GYMDESK.monthlySessionCount;
   const trimmedAthleteName = athleteName.trim();
   const trimmedEmail = email.trim();
   const trimmedPhone = phone.trim();
@@ -60,29 +53,12 @@ export default function ScheduleBooking() {
     trimmedAthleteName.length > 0 &&
     trimmedEmail.includes("@") &&
     phoneOk &&
-    selectedCount > 0 &&
-    fourSessionReady;
-
-  function choosePlan(nextPlan: GymdeskPlan) {
-    setPlan(nextPlan);
-    if (nextPlan === "monthly") {
-      setSelectedDates((current) =>
-        current.slice(0, GYMDESK.monthlySessionCount)
-      );
-    }
-  }
+    selectedCount > 0;
 
   function toggleDate(dateKey: string) {
     setSelectedDates((current) => {
       if (current.includes(dateKey)) {
         return current.filter((date) => date !== dateKey);
-      }
-
-      if (
-        plan === "monthly" &&
-        current.length >= GYMDESK.monthlySessionCount
-      ) {
-        return current;
       }
 
       return [...current, dateKey].sort();
@@ -135,8 +111,8 @@ export default function ScheduleBooking() {
     >
       <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        A drop-in is ${GYMDESK.dropInPrice}. Pay ${GYMDESK.monthlyPrice} and
-        choose any {GYMDESK.monthlySessionCount} Sundays. No class on November
+        Each class is ${GYMDESK.dropInPrice}. PRO-EDGE athletes receive a 15%
+        discount. Please contact Coach Josh for the code. No class on November
         1 or November 29.
       </p>
 
@@ -165,7 +141,7 @@ export default function ScheduleBooking() {
             pointerEvents: waiverDone ? "auto" : "none",
           }}
         >
-          <strong>2. Choose class, plan, and Sundays</strong>
+          <strong>2. Choose class and Sundays</strong>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Athlete name</legend>
             <input
@@ -200,61 +176,14 @@ export default function ScheduleBooking() {
             />
           </fieldset>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
-            <legend style={legendStyle}>Plan</legend>
-            <div className="schedule-plan-toggle">
-              <label
-                className={`schedule-plan-toggle__option${
-                  plan === "drop-in"
-                    ? " schedule-plan-toggle__option--selected"
-                    : ""
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="schedule-plan"
-                  value="drop-in"
-                  checked={plan === "drop-in"}
-                  onChange={() => choosePlan("drop-in")}
-                />
-                <span>Drop-in · ${GYMDESK.dropInPrice} each</span>
-              </label>
-              <label
-                className={`schedule-plan-toggle__option${
-                  plan === "monthly"
-                    ? " schedule-plan-toggle__option--selected"
-                    : ""
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="schedule-plan"
-                  value="monthly"
-                  checked={plan === "monthly"}
-                  onChange={() => choosePlan("monthly")}
-                />
-                <span>
-                  {GYMDESK.monthlySessionCount} sessions · $
-                  {GYMDESK.monthlyPrice}
-                </span>
-              </label>
-            </div>
-          </fieldset>
-          <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Class</legend>
-            <div style={classRowStyle}>
-              {CLASS_OPTIONS.map((option) => (
-                <label key={option.id} style={choiceStyle}>
-                  <input
-                    type="radio"
-                    name="schedule-class"
-                    value={option.id}
-                    checked={classId === option.id}
-                    onChange={() => setClassId(option.id)}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
+            <p style={classNameStyle}>
+              {BOOKABLE_CLASS.title} ({BOOKABLE_CLASS.audience}) ·{" "}
+              {BOOKABLE_CLASS.startTime}–{BOOKABLE_CLASS.endTime}
+            </p>
+            {BOOKABLE_CLASS_DESCRIPTION ? (
+              <p style={classDescriptionStyle}>{BOOKABLE_CLASS_DESCRIPTION}</p>
+            ) : null}
           </fieldset>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
             <legend style={legendStyle}>Month</legend>
@@ -276,21 +205,13 @@ export default function ScheduleBooking() {
             </div>
           </fieldset>
           <fieldset style={fieldsetStyle} disabled={!waiverDone}>
-            <legend style={legendStyle}>
-              {plan === "monthly"
-                ? `Choose ${GYMDESK.monthlySessionCount} Sundays`
-                : "Choose Sundays"}
-            </legend>
+            <legend style={legendStyle}>Choose Sundays</legend>
             {monthDates.length === 0 ? (
               <p style={panelBodyStyle}>No remaining Sundays this month.</p>
             ) : (
               <div className="september-session-picker">
                 {monthDates.map((dateKey) => {
                   const checked = selectedDates.includes(dateKey);
-                  const locked =
-                    plan === "monthly" &&
-                    !checked &&
-                    selectedCount >= GYMDESK.monthlySessionCount;
                   return (
                     <label
                       key={dateKey}
@@ -303,7 +224,6 @@ export default function ScheduleBooking() {
                       <input
                         type="checkbox"
                         checked={checked}
-                        disabled={locked}
                         onChange={() => toggleDate(dateKey)}
                       />
                       <span>{formatDateLabel(dateKey)}</span>
@@ -328,20 +248,15 @@ export default function ScheduleBooking() {
               ? "Sign the training waiver to unlock booking."
               : selectedCount === 0
                 ? "Select the Sundays you want."
-                : plan === "monthly" &&
-                    selectedCount !== GYMDESK.monthlySessionCount
-                  ? `Choose ${GYMDESK.monthlySessionCount} Sundays. You have ${selectedCount} selected.`
-                  : !trimmedAthleteName
-                    ? "Enter the athlete’s name."
-                    : !trimmedEmail.includes("@")
-                      ? "Enter the parent email."
-                      : !phoneOk
-                        ? "Enter a phone number."
-                        : plan === "monthly"
-                          ? `${trimmedAthleteName} · ${selectedCount} Sundays · $${GYMDESK.monthlyPrice}.`
-                          : `${trimmedAthleteName} · ${selectedCount} Sunday${
-                              selectedCount === 1 ? "" : "s"
-                            } · $${dropInTotal}.`}
+                : !trimmedAthleteName
+                  ? "Enter the athlete’s name."
+                  : !trimmedEmail.includes("@")
+                    ? "Enter the parent email."
+                    : !phoneOk
+                      ? "Enter a phone number."
+                      : `${trimmedAthleteName} · ${selectedCount} class${
+                          selectedCount === 1 ? "" : "es"
+                        } · $${dropInTotal}.`}
           </p>
           {payError ? <p style={errorStyle}>{payError}</p> : null}
           <div style={ctaRowStyle}>
@@ -356,11 +271,7 @@ export default function ScheduleBooking() {
                   cursor: isPaying ? "wait" : "pointer",
                 }}
               >
-                {isPaying
-                  ? "Opening checkout…"
-                  : plan === "monthly"
-                    ? `Pay $${GYMDESK.monthlyPrice}`
-                    : `Pay $${dropInTotal}`}
+                {isPaying ? "Opening checkout…" : `Pay $${dropInTotal}`}
               </button>
             ) : (
               <button
@@ -448,9 +359,19 @@ const inputStyle: React.CSSProperties = {
   fontWeight: 600,
 };
 
-const classRowStyle: React.CSSProperties = {
-  display: "grid",
-  gap: 10,
+const classNameStyle: React.CSSProperties = {
+  margin: "8px 0 0",
+  color: "var(--navy)",
+  fontWeight: 700,
+  lineHeight: 1.5,
+};
+
+const classDescriptionStyle: React.CSSProperties = {
+  margin: "6px 0 0",
+  color: "var(--navy)",
+  fontWeight: 500,
+  lineHeight: 1.5,
+  opacity: 0.82,
 };
 
 const choiceStyle: React.CSSProperties = {

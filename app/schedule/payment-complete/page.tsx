@@ -45,7 +45,7 @@ export default async function PaymentCompletePage({
   let email: string | null = null;
   let dates: string[] = [];
   let rosterMessage =
-    "Choose a class on the schedule, then pay $45 per Sunday or $150 for any 4 Sundays.";
+    "Choose a class on the schedule. Each class is $45.";
 
   if (transactionId) {
     try {
@@ -115,7 +115,7 @@ export default async function PaymentCompletePage({
             ) : null}
             {plan ? (
               <p style={summaryLineStyle}>
-                {plan === "monthly" ? "4 sessions · $150" : "Drop-in"}
+                {plan === "monthly" ? "4 sessions · $150" : "$45 per class"}
               </p>
             ) : null}
             <ul style={dateListStyle}>

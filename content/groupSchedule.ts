@@ -12,6 +12,7 @@ export type GroupClassTemplate = {
   endTime: string;
   title: string;
   subtitle: string;
+  description?: string;
   programKey: "intensive" | "jam";
   startDate: string;
   endDate: string;
@@ -38,6 +39,7 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
     endTime: session.endTime,
     title: session.title,
     subtitle: session.audience,
+    description: session.description,
     programKey: session.programKey,
     startDate: SCHOOL_YEAR_FLYER.startDate,
     endDate: GYMDESK.series.endDate,
@@ -57,6 +59,6 @@ export const PROGRAM_NOTES = [
   "No class on November 1 or November 29.",
   "Each class is 90 minutes.",
   SCHOOL_YEAR_FLYER.priceSummary,
+  SCHOOL_YEAR_FLYER.proEdgeNote,
   `At ${SCHOOL_YEAR_FLYER.venueName}, ${SCHOOL_YEAR_FLYER.venueAddress}.`,
-  "A drop-in is $45. Pay $150 and choose any 4 Sundays.",
 ];

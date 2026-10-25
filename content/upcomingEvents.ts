@@ -17,7 +17,7 @@ export type UpcomingEventRegisterAction = {
 
 export type UpcomingEventSession = Pick<
   SchoolYearSession,
-  "id" | "title" | "audience" | "startTime" | "endTime"
+  "id" | "title" | "audience" | "description" | "startTime" | "endTime"
 >;
 
 export type UpcomingEvent = {
@@ -31,8 +31,8 @@ export type UpcomingEvent = {
   details: UpcomingEventDetail[];
   locationName?: string;
   locationAddress?: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   registerHref?: string;
   registerActions?: UpcomingEventRegisterAction[];
   secondaryHref?: string;
@@ -49,6 +49,7 @@ export const upcomingEvents: UpcomingEvent[] = [
       id: session.id,
       title: session.title,
       audience: session.audience,
+      description: session.description,
       startTime: session.startTime,
       endTime: session.endTime,
     })),
@@ -57,21 +58,14 @@ export const upcomingEvents: UpcomingEvent[] = [
       { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
       {
         label: "Investment",
-        value: `${SCHOOL_YEAR_FLYER.dropInPrice} drop-in · ${SCHOOL_YEAR_FLYER.monthlyPrice} for ${SCHOOL_YEAR_FLYER.monthlyDetail} · ${SCHOOL_YEAR_FLYER.siblingDiscount}`,
+        value: `${SCHOOL_YEAR_FLYER.priceSummary}. ${SCHOOL_YEAR_FLYER.proEdgeNote}`,
       },
     ],
     locationName: SCHOOL_YEAR_FLYER.venueName,
     locationAddress: SCHOOL_YEAR_FLYER.venueAddress,
     imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
     imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
-    registerActions: [
-      {
-        href: "/schedule#book-sessions",
-        label: "Book and pay",
-        variant: "primary",
-      },
-      { href: "/waiver", label: "Sign training waiver", variant: "waiver" },
-    ],
+    registerActions: [],
     secondaryHref: "/group-schedule",
     secondaryLabel: "View class schedule",
   },

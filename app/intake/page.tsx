@@ -17,12 +17,6 @@ export default function IntakePage() {
         <CallToAction href={GYMDESK.signupUrl} variant="primary">
           Complete intake in Gymdesk
         </CallToAction>
-        <CallToAction href="/waiver" variant="waiver">
-          Sign training waiver
-        </CallToAction>
-        <CallToAction href="/schedule#book-sessions" variant="secondary">
-          Book and pay
-        </CallToAction>
       </div>
     </main>
   );

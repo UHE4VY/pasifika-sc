@@ -83,7 +83,11 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     throw new CheckoutValidationError("Enter a valid phone number.");
   }
 
-  if (classId !== "middle-school" && classId !== "high-school") {
+  if (classId === "high-school") {
+    throw new CheckoutValidationError("High School is not open for booking.");
+  }
+
+  if (classId !== "middle-school") {
     throw new CheckoutValidationError("Choose a valid class.");
   }
 
@@ -127,30 +131,9 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
   });
 
   if (plan === "monthly") {
-    if (sortedDates.length !== GYMDESK.monthlySessionCount) {
-      throw new CheckoutValidationError(
-        `The $150 payment books exactly ${GYMDESK.monthlySessionCount} Sundays.`
-      );
-    }
-
-    return {
-      classId,
-      plan,
-      selectedDates: sortedDates,
-      athleteName: who,
-      email: normalizedEmail,
-      phone: normalizedPhone,
-      lineItems: [
-        {
-          name: `${schedule.title} · ${GYMDESK.monthlySessionCount} sessions`,
-          quantity: 1,
-          unitAmountCents: GYMDESK.monthlyPrice * 100,
-        },
-      ],
-      totalCents: GYMDESK.monthlyPrice * 100,
-      description: `${schedule.title} monthly · ${who} · ${dateSummary}`,
-      paymentNote,
-    };
+    throw new CheckoutValidationError(
+      "Classes are $45 each. The 4-session pack is no longer available."
+    );
   }
 
   return {
@@ -162,13 +145,13 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     phone: normalizedPhone,
     lineItems: [
       {
-        name: `${schedule.title} drop-in`,
+        name: `${schedule.title} class`,
         quantity: sortedDates.length,
         unitAmountCents: GYMDESK.dropInPrice * 100,
       },
     ],
     totalCents: sortedDates.length * GYMDESK.dropInPrice * 100,
-    description: `${schedule.title} drop-in · ${who} · ${dateSummary}`,
+    description: `${schedule.title} · ${who} · ${dateSummary}`,
     paymentNote,
   };
 }

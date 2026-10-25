@@ -145,20 +145,19 @@ export default function OneOnOneServicePage() {
 
   <div style={pricingGridStyle}>
     <div style={pricingCardFeaturedStyle}>
-      <p style={pricingBadgeStyle}>Current package rate</p>
+      <p style={pricingBadgeStyle}>$140 per session</p>
 
       <p style={pricingTierStyle}>5 Private Coaching Sessions</p>
 
       <h3 style={pricingPriceStyle}>
-        $650<span style={pricingMonthStyle}> / 5 sessions</span>
+        $700<span style={pricingMonthStyle}> / 5 sessions</span>
       </h3>
 
-      <p style={pricingFreqStyle}>$130 per session</p>
+      <p style={pricingFreqStyle}>$140 per session</p>
 
       <p style={pricingDescStyle}>
         Includes a free initial consultation so we can understand the athlete’s
-        goals, training history, schedule, and best path forward. Session rates
-        will increase to $140 soon—this package locks in the current rate.
+        goals, training history, schedule, and best path forward.
       </p>
 
       <ul style={pricingListStyle}>

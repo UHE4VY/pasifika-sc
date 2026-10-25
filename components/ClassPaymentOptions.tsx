@@ -1,9 +1,4 @@
-import CallToAction from "./CallToAction";
-import {
-  BOOK_SESSIONS_HREF,
-  PAYMENT_OPTIONS,
-  WAIVER_HREF,
-} from "../content/schoolYearGroupClasses";
+import { PAYMENT_OPTIONS } from "../content/schoolYearGroupClasses";
 
 export default function ClassPaymentOptions({
   id = "how-to-join",
@@ -23,18 +18,11 @@ export default function ClassPaymentOptions({
         <article style={cardStyle}>
           <p style={eyebrowStyle}>{PAYMENT_OPTIONS.monthly.eyebrow}</p>
           <h3 style={titleStyle}>{PAYMENT_OPTIONS.monthly.title}</h3>
-          <p style={priceStyle}>{PAYMENT_OPTIONS.monthly.price}</p>
+          {PAYMENT_OPTIONS.monthly.price ? (
+            <p style={priceStyle}>{PAYMENT_OPTIONS.monthly.price}</p>
+          ) : null}
           <p style={bodyStyle}>{PAYMENT_OPTIONS.monthly.description}</p>
         </article>
-      </div>
-
-      <div style={ctaRowStyle}>
-        <CallToAction href={BOOK_SESSIONS_HREF} variant="primary">
-          Book and pay
-        </CallToAction>
-        <CallToAction href={WAIVER_HREF} variant="waiver">
-          Sign training waiver
-        </CallToAction>
       </div>
     </div>
   );
@@ -79,12 +67,4 @@ const bodyStyle: React.CSSProperties = {
   lineHeight: 1.7,
   color: "var(--navy)",
   opacity: 0.88,
-};
-
-const ctaRowStyle: React.CSSProperties = {
-  display: "flex",
-  gap: 12,
-  flexWrap: "wrap",
-  justifyContent: "center",
-  marginTop: 18,
 };

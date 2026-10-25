@@ -20,11 +20,11 @@ const ONE_ON_ONE_TIERS: Record<
     label: "5-Session Package",
     frequency: "5 private coaching sessions + free consultation",
     description:
-      "Five 1:1 coaching sessions for $650 ($130 per session). A straightforward starting package for student-athletes and families. Session rates will increase to $140 soon—this package locks in the current rate.",
+      "Five 1:1 coaching sessions for $700 ($140 per session). A straightforward starting package for student-athletes and families.",
     features: [
       "Free initial consultation",
-      "5 private coaching sessions for $650",
-      "$130 per session (current package rate)",
+      "5 private coaching sessions for $700",
+      "$140 per session",
       "Movement and training needs review",
       "Individualized coaching recommendations",
       "Package expires 90 days from purchase",
