@@ -4,7 +4,7 @@ export const BOOK_SESSIONS_HREF = "/schedule#book-sessions";
 export const WAIVER_HREF = "/waiver";
 
 export const SCHOOL_YEAR_FLYER = {
-  imageSrc: "/events/school-year-group-classes.png",
+  imageSrc: "/events/psc-elite.png",
   imageAlt:
     "Pasifika Strength & Conditioning logo with PSC Elite class details: Sundays 4:00–5:30 PM, $45 per class",
   headline: "Maintain and level up your gains this school year",
