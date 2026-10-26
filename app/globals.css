@@ -762,17 +762,37 @@
   min-width: 0;
   }
 
-  .upcoming-event-card__facts {
+  .elite-facts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
   }
 
-  .upcoming-event-card__facts > :first-child,
-  .upcoming-event-card__facts > :nth-child(4),
-  .upcoming-event-card__facts > :nth-child(5) {
-  grid-column: span 2;
+  .elite-facts__item {
+  margin: 0;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--panel);
+  }
+
+  .elite-facts__label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  }
+
+  .elite-facts__value {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--navy);
   }
 
   .early-registration-layout {
@@ -783,26 +803,12 @@
   text-align: left;
   }
 
-  .early-registration-info {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
-  gap: 16px;
-  align-items: stretch;
-  }
-
   .early-registration-flyer {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 14px;
   border: 1px solid var(--border);
-  }
-
-  .early-registration-sessions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-  margin-top: 16px;
   }
 
   @media (max-width: 768px) {
@@ -901,17 +907,12 @@
   grid-template-columns: 1fr;
   }
 
-  .upcoming-event-card__facts,
-  .early-registration-layout,
-  .early-registration-info,
-  .early-registration-sessions {
-  grid-template-columns: 1fr;
+  .elite-facts {
+  grid-template-columns: 1fr 1fr;
   }
 
-  .upcoming-event-card__facts > :first-child,
-  .upcoming-event-card__facts > :nth-child(4),
-  .upcoming-event-card__facts > :nth-child(5) {
-  grid-column: auto;
+  .early-registration-layout {
+  grid-template-columns: 1fr;
   }
 
   .class-payment-options__grid {

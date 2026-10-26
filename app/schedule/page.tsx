@@ -17,8 +17,7 @@ export default function SchedulePage() {
           <p style={eyebrowStyle}>Scheduling</p>
           <h1 style={titleStyle}>Book a session</h1>
           <p style={subtitleStyle}>
-            Each class is $45. PRO-EDGE athletes receive a 15% discount.
-            Please contact Coach Josh for the code.
+            {SCHOOL_YEAR_FLYER.tryFirstNote}
           </p>
 
         </section>

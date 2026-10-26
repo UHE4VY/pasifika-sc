@@ -1,4 +1,5 @@
 import CallToAction from "./CallToAction";
+import ClassFacts from "./ClassFacts";
 import ClassPaymentOptions from "./ClassPaymentOptions";
 import { upcomingEvents } from "../content/upcomingEvents";
 
@@ -17,8 +18,8 @@ export default function UpcomingEvents() {
     <section style={sectionStyle}>
       <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        Sunday group classes are $45 per class. PRO-EDGE athletes receive a
-        15% discount. Please contact Coach Josh for the code.
+        Sunday group classes are $45 per session. PRO-EDGE Academy students
+        receive 15% off with code PROEDGE.
       </p>
 
       <div style={eventsStackStyle}>
@@ -44,48 +45,7 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
-              <div className="upcoming-event-card__facts">
-                {event.sessions && event.sessions.length > 0
-                  ? event.sessions.map((session, index) => (
-                      <div key={session.id} style={sessionCardStyle}>
-                        {event.sessions && event.sessions.length > 1 ? (
-                          <p style={sessionEyebrowStyle}>
-                            Session {index + 1}
-                          </p>
-                        ) : null}
-                        <h4 style={sessionTitleStyle}>{session.title}</h4>
-                        <p style={sessionAudienceStyle}>{session.audience}</p>
-                        {session.description ? (
-                          <p style={sessionAudienceStyle}>
-                            {session.description}
-                          </p>
-                        ) : null}
-                        <p style={sessionTimeStyle}>
-                          {session.startTime} – {session.endTime}
-                        </p>
-                      </div>
-                    ))
-                  : null}
-
-                {event.details.map((detail) => (
-                  <div key={detail.label} style={detailItemStyle}>
-                    <p style={detailLabelStyle}>{detail.label}</p>
-                    <p style={detailValueStyle}>{detail.value}</p>
-                  </div>
-                ))}
-
-                {event.locationName ? (
-                  <div style={detailItemStyle}>
-                    <p style={detailLabelStyle}>Location</p>
-                    <p style={detailValueStyle}>{event.locationName}</p>
-                    {event.locationAddress ? (
-                      <p style={locationAddressStyle}>
-                        {event.locationAddress}
-                      </p>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
+              <ClassFacts />
 
               {event.instructor ? (
                 <p style={eventInstructorStyle}>{event.instructor}</p>
@@ -186,44 +146,6 @@ const eventSubtitleStyle: React.CSSProperties = {
   color: "var(--accent2)",
 };
 
-const sessionCardStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 14,
-  padding: "12px 14px",
-  background: "var(--panel)",
-};
-
-const sessionEyebrowStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 12,
-  fontWeight: 800,
-  letterSpacing: "0.04em",
-  textTransform: "uppercase",
-  color: "var(--accent)",
-};
-
-const sessionTitleStyle: React.CSSProperties = {
-  margin: "8px 0 4px",
-  fontSize: 20,
-  fontWeight: 800,
-  lineHeight: 1.2,
-  color: "var(--navy)",
-};
-
-const sessionAudienceStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 15,
-  fontWeight: 700,
-  color: "var(--accent2)",
-};
-
-const sessionTimeStyle: React.CSSProperties = {
-  margin: "8px 0 0",
-  fontSize: 15,
-  fontWeight: 700,
-  color: "var(--navy)",
-};
-
 const eventInstructorStyle: React.CSSProperties = {
   margin: "16px 0 8px",
   fontSize: 18,
@@ -237,37 +159,6 @@ const credentialsListStyle: React.CSSProperties = {
   lineHeight: 1.7,
   color: "var(--navy)",
   opacity: 0.9,
-};
-
-const detailItemStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 14,
-  padding: "12px 14px",
-  background: "var(--panel2)",
-};
-
-const detailLabelStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 12,
-  fontWeight: 800,
-  letterSpacing: "0.04em",
-  textTransform: "uppercase",
-  color: "var(--muted)",
-};
-
-const detailValueStyle: React.CSSProperties = {
-  margin: "6px 0 0",
-  fontSize: 15,
-  fontWeight: 700,
-  lineHeight: 1.5,
-  color: "var(--navy)",
-};
-
-const locationAddressStyle: React.CSSProperties = {
-  margin: "4px 0 0",
-  lineHeight: 1.5,
-  color: "var(--navy)",
-  opacity: 0.88,
 };
 
 const ctaColumnStyle: React.CSSProperties = {

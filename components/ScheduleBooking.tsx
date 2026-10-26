@@ -8,6 +8,7 @@ import {
   getUpcomingGymdeskDatesForMonth,
 } from "../content/gymdesk";
 import {
+  SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
   WAIVER_HREF,
 } from "../content/schoolYearGroupClasses";
@@ -111,9 +112,8 @@ export default function ScheduleBooking() {
     >
       <h2 style={sectionTitleStyle}>Book and pay</h2>
       <p style={panelBodyStyle}>
-        Each class is ${GYMDESK.dropInPrice}. PRO-EDGE athletes receive a 15%
-        discount. Please contact Coach Josh for the code. No class on November
-        1 or November 29.
+        Each class is ${GYMDESK.dropInPrice}. {SCHOOL_YEAR_FLYER.proEdgeNote}{" "}
+        No class on November 1 or November 29.
       </p>
 
       <ol className="booking-steps" style={stepsStyle}>

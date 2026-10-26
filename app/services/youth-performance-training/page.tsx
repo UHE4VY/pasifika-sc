@@ -2,11 +2,9 @@
 
 import React from "react";
 import CallToAction from "../../../components/CallToAction";
+import ClassFacts from "../../../components/ClassFacts";
 import ClassPaymentOptions from "../../../components/ClassPaymentOptions";
-import {
-  SCHOOL_YEAR_FLYER,
-  SCHOOL_YEAR_SESSIONS,
-} from "../../../content/schoolYearGroupClasses";
+import { SCHOOL_YEAR_FLYER } from "../../../content/schoolYearGroupClasses";
 
 export default function YouthPerformancePage() {
   return (
@@ -33,42 +31,7 @@ export default function YouthPerformancePage() {
             className="early-registration-flyer"
           />
 
-          <div className="early-registration-info">
-            <div>
-              <p style={infoTitleStyle}>{SCHOOL_YEAR_FLYER.startLabel}</p>
-              <p style={infoBodyStyle}>
-                {SCHOOL_YEAR_FLYER.venueName}
-                <br />
-                {SCHOOL_YEAR_FLYER.venueAddress}
-              </p>
-              <p style={infoBodyStyle}>
-                {SCHOOL_YEAR_FLYER.duration}. Limited to 15 athletes per class.
-              </p>
-
-              <div className="early-registration-sessions">
-                {SCHOOL_YEAR_SESSIONS.map((session) => (
-                  <div key={session.id} style={infoCardStyle}>
-                    <h3 style={infoCardTitleStyle}>{session.title}</h3>
-                    <p style={infoBodyStyle}>{session.audience}</p>
-                    {session.description ? (
-                      <p style={infoBodyStyle}>{session.description}</p>
-                    ) : null}
-                    <p style={sessionTimeStyle}>
-                      {session.startTime} – {session.endTime}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div style={infoPricingStyle}>
-              <p style={pricingLabelStyle}>Pricing</p>
-              <p style={pricingValueStyle}>
-                {SCHOOL_YEAR_FLYER.priceSummary}
-              </p>
-              <p style={infoBodyStyle}>{SCHOOL_YEAR_FLYER.proEdgeNote}</p>
-            </div>
-          </div>
+          <ClassFacts />
         </div>
       </section>
 
@@ -87,10 +50,7 @@ export default function YouthPerformancePage() {
         <div style={gridStyle}>
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Try September first</h3>
-            <p style={cardBodyStyle}>
-              Each class is $45. PRO-EDGE athletes receive a 15% discount.
-              Please contact Coach Josh for the code.
-            </p>
+            <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.tryFirstNote}</p>
           </div>
 
           <div style={cardStyle}>
@@ -147,10 +107,7 @@ export default function YouthPerformancePage() {
 
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
-        <p style={cardBodyStyle}>
-          Each class is $45. PRO-EDGE athletes receive a 15% discount. Please
-          contact Coach Josh for the code.
-        </p>
+        <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.tryFirstNote}</p>
 
         <div
           style={{
@@ -270,68 +227,3 @@ const cardBodyStyle: React.CSSProperties = {
   textAlign: "center",
 };
 
-const startLabelStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 16,
-  fontWeight: 800,
-  color: "var(--navy)",
-};
-
-const infoTitleStyle: React.CSSProperties = {
-  ...startLabelStyle,
-  textAlign: "left",
-};
-
-const infoBodyStyle: React.CSSProperties = {
-  ...cardBodyStyle,
-  marginTop: 8,
-  textAlign: "left",
-};
-
-const infoCardStyle: React.CSSProperties = {
-  ...cardStyle,
-  textAlign: "left",
-};
-
-const infoCardTitleStyle: React.CSSProperties = {
-  ...cardTitleStyle,
-  textAlign: "left",
-};
-
-const sessionTimeStyle: React.CSSProperties = {
-  margin: "10px 0 0",
-  fontSize: 18,
-  fontWeight: 800,
-  color: "var(--navy)",
-};
-
-const pricingBoxStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 16,
-  padding: 16,
-  background: "var(--panel2)",
-  marginTop: 16,
-  textAlign: "center",
-};
-
-const pricingLabelStyle: React.CSSProperties = {
-  margin: 0,
-  fontSize: 12,
-  fontWeight: 800,
-  letterSpacing: "0.04em",
-  textTransform: "uppercase",
-  color: "var(--muted)",
-};
-
-const pricingValueStyle: React.CSSProperties = {
-  margin: "8px 0 4px",
-  fontSize: 22,
-  fontWeight: 800,
-  color: "var(--navy)",
-};
-
-const infoPricingStyle: React.CSSProperties = {
-  ...pricingBoxStyle,
-  marginTop: 0,
-  textAlign: "left",
-};
