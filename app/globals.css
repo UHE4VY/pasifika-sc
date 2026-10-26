@@ -732,8 +732,8 @@
 
   .upcoming-event-card {
   display: grid;
-  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 18px;
   align-items: start;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -762,27 +762,32 @@
   min-width: 0;
   }
 
-  .upcoming-event-card__details {
+  .upcoming-event-card__facts {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
   }
 
-  .upcoming-event-card__sessions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 18px;
+  .upcoming-event-card__facts > :first-child,
+  .upcoming-event-card__facts > :nth-child(4),
+  .upcoming-event-card__facts > :nth-child(5) {
+  grid-column: span 2;
   }
 
   .early-registration-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   align-items: start;
   text-align: left;
+  }
+
+  .early-registration-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr);
+  gap: 16px;
+  align-items: stretch;
   }
 
   .early-registration-flyer {
@@ -795,7 +800,7 @@
 
   .early-registration-sessions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
   margin-top: 16px;
   }
@@ -896,27 +901,21 @@
   grid-template-columns: 1fr;
   }
 
-  .upcoming-event-card__poster {
-  max-width: 360px;
-  margin: 0 auto;
-  }
-
-  .upcoming-event-card__details,
-  .upcoming-event-card__sessions {
-  grid-template-columns: 1fr;
-  }
-
+  .upcoming-event-card__facts,
   .early-registration-layout,
+  .early-registration-info,
   .early-registration-sessions {
   grid-template-columns: 1fr;
+  }
+
+  .upcoming-event-card__facts > :first-child,
+  .upcoming-event-card__facts > :nth-child(4),
+  .upcoming-event-card__facts > :nth-child(5) {
+  grid-column: auto;
   }
 
   .class-payment-options__grid {
   grid-template-columns: 1fr;
   }
 
-  .early-registration-flyer {
-  max-width: 360px;
-  margin: 0 auto;
-  }
   }

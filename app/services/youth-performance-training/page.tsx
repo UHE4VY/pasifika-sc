@@ -33,38 +33,40 @@ export default function YouthPerformancePage() {
             className="early-registration-flyer"
           />
 
-          <div>
-            <p style={startLabelStyle}>{SCHOOL_YEAR_FLYER.startLabel}</p>
-            <p style={{ ...cardBodyStyle, marginTop: 8 }}>
-              {SCHOOL_YEAR_FLYER.venueName}
-              <br />
-              {SCHOOL_YEAR_FLYER.venueAddress}
-            </p>
-            <p style={{ ...cardBodyStyle, marginTop: 8 }}>
-              {SCHOOL_YEAR_FLYER.duration}. Limited to 15 athletes per class.
-            </p>
+          <div className="early-registration-info">
+            <div>
+              <p style={infoTitleStyle}>{SCHOOL_YEAR_FLYER.startLabel}</p>
+              <p style={infoBodyStyle}>
+                {SCHOOL_YEAR_FLYER.venueName}
+                <br />
+                {SCHOOL_YEAR_FLYER.venueAddress}
+              </p>
+              <p style={infoBodyStyle}>
+                {SCHOOL_YEAR_FLYER.duration}. Limited to 15 athletes per class.
+              </p>
 
-            <div className="early-registration-sessions">
-              {SCHOOL_YEAR_SESSIONS.map((session) => (
-                <div key={session.id} style={cardStyle}>
-                  <h3 style={cardTitleStyle}>{session.title}</h3>
-                  <p style={cardBodyStyle}>{session.audience}</p>
-                  {session.description ? (
-                    <p style={cardBodyStyle}>{session.description}</p>
-                  ) : null}
-                  <p style={sessionTimeStyle}>
-                    {session.startTime} – {session.endTime}
-                  </p>
-                </div>
-              ))}
+              <div className="early-registration-sessions">
+                {SCHOOL_YEAR_SESSIONS.map((session) => (
+                  <div key={session.id} style={infoCardStyle}>
+                    <h3 style={infoCardTitleStyle}>{session.title}</h3>
+                    <p style={infoBodyStyle}>{session.audience}</p>
+                    {session.description ? (
+                      <p style={infoBodyStyle}>{session.description}</p>
+                    ) : null}
+                    <p style={sessionTimeStyle}>
+                      {session.startTime} – {session.endTime}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div style={pricingBoxStyle}>
+            <div style={infoPricingStyle}>
               <p style={pricingLabelStyle}>Pricing</p>
               <p style={pricingValueStyle}>
                 {SCHOOL_YEAR_FLYER.priceSummary}
               </p>
-              <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.proEdgeNote}</p>
+              <p style={infoBodyStyle}>{SCHOOL_YEAR_FLYER.proEdgeNote}</p>
             </div>
           </div>
         </div>
@@ -275,6 +277,27 @@ const startLabelStyle: React.CSSProperties = {
   color: "var(--navy)",
 };
 
+const infoTitleStyle: React.CSSProperties = {
+  ...startLabelStyle,
+  textAlign: "left",
+};
+
+const infoBodyStyle: React.CSSProperties = {
+  ...cardBodyStyle,
+  marginTop: 8,
+  textAlign: "left",
+};
+
+const infoCardStyle: React.CSSProperties = {
+  ...cardStyle,
+  textAlign: "left",
+};
+
+const infoCardTitleStyle: React.CSSProperties = {
+  ...cardTitleStyle,
+  textAlign: "left",
+};
+
 const sessionTimeStyle: React.CSSProperties = {
   margin: "10px 0 0",
   fontSize: 18,
@@ -305,4 +328,10 @@ const pricingValueStyle: React.CSSProperties = {
   fontSize: 22,
   fontWeight: 800,
   color: "var(--navy)",
+};
+
+const infoPricingStyle: React.CSSProperties = {
+  ...pricingBoxStyle,
+  marginTop: 0,
+  textAlign: "left",
 };

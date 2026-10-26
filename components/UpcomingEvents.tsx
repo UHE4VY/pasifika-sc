@@ -44,25 +44,48 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
-              {event.sessions && event.sessions.length > 0 ? (
-                <div className="upcoming-event-card__sessions">
-                  {event.sessions.map((session, index) => (
-                    <div key={session.id} style={sessionCardStyle}>
-                      {event.sessions && event.sessions.length > 1 ? (
-                        <p style={sessionEyebrowStyle}>Session {index + 1}</p>
-                      ) : null}
-                      <h4 style={sessionTitleStyle}>{session.title}</h4>
-                      <p style={sessionAudienceStyle}>{session.audience}</p>
-                      {session.description ? (
-                        <p style={sessionAudienceStyle}>{session.description}</p>
-                      ) : null}
-                      <p style={sessionTimeStyle}>
-                        {session.startTime} – {session.endTime}
+              <div className="upcoming-event-card__facts">
+                {event.sessions && event.sessions.length > 0
+                  ? event.sessions.map((session, index) => (
+                      <div key={session.id} style={sessionCardStyle}>
+                        {event.sessions && event.sessions.length > 1 ? (
+                          <p style={sessionEyebrowStyle}>
+                            Session {index + 1}
+                          </p>
+                        ) : null}
+                        <h4 style={sessionTitleStyle}>{session.title}</h4>
+                        <p style={sessionAudienceStyle}>{session.audience}</p>
+                        {session.description ? (
+                          <p style={sessionAudienceStyle}>
+                            {session.description}
+                          </p>
+                        ) : null}
+                        <p style={sessionTimeStyle}>
+                          {session.startTime} – {session.endTime}
+                        </p>
+                      </div>
+                    ))
+                  : null}
+
+                {event.details.map((detail) => (
+                  <div key={detail.label} style={detailItemStyle}>
+                    <p style={detailLabelStyle}>{detail.label}</p>
+                    <p style={detailValueStyle}>{detail.value}</p>
+                  </div>
+                ))}
+
+                {event.locationName ? (
+                  <div style={detailItemStyle}>
+                    <p style={detailLabelStyle}>Location</p>
+                    <p style={detailValueStyle}>{event.locationName}</p>
+                    {event.locationAddress ? (
+                      <p style={locationAddressStyle}>
+                        {event.locationAddress}
                       </p>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
 
               {event.instructor ? (
                 <p style={eventInstructorStyle}>{event.instructor}</p>
@@ -74,25 +97,6 @@ export default function UpcomingEvents() {
                     <li key={credential}>{credential}</li>
                   ))}
                 </ul>
-              ) : null}
-
-              <div className="upcoming-event-card__details">
-                {event.details.map((detail) => (
-                  <div key={detail.label} style={detailItemStyle}>
-                    <p style={detailLabelStyle}>{detail.label}</p>
-                    <p style={detailValueStyle}>{detail.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              {event.locationName ? (
-                <div style={locationStyle}>
-                  <p style={detailLabelStyle}>Location</p>
-                  <p style={detailValueStyle}>{event.locationName}</p>
-                  {event.locationAddress ? (
-                    <p style={locationAddressStyle}>{event.locationAddress}</p>
-                  ) : null}
-                </div>
               ) : null}
 
               <div style={ctaColumnStyle}>
@@ -257,14 +261,6 @@ const detailValueStyle: React.CSSProperties = {
   fontWeight: 700,
   lineHeight: 1.5,
   color: "var(--navy)",
-};
-
-const locationStyle: React.CSSProperties = {
-  marginBottom: 18,
-  border: "1px solid var(--border)",
-  borderRadius: 14,
-  padding: "12px 14px",
-  background: "var(--panel2)",
 };
 
 const locationAddressStyle: React.CSSProperties = {
