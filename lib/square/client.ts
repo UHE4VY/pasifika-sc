@@ -55,15 +55,22 @@ export async function createSquarePaymentLink(
         description: input.description,
         order: {
           location_id: process.env.SQUARE_LOCATION_ID,
-          line_items: input.lineItems.map((item) => ({
-            name: item.name,
-            quantity: String(item.quantity),
-            item_type: "ITEM",
-            base_price_money: {
-              amount: item.unitAmountCents,
-              currency: "USD",
-            },
-          })),
+          line_items: input.lineItems.map((item) =>
+            item.catalogObjectId
+              ? {
+                  catalog_object_id: item.catalogObjectId,
+                  quantity: String(item.quantity),
+                }
+              : {
+                  name: item.name,
+                  quantity: String(item.quantity),
+                  item_type: "ITEM",
+                  base_price_money: {
+                    amount: item.unitAmountCents,
+                    currency: "USD",
+                  },
+                }
+          ),
         },
         checkout_options: {
           redirect_url: input.redirectUrl,

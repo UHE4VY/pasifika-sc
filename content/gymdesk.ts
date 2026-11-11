@@ -70,6 +70,8 @@ export const GYMDESK = {
     signupDeadline: "2026-11-20",
     priceCents: 18000,
     siblingPriceCents: 15300,
+    /** Square Catalog item variation “PSC Starters / Regular”, $180. */
+    squareVariationId: "XJ3Z7L7RCZ37NKJE56BQIYOO",
   },
 } as const;
 

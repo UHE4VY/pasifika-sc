@@ -21,6 +21,7 @@ export type CheckoutLineItem = {
   name: string;
   quantity: number;
   unitAmountCents: number;
+  catalogObjectId?: string;
 };
 
 export type ValidatedCheckout = {
@@ -141,13 +142,18 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
       phone: normalizedPhone,
       siblingDiscount: sibling,
       lineItems: [
-        {
-          name: sibling
-            ? "PSC Starters 4-week trial, sibling discount"
-            : "PSC Starters 4-week trial",
-          quantity: 1,
-          unitAmountCents: totalCents,
-        },
+        sibling
+          ? {
+              name: "PSC Starters 4-week trial, sibling discount",
+              quantity: 1,
+              unitAmountCents: totalCents,
+            }
+          : {
+              name: "PSC Starters",
+              quantity: 1,
+              unitAmountCents: totalCents,
+              catalogObjectId: GYMDESK.starters.squareVariationId,
+            },
       ],
       totalCents,
       description: `PSC Starters · ${normalizedName} · Nov 23, Nov 30, Dec 7, Dec 14`,
