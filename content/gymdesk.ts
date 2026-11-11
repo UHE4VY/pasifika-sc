@@ -6,11 +6,11 @@
  *
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
  * Parents sign the training waiver on /waiver, choose a class on /schedule,
- * then pay on Square: $45 per class. PRO-EDGE athletes receive a 15% discount.
- * they choose. After payment the site creates one free
- * Gymdesk booking per Sunday so parents are not charged again.
+ * then pay on Square. After payment the site creates a free Gymdesk booking
+ * so parents are not charged again. Middle School and High School were
+ * removed in Gymdesk, so those sessions are no longer linked.
  */
-export type GymdeskClassId = "middle-school" | "high-school";
+export type GymdeskClassId = "middle-school" | "high-school" | "psc-starters";
 export type GymdeskPlan = "drop-in" | "monthly";
 
 export const GYMDESK = {
@@ -32,9 +32,9 @@ export const GYMDESK = {
   },
   schedules: {
     "middle-school": {
-      scheduleId: "36061",
-      sessionId: "1774027",
-      dropInPricingId: "294487",
+      scheduleId: "",
+      sessionId: "",
+      dropInPricingId: "",
       title: "PSC Elite",
       audience: "Coed",
       startTime: "4:00 PM",
@@ -43,9 +43,9 @@ export const GYMDESK = {
       monthlyOption: null as string | null,
     },
     "high-school": {
-      scheduleId: "36062",
-      sessionId: "1774028",
-      dropInPricingId: "294489",
+      scheduleId: "",
+      sessionId: "",
+      dropInPricingId: "",
       title: "High School",
       audience: "Girls only",
       startTime: "5:30 PM",
@@ -53,6 +53,24 @@ export const GYMDESK = {
       dropInOption: "Drop-In Rate",
       monthlyOption: "Monthly Commitment Rate",
     },
+    "psc-starters": {
+      scheduleId: "",
+      sessionId: "1905749",
+      dropInPricingId: "378559",
+      title: "PSC Starters",
+      audience: "Developing athletes",
+      startTime: "7:30 PM",
+      endTime: "9:00 PM",
+      dropInOption: "4-week trial",
+      monthlyOption: null as string | null,
+    },
+  },
+  starters: {
+    dates: ["2026-11-23", "2026-11-30", "2026-12-07", "2026-12-14"] as const,
+    /** Signup is open before this Pacific date. */
+    signupDeadline: "2026-11-20",
+    priceCents: 18000,
+    siblingPriceCents: 15300,
   },
 } as const;
 
@@ -110,6 +128,10 @@ export function getGymdeskDatesForMonth(
   });
 }
 
+export function isStartersSignupOpen(now = new Date()) {
+  return getPacificTodayKey(now) < GYMDESK.starters.signupDeadline;
+}
+
 export function getUpcomingGymdeskDatesForMonth(month: number, now = new Date()) {
   return getUpcomingGymdeskClassDates(now).filter((dateKey) => {
     const date = parseDateKey(dateKey);
@@ -126,7 +148,7 @@ export function getGymdeskBookUrl(options?: {
     ? GYMDESK.schedules[options.classId]
     : undefined;
 
-  if (schedule) {
+  if (schedule?.scheduleId) {
     url.searchParams.set("schedule", schedule.scheduleId);
   }
 

@@ -44,8 +44,10 @@ export default async function PaymentCompletePage({
   let athlete: string | null = null;
   let email: string | null = null;
   let dates: string[] = [];
+  let siblingDiscount = false;
+  let classRemoved = false;
   let rosterMessage =
-    "Choose a class on the schedule. Each class is $45.";
+    "PSC Starters is open on the schedule. Four Mondays are $180.";
 
   if (transactionId) {
     try {
@@ -59,6 +61,18 @@ export default async function PaymentCompletePage({
         if (!parsed?.phone) {
           rosterMessage =
             "Payment received, but the booking details were missing. Contact us with your Square receipt.";
+        } else if (
+          parsed.classId === "middle-school" ||
+          parsed.classId === "high-school"
+        ) {
+          classId = parsed.classId;
+          plan = parsed.plan;
+          athlete = parsed.athleteName;
+          email = parsed.email;
+          dates = parsed.selectedDates;
+          classRemoved = true;
+          rosterMessage =
+            "Payment received. This class has been removed, so it was not added in Gymdesk. Contact us with your Square receipt.";
         } else {
           const checkout = validateCheckoutRequest(parsed);
           const roster = await rosterAthleteOnGymdesk({
@@ -71,9 +85,15 @@ export default async function PaymentCompletePage({
           athlete = checkout.athleteName;
           email = checkout.email;
           dates = checkout.selectedDates;
+          siblingDiscount = checkout.siblingDiscount;
+          const isStarters = checkout.classId === "psc-starters";
           rosterMessage = roster.ok
-            ? "Payment received. Your athlete is booked for the Sundays below."
-            : "Payment received. If a Sunday is missing from Gymdesk, contact us with your Square receipt.";
+            ? isStarters
+              ? "Payment received. Your athlete is booked for the Mondays below."
+              : "Payment received. Your athlete is booked for the Sundays below."
+            : isStarters
+              ? "Payment received for PSC Starters. If a Monday is missing from Gymdesk, contact us with your Square receipt."
+              : "Payment received. If a Sunday is missing from Gymdesk, contact us with your Square receipt.";
 
           if (!roster.ok) {
             console.error("payment-complete roster errors:", roster.errors);
@@ -99,7 +119,11 @@ export default async function PaymentCompletePage({
       <section style={panelStyle}>
         <p style={eyebrowStyle}>Payment</p>
         <h1 style={titleStyle}>
-          {hasBookingSummary ? "You’re booked" : "Book a session"}
+          {classRemoved
+            ? "Payment received"
+            : hasBookingSummary
+              ? "You’re booked"
+              : "Book a session"}
         </h1>
         <p style={bodyStyle}>{rosterMessage}</p>
 
@@ -115,7 +139,13 @@ export default async function PaymentCompletePage({
             ) : null}
             {plan ? (
               <p style={summaryLineStyle}>
-                {plan === "monthly" ? "4 sessions · $150" : "$45 per class"}
+                {classId === "psc-starters"
+                  ? siblingDiscount
+                    ? "$153 · sibling discount"
+                    : "$180 for 4 weeks"
+                  : plan === "monthly"
+                    ? "4 sessions · $150"
+                    : "$45 per class"}
               </p>
             ) : null}
             <ul style={dateListStyle}>

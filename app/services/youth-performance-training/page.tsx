@@ -2,9 +2,11 @@
 
 import React from "react";
 import CallToAction from "../../../components/CallToAction";
-import ClassFacts from "../../../components/ClassFacts";
-import ClassPaymentOptions from "../../../components/ClassPaymentOptions";
 import { SCHOOL_YEAR_FLYER } from "../../../content/schoolYearGroupClasses";
+import {
+  STARTERS_FLYER,
+  STARTERS_SIBLING_NOTE,
+} from "../../../content/upcomingEvents";
 
 export default function YouthPerformancePage() {
   return (
@@ -13,44 +15,58 @@ export default function YouthPerformancePage() {
         <p style={eyebrowStyle}>Training Program</p>
         <h1 style={titleStyle}>Group Performance Training</h1>
         <p style={subtitleStyle}>
-          Coach-led Sunday sessions for speed, strength, and movement quality.
+          Coach-led group sessions for speed, strength, and movement quality.
         </p>
 
       </section>
 
       <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>Early Registration</h2>
+        <h2 style={sectionTitleStyle}>Current class</h2>
+        <img
+          src={STARTERS_FLYER.imageSrc}
+          alt={STARTERS_FLYER.imageAlt}
+          className="starters-flyer"
+        />
         <p style={cardBodyStyle}>
-          {SCHOOL_YEAR_FLYER.headline} in our Sunday group classes.
+          PSC Starters is a four-week Monday trial for athletes new to training,
+          or returning after 6 or more weeks away. Sessions run 7:30–9:00 PM on
+          November 23, November 30, December 7, and December 14 at{" "}
+          {SCHOOL_YEAR_FLYER.venueName}. Four weeks are $180, paid in full.{" "}
+          {STARTERS_SIBLING_NOTE}
         </p>
-
-        <div className="early-registration-layout" style={{ marginTop: 18 }}>
-          <img
-            src={SCHOOL_YEAR_FLYER.imageSrc}
-            alt={SCHOOL_YEAR_FLYER.imageAlt}
-            className="early-registration-flyer"
-          />
-
-          <ClassFacts />
+        <div
+          style={{
+            marginTop: 18,
+            display: "flex",
+            gap: 12,
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <CallToAction href="/schedule#psc-starters">
+            Sign up for PSC Starters
+          </CallToAction>
+          <CallToAction href="/group-schedule" variant="secondary">
+            View class schedule
+          </CallToAction>
         </div>
-      </section>
-
-      <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>How to join</h2>
-        <ClassPaymentOptions />
       </section>
 
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Program Availability</h2>
 
         <p style={cardBodyStyle}>
-          Group Performance Training runs Sundays through the school year.
+          The current group class is PSC Starters, Mondays from November 23
+          through December 14.
         </p>
 
         <div style={gridStyle}>
           <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>Try September first</h3>
-            <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.tryFirstNote}</p>
+            <h3 style={cardTitleStyle}>Four-week trial</h3>
+            <p style={cardBodyStyle}>
+              Four weeks are $180, paid in full before November 23.{" "}
+              {STARTERS_SIBLING_NOTE}
+            </p>
           </div>
 
           <div style={cardStyle}>
@@ -63,14 +79,9 @@ export default function YouthPerformancePage() {
           <div style={cardStyle}>
             <h3 style={cardTitleStyle}>Best Fit First</h3>
             <p style={cardBodyStyle}>
-              Drop-in to try the class, or book a consultation if you want help
-              choosing a plan.
+              Starters is for athletes new to training, or returning after 6 or
+              more weeks away.
             </p>
-          </div>
-
-          <div style={cardStyle}>
-            <h3 style={cardTitleStyle}>School-Year Pricing</h3>
-            <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.priceSummary}.</p>
           </div>
         </div>
       </section>
@@ -107,7 +118,10 @@ export default function YouthPerformancePage() {
 
       <section style={panelStyle}>
         <h2 style={sectionTitleStyle}>Ready to Get Started?</h2>
-        <p style={cardBodyStyle}>{SCHOOL_YEAR_FLYER.tryFirstNote}</p>
+        <p style={cardBodyStyle}>
+          Sign up for PSC Starters, or contact us if you want help choosing a
+          plan.
+        </p>
 
         <div
           style={{

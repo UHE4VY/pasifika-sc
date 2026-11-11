@@ -31,6 +31,11 @@ async function createGymdeskBooking(input: {
   phone: string;
 }) {
   const schedule = GYMDESK.schedules[input.classId];
+  if (!schedule.sessionId || !schedule.dropInPricingId) {
+    throw new Error(
+      `${schedule.title} is not linked to a Gymdesk session yet.`
+    );
+  }
   const pageUrl = getGymdeskBookUrl({
     classId: input.classId,
     date: input.date,
@@ -69,7 +74,7 @@ async function createGymdeskBooking(input: {
 
   if (!validate.ok || !validatePayload?.success) {
     throw new Error(
-      validatePayload?.message || "Gymdesk could not accept this Sunday."
+      validatePayload?.message || "Gymdesk could not accept this class date."
     );
   }
 

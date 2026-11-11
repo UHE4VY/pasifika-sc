@@ -1,10 +1,9 @@
 "use client";
 
 import CallToAction from "../../components/CallToAction";
-import ClassPaymentOptions from "../../components/ClassPaymentOptions";
-import ScheduleBooking from "../../components/ScheduleBooking";
+import StartersBooking from "../../components/StartersBooking";
 import { GYMDESK } from "../../content/gymdesk";
-import { SCHOOL_YEAR_FLYER } from "../../content/schoolYearGroupClasses";
+import { STARTERS_SIBLING_NOTE } from "../../content/upcomingEvents";
 import PageViewTracker from "./PageViewTracker";
 
 export default function SchedulePage() {
@@ -17,25 +16,20 @@ export default function SchedulePage() {
           <p style={eyebrowStyle}>Scheduling</p>
           <h1 style={titleStyle}>Book a session</h1>
           <p style={subtitleStyle}>
-            {SCHOOL_YEAR_FLYER.tryFirstNote}
+            PSC Starters is a four-week Monday trial for athletes new to
+            training, or returning after 6 or more weeks away. Four weeks are
+            $180, paid in full. {STARTERS_SIBLING_NOTE}
           </p>
 
         </section>
 
-        <ScheduleBooking />
+        <StartersBooking />
 
-        <section style={panelStyle}>
-          <h2 style={sectionTitleStyle}>Pricing</h2>
-          <p style={panelBodyStyle}>
-            PSC Elite (Coed) 4:00–5:30 PM · {SCHOOL_YEAR_FLYER.priceSummary}
-          </p>
-          <ClassPaymentOptions />
-          <div style={ctaRowStyle}>
-            <CallToAction href={GYMDESK.loginUrl} variant="secondary">
-              Member login
-            </CallToAction>
-          </div>
-        </section>
+        <div style={ctaRowStyle}>
+          <CallToAction href={GYMDESK.loginUrl} variant="secondary">
+            Member login
+          </CallToAction>
+        </div>
       </main>
     </>
   );
@@ -93,29 +87,4 @@ const ctaRowStyle: React.CSSProperties = {
   flexWrap: "wrap",
   marginTop: 18,
   justifyContent: "center",
-};
-
-const panelStyle: React.CSSProperties = {
-  border: "1px solid var(--border)",
-  borderRadius: 18,
-  padding: "18px 16px",
-  background: "var(--panel)",
-  boxShadow: "0 10px 26px var(--shadow)",
-  textAlign: "center",
-  marginTop: 22,
-};
-
-const sectionTitleStyle: React.CSSProperties = {
-  marginTop: 0,
-  marginBottom: 12,
-  fontSize: 20,
-  color: "var(--navy)",
-};
-
-const panelBodyStyle: React.CSSProperties = {
-  margin: "0 auto 8px",
-  maxWidth: 680,
-  lineHeight: 1.7,
-  color: "var(--navy)",
-  opacity: 0.88,
 };

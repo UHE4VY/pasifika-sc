@@ -1,4 +1,4 @@
-import ClassPaymentOptions from "@/components/ClassPaymentOptions";
+import CallToAction from "@/components/CallToAction";
 import {
   CANCELLED_CLASS_DATES,
   GROUP_SCHEDULE_MONTHS,
@@ -7,10 +7,8 @@ import {
   WEEKLY_GROUP_CLASSES,
   type GroupClassTemplate,
 } from "@/content/groupSchedule";
-import {
-  BOOK_SESSIONS_HREF,
-  SCHOOL_YEAR_FLYER,
-} from "@/content/schoolYearGroupClasses";
+import { SCHOOL_YEAR_FLYER } from "@/content/schoolYearGroupClasses";
+import { STARTERS_SIBLING_NOTE } from "@/content/upcomingEvents";
 
 type DayClass = GroupClassTemplate & { cancelled?: boolean };
 
@@ -120,7 +118,7 @@ function MonthCalendar({
 
               const dateKey = toDateKey(date);
               const classes = getClassesForDate(date);
-              const isCancelledDay = CANCELLED_CLASS_DATES.includes(dateKey);
+              const isCancelledDay = classes.some((session) => session.cancelled);
               const dayLabel = date.toLocaleDateString("en-US", {
                 weekday: "short",
                 month: "short",
@@ -164,10 +162,10 @@ function MonthCalendar({
                           </p>
                           {!session.cancelled ? (
                             <a
-                              href={BOOK_SESSIONS_HREF}
+                              href={session.registerHref}
                               className="group-schedule-event__dropin"
                             >
-                              Book
+                              {session.id === "psc-starters" ? "Sign up" : "Book"}
                             </a>
                           ) : null}
                         </div>
@@ -193,8 +191,9 @@ export default function GroupSchedulePage() {
         <p style={eyebrowStyle}>Group Performance Training</p>
         <h1 style={titleStyle}>Class schedule</h1>
         <p style={subtitleStyle}>
-          Sundays at {SCHOOL_YEAR_FLYER.venueName}.{" "}
-          {SCHOOL_YEAR_FLYER.startLabel} {SCHOOL_YEAR_FLYER.endLabel}.
+          PSC Starters meets Mondays, November 23 through December 14,
+          7:30–9:00 PM at {SCHOOL_YEAR_FLYER.venueName}. It is for athletes new
+          to training or returning after time away.
         </p>
 
       </section>
@@ -226,7 +225,15 @@ export default function GroupSchedulePage() {
 
       <section className="group-schedule-panel" style={panelStyle}>
         <h2 style={sectionTitleStyle}>How to join</h2>
-        <ClassPaymentOptions />
+        <p style={subtitleStyle}>
+          Four weeks are $180, paid in full before November 23.{" "}
+          {STARTERS_SIBLING_NOTE}
+        </p>
+        <div style={{ marginTop: 16, textAlign: "center" }}>
+          <CallToAction href="/schedule#psc-starters">
+            Sign up for PSC Starters
+          </CallToAction>
+        </div>
       </section>
 
       {GROUP_SCHEDULE_MONTHS.map(({ month, label }) => (

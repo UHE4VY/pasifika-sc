@@ -1,19 +1,19 @@
-import { GYMDESK } from "./gymdesk";
+import { GYMDESK, type GymdeskClassId } from "./gymdesk";
 import {
   SCHOOL_YEAR_FLYER,
   SCHOOL_YEAR_SESSIONS,
-  type SchoolYearSession,
 } from "./schoolYearGroupClasses";
+import { STARTERS_SIBLING_NOTE } from "./upcomingEvents";
 
 export type GroupClassTemplate = {
-  id: SchoolYearSession["id"];
+  id: GymdeskClassId;
   dayOfWeek: number;
   startTime: string;
   endTime: string;
   title: string;
   subtitle: string;
   description?: string;
-  programKey: "intensive" | "jam";
+  programKey: "intensive" | "jam" | "starters";
   startDate: string;
   endDate: string;
   registerHref: string;
@@ -50,15 +50,31 @@ export const WEEKLY_GROUP_CLASSES: GroupClassTemplate[] = SCHOOL_YEAR_SESSIONS.m
   })
 );
 
+const starters = GYMDESK.schedules["psc-starters"];
+
+WEEKLY_GROUP_CLASSES.push({
+  id: "psc-starters",
+  dayOfWeek: 1,
+  startTime: starters.startTime,
+  endTime: starters.endTime,
+  title: starters.title,
+  subtitle: starters.audience,
+  description:
+    "For athletes new to training, or returning after 6 or more weeks away. Four Mondays, paid in full.",
+  programKey: "starters",
+  startDate: GYMDESK.starters.dates[0],
+  endDate: GYMDESK.starters.dates[GYMDESK.starters.dates.length - 1],
+  registerHref: "/schedule#psc-starters",
+  registerLabel: "Sign up for PSC Starters",
+});
+
 export const CANCELLED_CLASS_DATES: string[] = [
   ...GYMDESK.series.cancelledDates,
 ];
 
 export const PROGRAM_NOTES = [
-  `${SCHOOL_YEAR_FLYER.startLabel} ${SCHOOL_YEAR_FLYER.endLabel}.`,
-  "No class on November 1 or November 29.",
+  "PSC Starters meets Mondays, November 23, November 30, December 7, and December 14, 7:30–9:00 PM.",
+  `Four weeks are $180, paid in full before November 23. ${STARTERS_SIBLING_NOTE}`,
   "Each class is 90 minutes.",
-  SCHOOL_YEAR_FLYER.priceSummary,
-  SCHOOL_YEAR_FLYER.proEdgeNote,
   `At ${SCHOOL_YEAR_FLYER.venueName}, ${SCHOOL_YEAR_FLYER.venueAddress}.`,
 ];

@@ -1,6 +1,4 @@
 import CallToAction from "./CallToAction";
-import ClassFacts from "./ClassFacts";
-import ClassPaymentOptions from "./ClassPaymentOptions";
 import { upcomingEvents } from "../content/upcomingEvents";
 
 const eventTypeLabels = {
@@ -18,8 +16,8 @@ export default function UpcomingEvents() {
     <section style={sectionStyle}>
       <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        Sunday group classes are $45 per session. PRO-EDGE Academy students
-        receive 15% off with code PROEDGE.
+        PSC Starters is a four-week Monday trial for athletes new to training,
+        or returning after time away.
       </p>
 
       <div style={eventsStackStyle}>
@@ -45,7 +43,23 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
-              <ClassFacts />
+              {event.details.length > 0 ? (
+                <dl style={detailsListStyle}>
+                  {event.details.map((detail) => (
+                    <div key={detail.label}>
+                      <dt style={detailLabelStyle}>{detail.label}</dt>
+                      <dd style={detailValueStyle}>{detail.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+
+              {event.locationName ? (
+                <p style={locationStyle}>
+                  {event.locationName}
+                  {event.locationAddress ? ` · ${event.locationAddress}` : ""}
+                </p>
+              ) : null}
 
               {event.instructor ? (
                 <p style={eventInstructorStyle}>{event.instructor}</p>
@@ -60,9 +74,6 @@ export default function UpcomingEvents() {
               ) : null}
 
               <div style={ctaColumnStyle}>
-                {event.sessions && event.sessions.length > 0 ? (
-                  <ClassPaymentOptions />
-                ) : null}
                 <div style={ctaRowStyle}>
                   {(event.registerActions ??
                     (event.registerHref
@@ -144,6 +155,34 @@ const eventSubtitleStyle: React.CSSProperties = {
   fontSize: 16,
   fontWeight: 700,
   color: "var(--accent2)",
+};
+
+const detailsListStyle: React.CSSProperties = {
+  margin: "16px 0 0",
+  display: "grid",
+  gap: 10,
+};
+
+const detailLabelStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 12,
+  fontWeight: 800,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--accent)",
+};
+
+const detailValueStyle: React.CSSProperties = {
+  margin: "2px 0 0",
+  lineHeight: 1.6,
+  color: "var(--navy)",
+};
+
+const locationStyle: React.CSSProperties = {
+  margin: "14px 0 0",
+  lineHeight: 1.6,
+  color: "var(--navy)",
+  opacity: 0.88,
 };
 
 const eventInstructorStyle: React.CSSProperties = {

@@ -7,6 +7,7 @@ export type RosterPayload = {
   plan: GymdeskPlan;
   selectedDates: string[];
   phone?: string;
+  siblingDiscount?: boolean;
   orderId?: string;
 };
 
@@ -22,6 +23,7 @@ export function encodeRosterPaymentNote(payload: RosterPayload) {
       p: payload.plan,
       d: payload.selectedDates,
       h: payload.phone || undefined,
+      s: payload.siblingDiscount ? 1 : undefined,
     })
   );
 }
@@ -40,12 +42,15 @@ export function parseRosterPaymentNote(
         p?: string;
         d?: string[];
         h?: string;
+        s?: number;
       };
 
       if (
         !raw.n ||
         !raw.e ||
-        (raw.c !== "middle-school" && raw.c !== "high-school") ||
+        (raw.c !== "middle-school" &&
+          raw.c !== "high-school" &&
+          raw.c !== "psc-starters") ||
         (raw.p !== "drop-in" && raw.p !== "monthly") ||
         !Array.isArray(raw.d) ||
         raw.d.length === 0
@@ -60,6 +65,7 @@ export function parseRosterPaymentNote(
         plan: raw.p,
         selectedDates: raw.d,
         phone: raw.h,
+        siblingDiscount: raw.s === 1,
       };
     } catch {
       return null;
