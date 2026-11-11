@@ -1,4 +1,6 @@
 import CallToAction from "./CallToAction";
+import ClassFacts from "./ClassFacts";
+import ClassPaymentOptions from "./ClassPaymentOptions";
 import { upcomingEvents } from "../content/upcomingEvents";
 
 const eventTypeLabels = {
@@ -16,8 +18,9 @@ export default function UpcomingEvents() {
     <section style={sectionStyle}>
       <h2 style={sectionTitleStyle}>Upcoming classes</h2>
       <p style={sectionIntroStyle}>
-        PSC Starters is a four-week Monday trial for athletes new to training,
-        or returning after time away.
+        PSC Elite meets Sundays, 4:00–5:30 PM. PSC Starters is a four-week
+        Monday trial for athletes new to training, or returning after time
+        away.
       </p>
 
       <div style={eventsStackStyle}>
@@ -43,7 +46,12 @@ export default function UpcomingEvents() {
               <h3 style={eventTitleStyle}>{event.title}</h3>
               <p style={eventSubtitleStyle}>{event.subtitle}</p>
 
-              {event.details.length > 0 ? (
+              {event.sessions && event.sessions.length > 0 ? (
+                <>
+                  <ClassFacts />
+                  <ClassPaymentOptions />
+                </>
+              ) : event.details.length > 0 ? (
                 <dl style={detailsListStyle}>
                   {event.details.map((detail) => (
                     <div key={detail.label}>

@@ -61,10 +61,7 @@ export default async function PaymentCompletePage({
         if (!parsed?.phone) {
           rosterMessage =
             "Payment received, but the booking details were missing. Contact us with your Square receipt.";
-        } else if (
-          parsed.classId === "middle-school" ||
-          parsed.classId === "high-school"
-        ) {
+        } else if (parsed.classId === "high-school") {
           classId = parsed.classId;
           plan = parsed.plan;
           athlete = parsed.athleteName;

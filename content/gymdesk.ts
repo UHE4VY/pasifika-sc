@@ -7,8 +7,7 @@
  * Gymdesk sends X-Frame-Options: SAMEORIGIN, so /book cannot be iframed.
  * Parents sign the training waiver on /waiver, choose a class on /schedule,
  * then pay on Square. After payment the site creates a free Gymdesk booking
- * so parents are not charged again. Middle School and High School were
- * removed in Gymdesk, so those sessions are no longer linked.
+ * so parents are not charged again. High School is no longer open for booking.
  */
 export type GymdeskClassId = "middle-school" | "high-school" | "psc-starters";
 export type GymdeskPlan = "drop-in" | "monthly";
@@ -32,9 +31,9 @@ export const GYMDESK = {
   },
   schedules: {
     "middle-school": {
-      scheduleId: "",
-      sessionId: "",
-      dropInPricingId: "",
+      scheduleId: "36061",
+      sessionId: "1774027",
+      dropInPricingId: "294487",
       title: "PSC Elite",
       audience: "Coed",
       startTime: "4:00 PM",

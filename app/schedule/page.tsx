@@ -1,6 +1,7 @@
 "use client";
 
 import CallToAction from "../../components/CallToAction";
+import ScheduleBooking from "../../components/ScheduleBooking";
 import StartersBooking from "../../components/StartersBooking";
 import { GYMDESK } from "../../content/gymdesk";
 import { STARTERS_SIBLING_NOTE } from "../../content/upcomingEvents";
@@ -16,14 +17,17 @@ export default function SchedulePage() {
           <p style={eyebrowStyle}>Scheduling</p>
           <h1 style={titleStyle}>Book a session</h1>
           <p style={subtitleStyle}>
-            PSC Starters is a four-week Monday trial for athletes new to
-            training, or returning after 6 or more weeks away. Four weeks are
-            $180, paid in full. {STARTERS_SIBLING_NOTE}
+            PSC Elite is Sundays, 4:00–5:30 PM, at $45 per class. PSC Starters
+            is a four-week Monday trial for athletes new to training, or
+            returning after 6 or more weeks away. Four weeks are $180, paid in
+            full. {STARTERS_SIBLING_NOTE}
           </p>
 
         </section>
 
         <StartersBooking />
+
+        <ScheduleBooking />
 
         <div style={ctaRowStyle}>
           <CallToAction href={GYMDESK.loginUrl} variant="secondary">

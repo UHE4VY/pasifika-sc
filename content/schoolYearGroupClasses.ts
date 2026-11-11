@@ -131,4 +131,19 @@ export function getSessionCtas(_session: SessionPaymentLinks): SessionCta[] {
   ];
 }
 
-export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [];
+export const SCHOOL_YEAR_SESSIONS: SchoolYearSession[] = [
+  {
+    id: "middle-school",
+    title: "PSC Elite",
+    audience: "Coed",
+    description:
+      "Ages 13 and up. High school athletes welcome. Athletes must squat, hinge, and press at least 75 lb.",
+    startTime: "4:00 PM",
+    endTime: "5:30 PM",
+    programKey: "jam",
+    registerHref: BOOK_SESSIONS_HREF,
+    registerLabel: "Book PSC Elite",
+    dropInHref: BOOK_SESSIONS_HREF,
+    dropInLabel: "Book PSC Elite",
+  },
+];

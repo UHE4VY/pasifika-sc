@@ -1,5 +1,6 @@
 import {
   GYMDESK,
+  getUpcomingGymdeskClassDates,
   isStartersSignupOpen,
   type GymdeskClassId,
   type GymdeskPlan,
@@ -36,7 +37,16 @@ export type ValidatedCheckout = {
   description: string;
 };
 
+const DATE_KEY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function formatDateForNote(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
 
 function normalizeAthleteName(value: unknown) {
   if (typeof value !== "string") return "";
@@ -77,10 +87,8 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     throw new CheckoutValidationError("Enter a valid phone number.");
   }
 
-  if (classId === "high-school" || classId === "middle-school") {
-    throw new CheckoutValidationError(
-      "That class is no longer open for booking."
-    );
+  if (classId === "high-school") {
+    throw new CheckoutValidationError("High School is not open for booking.");
   }
 
   if (classId === "psc-starters") {
@@ -147,7 +155,71 @@ export function validateCheckoutRequest(body: unknown): ValidatedCheckout {
     };
   }
 
-  throw new CheckoutValidationError("Choose a valid class.");
+  if (classId !== "middle-school") {
+    throw new CheckoutValidationError("Choose a valid class.");
+  }
+
+  if (plan !== "drop-in" && plan !== "monthly") {
+    throw new CheckoutValidationError("Choose a valid plan.");
+  }
+
+  if (!Array.isArray(selectedDates) || selectedDates.length === 0) {
+    throw new CheckoutValidationError("Select at least one Sunday.");
+  }
+
+  const uniqueDates = [...new Set(selectedDates)];
+  if (uniqueDates.length !== selectedDates.length) {
+    throw new CheckoutValidationError("Duplicate dates are not allowed.");
+  }
+
+  for (const dateKey of uniqueDates) {
+    if (typeof dateKey !== "string" || !DATE_KEY_PATTERN.test(dateKey)) {
+      throw new CheckoutValidationError("One or more dates are invalid.");
+    }
+  }
+
+  const allowedDates = new Set(getUpcomingGymdeskClassDates());
+  const invalidDates = uniqueDates.filter((dateKey) => !allowedDates.has(dateKey));
+  if (invalidDates.length > 0) {
+    throw new CheckoutValidationError("One or more dates are not bookable.");
+  }
+
+  const sortedDates = [...uniqueDates].sort();
+  const schedule = GYMDESK.schedules[classId];
+  const dateSummary = sortedDates.map(formatDateForNote).join(", ");
+
+  if (plan === "monthly") {
+    throw new CheckoutValidationError(
+      "Classes are $45 each. The 4-session pack is no longer available."
+    );
+  }
+
+  return {
+    classId,
+    plan,
+    selectedDates: sortedDates,
+    athleteName: normalizedName,
+    email: normalizedEmail,
+    phone: normalizedPhone,
+    siblingDiscount: false,
+    lineItems: [
+      {
+        name: `${schedule.title} class`,
+        quantity: sortedDates.length,
+        unitAmountCents: GYMDESK.dropInPrice * 100,
+      },
+    ],
+    totalCents: sortedDates.length * GYMDESK.dropInPrice * 100,
+    description: `${schedule.title} · ${normalizedName} · ${dateSummary}`,
+    paymentNote: encodeRosterPaymentNote({
+      athleteName: normalizedName,
+      email: normalizedEmail,
+      classId,
+      plan,
+      selectedDates: sortedDates,
+      phone: normalizedPhone,
+    }),
+  };
 }
 
 export class CheckoutValidationError extends Error {

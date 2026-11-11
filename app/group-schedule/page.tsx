@@ -191,9 +191,9 @@ export default function GroupSchedulePage() {
         <p style={eyebrowStyle}>Group Performance Training</p>
         <h1 style={titleStyle}>Class schedule</h1>
         <p style={subtitleStyle}>
-          PSC Starters meets Mondays, November 23 through December 14,
-          7:30–9:00 PM at {SCHOOL_YEAR_FLYER.venueName}. It is for athletes new
-          to training or returning after time away.
+          PSC Elite meets Sundays, 4:00–5:30 PM, through December 6. PSC
+          Starters meets Mondays, November 23 through December 14, 7:30–9:00 PM
+          at {SCHOOL_YEAR_FLYER.venueName}.
         </p>
 
       </section>

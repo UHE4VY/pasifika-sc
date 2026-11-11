@@ -1,5 +1,6 @@
 import {
   SCHOOL_YEAR_FLYER,
+  SCHOOL_YEAR_SESSIONS,
   type SchoolYearSession,
 } from "./schoolYearGroupClasses";
 
@@ -48,6 +49,40 @@ export const STARTERS_SIBLING_NOTE =
   "Families with a sibling in PSC Starters receive 15% off ($153).";
 
 export const upcomingEvents: UpcomingEvent[] = [
+  {
+    id: "psc-elite-2026",
+    type: "class",
+    title: "PSC Elite",
+    subtitle: SCHOOL_YEAR_FLYER.headline,
+    sessions: SCHOOL_YEAR_SESSIONS.map((session) => ({
+      id: session.id,
+      title: session.title,
+      audience: session.audience,
+      description: session.description,
+      startTime: session.startTime,
+      endTime: session.endTime,
+    })),
+    details: [
+      { label: "Schedule", value: "Sundays, 4:00–5:30 PM, through December 6" },
+      { label: "Format", value: SCHOOL_YEAR_FLYER.duration },
+      {
+        label: "Investment",
+        value: `${SCHOOL_YEAR_FLYER.priceSummary}. ${SCHOOL_YEAR_FLYER.proEdgeNote}`,
+      },
+    ],
+    locationName: SCHOOL_YEAR_FLYER.venueName,
+    locationAddress: SCHOOL_YEAR_FLYER.venueAddress,
+    imageSrc: SCHOOL_YEAR_FLYER.imageSrc,
+    imageAlt: SCHOOL_YEAR_FLYER.imageAlt,
+    registerActions: [
+      {
+        href: "/schedule#book-sessions",
+        label: "Book PSC Elite",
+      },
+    ],
+    secondaryHref: "/group-schedule",
+    secondaryLabel: "View class schedule",
+  },
   {
     id: "psc-starters-2026",
     type: "class",

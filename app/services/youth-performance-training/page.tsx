@@ -2,6 +2,7 @@
 
 import React from "react";
 import CallToAction from "../../../components/CallToAction";
+import ClassFacts from "../../../components/ClassFacts";
 import { SCHOOL_YEAR_FLYER } from "../../../content/schoolYearGroupClasses";
 import {
   STARTERS_FLYER,
@@ -21,7 +22,37 @@ export default function YouthPerformancePage() {
       </section>
 
       <section style={panelStyle}>
-        <h2 style={sectionTitleStyle}>Current class</h2>
+        <h2 style={sectionTitleStyle}>PSC Elite</h2>
+        <img
+          src={SCHOOL_YEAR_FLYER.imageSrc}
+          alt={SCHOOL_YEAR_FLYER.imageAlt}
+          className="starters-flyer"
+        />
+        <ClassFacts />
+        <p style={{ ...cardBodyStyle, marginTop: 16 }}>
+          Sundays, 4:00–5:30 PM, through December 6.{" "}
+          {SCHOOL_YEAR_FLYER.tryFirstNote}
+        </p>
+        <div
+          style={{
+            marginTop: 18,
+            display: "flex",
+            gap: 12,
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <CallToAction href="/schedule#book-sessions">
+            Book PSC Elite
+          </CallToAction>
+          <CallToAction href="/group-schedule" variant="secondary">
+            View class schedule
+          </CallToAction>
+        </div>
+      </section>
+
+      <section style={panelStyle}>
+        <h2 style={sectionTitleStyle}>PSC Starters</h2>
         <img
           src={STARTERS_FLYER.imageSrc}
           alt={STARTERS_FLYER.imageAlt}

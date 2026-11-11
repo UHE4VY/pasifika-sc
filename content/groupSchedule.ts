@@ -25,8 +25,6 @@ export type GroupClassTemplate = {
 export const GROUP_SCHEDULE_YEAR = 2026;
 
 export const GROUP_SCHEDULE_MONTHS = [
-  { month: 9, label: "September 2026" },
-  { month: 10, label: "October 2026" },
   { month: 11, label: "November 2026" },
   { month: 12, label: "December 2026" },
 ];
@@ -73,6 +71,10 @@ export const CANCELLED_CLASS_DATES: string[] = [
 ];
 
 export const PROGRAM_NOTES = [
+  "PSC Elite meets Sundays, 4:00–5:30 PM, through December 6, 2026.",
+  "No class on November 1 or November 29.",
+  SCHOOL_YEAR_FLYER.priceSummary,
+  SCHOOL_YEAR_FLYER.proEdgeNote,
   "PSC Starters meets Mondays, November 23, November 30, December 7, and December 14, 7:30–9:00 PM.",
   `Four weeks are $180, paid in full before November 23. ${STARTERS_SIBLING_NOTE}`,
   "Each class is 90 minutes.",
